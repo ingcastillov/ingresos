@@ -191,7 +191,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
                      height: 235,
                    )),
                    Container(
-                     padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                     padding: EdgeInsets.fromLTRB(0, 18, 0, 20),
                      margin: EdgeInsets.symmetric(vertical: 50),
                      child: Column(
                       children: <Widget>[

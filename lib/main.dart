@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ingresos/pages/detalle_ingresos.dart';
 import 'package:ingresos/pages/saldo_disponible.dart';
 
 void main() => runApp(MyApp());
@@ -98,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible() ));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DetalleIngresos() ));
         },
        
       ), // This trailing comma makes auto-formatting nicer for build methods.
