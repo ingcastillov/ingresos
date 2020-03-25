@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DetalleIngresos() ));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible() ));
         },
        
       ), // This trailing comma makes auto-formatting nicer for build methods.

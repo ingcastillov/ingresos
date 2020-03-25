@@ -32,23 +32,47 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
            Navigator.pop(context);
          }),
          centerTitle: true,
-         title: Text('Detalle de Ingresos', style: TextStyle(color:Colors.blueGrey),),
+         title: Text('Saldo Disponible', style: TextStyle(color:Colors.blueGrey),),
        ),
-       body: Stack(
+  
+       body:  Column(
          children: <Widget>[
-           _crearFondo(context),
-           _graficaCircular(),
-           textoCircular(),
-         
+           Stack(
+            // fit: StackFit.expand,
+    
+                // alignment: AlignmentDirectional.center,
+               children: <Widget>[
+                
+                _crearFondo(context),
+
+                 Center(
+                   child: Stack(
+                       alignment: AlignmentDirectional.center,
+                         children: <Widget>[
+                           circuloBlanco(),
+                           _graficaCircular(context),
+                           textoCircular(),
+                        
+                         
+                         
+                         ],
+                       ),
+                 ),
+                
+               ],
+             ),
          ],
        ),
+       
+       
     );
   }
 
     Widget  _crearFondo(context) {
                       final size  = MediaQuery.of(context).size;
                       final colorFondo = Container(
-                        height: size.height * 0.25,
+                       
+                        height: size.height * 0.20,
                         width: double.infinity,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(colors: <Color>[
@@ -61,55 +85,62 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
                       ),
                       );
           
-                       final circulo = Container(
-                        width: 300.0,
-                        height: 300.0,
-                
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(300),
-                          color: Color.fromRGBO(255, 255, 255, 1),
-                        
-                        ),
-                      ); 
+                      
           
-                      return Stack(
-                      children: <Widget>[
-                        colorFondo,
-                         Positioned(top: 25, left: 50,  child: circulo),
-                      /*  Positioned(top: -40, right: -120,  child: circulo),
-                         Positioned(top: -40, right: -250,  child: circulo), */
-                        
+                      return  Stack(
+                        children: <Widget>[
+                          colorFondo,
 
-                       
+                          
+
+                         
           Container(
-              padding: EdgeInsets.only(top:50 , left: 20),
+            //  padding: EdgeInsets.only(top:50 , left: 20),
             child: Column(
               children: <Widget>[
-                                              SizedBox(),
+                                                SizedBox(),
 
               ],
             ),
           ),
          
-                        Container(
-                          padding: EdgeInsets.only(top:80 , left: 20),
-                          child: Column(
-                            children: <Widget>[
-                                
+                          Container(
+                           // padding: EdgeInsets.only(top:10 , left: 20),
+                            child: Column(
+                              children: <Widget>[
+                                  
 
-                               SizedBox(),
+                                 SizedBox(),
 
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
       
 
 
-                      ],
-                      );
+                        ],
+                        );
+                      
                     }
 
-      Widget _graficaCircular(){
+      Widget circuloBlanco(){
+         return    Container(
+                     // alignment: AlignmentDirectional.bottomCenter,
+                            width: 300.0,
+                            height: 300.0,
+                          // padding: EdgeInsets.only(top),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(300),
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                            
+                            ),
+                          );
+           
+         
+      }
+
+      Widget _graficaCircular(context){
+   
     List<CircularStackEntry> data = <CircularStackEntry>[
   new CircularStackEntry(
     <CircularSegmentEntry>[
@@ -123,7 +154,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
 ];
 
           return Container(
-           padding: EdgeInsets.only(top:0 , left:25),
+           padding: EdgeInsets.only(top: 0),
             child: new AnimatedCircularChart(
     key: _chartKey,
     size: const Size(350.0, 350.0),
@@ -137,7 +168,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
  
 
                   return   Container(
-                           padding: EdgeInsets.only(top:110 , left: 100),
+
                           child: Column(
                             children: <Widget>[
         
@@ -151,4 +182,6 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
                           ),
                         );
       }
+
+    
 }
