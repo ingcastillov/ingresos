@@ -1,0 +1,25 @@
+{   "id" : "432312",
+    "nombre" : "Luis F Castillo",
+    "aseguradosVida" : [
+        {
+            
+            "poliza" : "12345",
+            "comision": "20000.43",
+            "prima": "22233.32"
+        },
+        {
+        
+            "poliza" : "54321",
+            "comision": "20000.43",
+            "prima": "22233.32"
+        },
+        {
+           
+            "poliza" : "2432432",
+            "comision": "25000.43",
+            "prima": "24233.32"
+        }
+    ]
+
+    
+}
