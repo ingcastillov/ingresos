@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ingresos/pages/comisiones_page.dart';
+import 'package:ingresos/pages/detalle_ingresos.dart';
+import 'package:ingresos/pages/saldo_disponible.dart';
 import 'package:ingresos/utils/asegurado_cls.dart';
 
 void main() => runApp(MyApp());
@@ -102,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ComisionesPage() ));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible() ));
         },
        
       ), // This trailing comma makes auto-formatting nicer for build methods.

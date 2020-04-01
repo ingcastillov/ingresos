@@ -1,3 +1,5 @@
+import 'package:ingresos/pages/bonos_page.dart';
+import 'package:ingresos/pages/comisiones_page.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -245,7 +247,9 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
                            ),
                          ),
                            title: Text('Comisiones'+'             '"\u0024"+pattern.format(comisiones), style: TextStyle(color: Colors.blueGrey,fontSize: 17),),
-                           trailing: Container(child: IconButton(icon: Icon(Icons.arrow_forward_ios, size: 25, color: Colors.orange,), onPressed: (){})),
+                           trailing: Container(child: IconButton(icon: Icon(Icons.arrow_forward_ios, size: 25, color: Colors.orange,), onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ComisionesPage() ));
+                           })),
                 ),
 
                             decoration: BoxDecoration(
@@ -289,7 +293,9 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
                            ),
                          ),
                            title: Text('Bonos'+'                      '"\u0024"+pattern.format(bonos), style: TextStyle(color: Colors.blueGrey,fontSize: 17),),
-                           trailing: Container(child: IconButton(icon: Icon(Icons.arrow_forward_ios, size: 25, color: Colors.orange,), onPressed: (){})),
+                           trailing: Container(child: IconButton(icon: Icon(Icons.arrow_forward_ios, size: 25, color: Colors.orange,), onPressed: (){
+                                                           Navigator.push(context, MaterialPageRoute(builder: (context) => BonosPage() ));
+                           })),
                 ),
 
                             decoration: BoxDecoration(

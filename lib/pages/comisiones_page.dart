@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:ingresos/pages/filter_comisiones.dart';
 
 class ComisionesPage extends StatefulWidget {
 
@@ -78,7 +79,11 @@ void initState() {
          }),
          centerTitle: true,
          title: Text('Comisiones', style: TextStyle(color:Colors.blueGrey),),
-
+         actions: <Widget>[
+           IconButton(icon: Icon(Icons.filter_list, color: Colors.orange,), onPressed: (){
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => FilterList() ));
+           })
+         ],
        
        ),
        body: DefaultTabController(
