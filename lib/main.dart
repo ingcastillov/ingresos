@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ingresos/pages/comisiones_page.dart';
-import 'package:ingresos/pages/detalle_ingresos.dart';
-import 'package:ingresos/pages/saldo_disponible.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
 import 'package:ingresos/utils/asegurado_cls.dart';
 
 void main() => runApp(MyApp());
