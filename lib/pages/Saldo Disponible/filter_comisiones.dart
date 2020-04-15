@@ -12,7 +12,8 @@ class _FilterListState extends State<FilterList> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton:        Container(
-              // alignment: Alignment.bottomCenter,
+         padding: EdgeInsets.only(left: 35),
+               alignment: Alignment.bottomCenter,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           
@@ -21,7 +22,7 @@ class _FilterListState extends State<FilterList> {
            
             RaisedButton(
 
-               padding: EdgeInsets.fromLTRB(22, 10, 22, 10),
+               padding: EdgeInsets.fromLTRB(44, 15, 44, 15),
               child: Text('Borrar Filtros'),
               color: Colors.white,
             
@@ -30,7 +31,7 @@ class _FilterListState extends State<FilterList> {
             ),
             Text('    '),
               RaisedButton(
-                padding: EdgeInsets.fromLTRB(42, 10, 42, 10),
+               padding: EdgeInsets.fromLTRB(64, 15, 64, 15),
                   color: Colors.orange,
                    child: Text('Filtrar', style: TextStyle(color: Colors.white),),
               onPressed: (){},
@@ -60,15 +61,16 @@ class _FilterListState extends State<FilterList> {
               child: TextField(
                 
                 decoration: InputDecoration(
+                  prefixIcon:  Icon(Icons.search, color: Colors.grey,),
                   labelText: 'Nombre o numero de poliza',
                  border: OutlineInputBorder(
-
+                  
                   borderSide: BorderSide(
                     color: Colors.blue,
                     width: 5.0
                   ),
                  ),
-                  icon: Icon(Icons.search, color: Colors.grey,),
+             
                 
                 ),
                 onTap: (){},

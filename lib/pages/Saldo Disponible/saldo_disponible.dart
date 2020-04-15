@@ -1,5 +1,7 @@
+import 'package:ingresos/pages/Saldo%20Disponible/comparacion_periodos.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/impuestos_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/otros_movimientos.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/simple_bar_chart.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import 'bonos_page.dart';
 import 'comisiones_page.dart';
 
 class SaldoDisponible extends StatefulWidget {
+  
   @override
   _SaldoDisponibleState createState() => _SaldoDisponibleState();
 }
@@ -405,7 +408,10 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
       height: size.height * 0.085,
       width: size.width * 0.95,
       child: RaisedButton(
-        onPressed: () {},
+        onPressed: () {
+           Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ComparacionPeriodos()));
+        },
         child: Text(
           'VER DATOS DE FACTURACIÓN',
           style: TextStyle(color: Colors.orange),
