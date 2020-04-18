@@ -1,9 +1,8 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+
 
 
 import 'filter_comisiones.dart';
@@ -87,7 +86,8 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
               child: TabBar(
                
                 
-                isScrollable: true, tabs: [
+                isScrollable: true, 
+                tabs: [
                 Container(
                     alignment: Alignment.center,
                     constraints: BoxConstraints.expand(width: 100),
@@ -142,7 +142,7 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
                   children: [
                _anualPage(),
                 _anualPage2(),
-                Text('HOLA'),
+                _anualPage3(),
                 ]),
               ),
             )
@@ -519,7 +519,7 @@ horizontalMargin: 45,
 
     ];
 
-    final LineChartBarData tooltipsOnBar = lineBarsData[0];
+   // final LineChartBarData tooltipsOnBar = lineBarsData[0];
   final size = MediaQuery.of(context).size;
 
 
@@ -587,34 +587,33 @@ return Column(
                    // reservedSize: 80,
 
                       showTitles: true,
-                      interval: 2.0,
+                      interval: 1.8,
                       getTitles: (val) {
                         switch (val.toInt()) {
                           case 0:
-                            return '0';
-                          case 1:
                             return 'ENERO';
-                          case 2:
+                        
+                          case 1:
                             return 'FEBRERO';
-                          case 3:
+                          case 2:
                             return 'MARZO';
-                          case 4:
+                          case 3:
                             return 'ABRIL';
-                          case 5:
+                          case 4:
                             return 'MAYO';
-                          case 6:
+                          case 5:
                             return 'JUNIO';
-                          case 7:
+                          case 6:
                             return 'JULIO';
-                          case 8:
+                          case 7:
                             return 'AGOSTO';
-                          case 9:
+                          case 8:
                             return 'SEPTIEMBRE';
-                          case 10:
+                          case 9:
                             return 'OCTUBRE';
-                          case 11:
+                          case 10:
                             return 'NOVIEMBRE';
-                          case 12:
+                          case 11:
                             return 'DICIEMBRE';
                      
                         }
@@ -640,14 +639,327 @@ return Column(
               ),
             ),
        ),
+
+           Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Container(
+        alignment: Alignment.centerLeft,
+        child: Text('Febrero', style: TextStyle(fontSize: 20),),),
+    ),
+
+
+
+
        
-  ],
-);
+       ]
+       ); 
+       
+       }
 
-    /// Lerps between a [LinearGradient] colors, based on [t]
 
-  }
-}
+  Widget _anualPage3() {
+
+  final List<int> showIndexes = const [2];
+  final List<FlSpot> allSpots = [
+    FlSpot(0, 2),
+    FlSpot(1, 2),
+    FlSpot(2, 1),
+    FlSpot(3, 0),
+    FlSpot(4, 0),
+    FlSpot(5, 0),
+     FlSpot(6, 0),
+
+  ];
+  final List<int> showIndexes2 = const [2];
+    final List<FlSpot> allSpots2 = [
+  FlSpot(0, 2),
+    FlSpot(1, 8),
+    FlSpot(2, 1),
+    FlSpot(3, 0),
+    FlSpot(4, 0),
+    FlSpot(5, 0),
+     FlSpot(6, 0),
+
+  ];
+
+    final List<int> showIndexes3 = const [2];
+    final List<FlSpot> allSpots3 = [
+    FlSpot(0, 2),
+    FlSpot(1, 3),
+    FlSpot(2, 1),
+    FlSpot(3, 0),
+    FlSpot(4, 0),
+    FlSpot(5, 0),
+    FlSpot(5, 0),
+    FlSpot(6, 0),
+
+  ];
+
+
+
+   final lineBarsData = [
+      LineChartBarData(
+         
+
+          showingIndicators: showIndexes,
+          spots: allSpots,
+          isCurved: true,
+          barWidth: 2,
+          belowBarData: BarAreaData(
+            show: true,
+            colors: [
+          Colors.blue.withOpacity(0.25),
+           Colors.blue.withOpacity(0.25),
+          Colors.blue.withOpacity(0.25),
+            ],
+          ),
+          dotData: FlDotData(show: false),
+          colors: [
+          Colors.blue.withOpacity(0.25),
+           Colors.blue.withOpacity(0.25),
+           Colors.blue.withOpacity(0.25),
+          ],
+          colorStops: [
+            0.1,
+            0.4,
+            0.9
+          ]),
+
+
+      LineChartBarData(
+          showingIndicators: showIndexes2,
+          spots: allSpots2,
+          isCurved: true,
+          barWidth: 2,
+          belowBarData: BarAreaData(
+            show: true,
+            colors: [
+        Colors.deepPurple.withOpacity(0.25),
+           Colors.deepPurple.withOpacity(0.25),
+           Colors.deepPurple.withOpacity(0.25),
+            ],
+          ),
+          dotData: FlDotData(show: false),
+          colors: [
+             Colors.deepPurple.withOpacity(0.25),
+           Colors.deepPurple.withOpacity(0.25),
+           Colors.deepPurple.withOpacity(0.25),
+          ],
+          colorStops: [
+            0.1,
+            0.4,
+            0.9
+          ]),
+
+        LineChartBarData(
+          showingIndicators: showIndexes3,
+          spots: allSpots3,
+          isCurved: true,
+          barWidth: 2,
+          belowBarData: BarAreaData(
+            show: true,
+            colors: [
+         Colors.deepOrange.withOpacity(0.25),
+           Colors.deepOrange.withOpacity(0.25),
+          Colors.deepOrange.withOpacity(0.25),
+     
+            ],
+          ),
+          dotData: FlDotData(show: false),
+          colors: [
+        Colors.deepOrange.withOpacity(0.25),
+           Colors.deepOrange.withOpacity(0.25),
+          Colors.deepOrange.withOpacity(0.25),
+          ],
+          colorStops: [
+            0.1,
+            0.4,
+            0.9
+          ]),
+
+          
+
+    ];
+
+   // final LineChartBarData tooltipsOnBar = lineBarsData[0];
+  final size = MediaQuery.of(context).size;
+
+
+return Column(
+  children: <Widget>[
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        alignment: Alignment.centerLeft,
+        child: Text('Selecciona el Mes a Comparar'),),
+    ),
+       Container(
+       //height: 100,
+         width: size.width*1,
+         child: LineChart(
+
+              LineChartData(
+                  
+            /*     showingTooltipIndicators: showIndexes.map((index) {
+                /*  return ShowingTooltipIndicators(index, [
+                    LineBarSpot(
+                        tooltipsOnBar, lineBarsData.indexOf(tooltipsOnBar), tooltipsOnBar.spots[index]),
+                  ]); */
+                }).toList(), */
+                lineTouchData: LineTouchData(
+                  enabled: false,
+                  getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
+                    return spotIndexes.map((index) {
+                      return TouchedSpotIndicatorData(
+                        FlLine(
+                          color: Colors.pink,
+                        ),
+                        FlDotData(
+                          show: true,
+                          dotSize: 8,
+                      //    strokeWidth: 2,
+                       //   getStrokeColor: (spot, percent, barData) => Colors.black,
+                        /*   getDotColor: (spot, percent, barData) {
+                            return lerpGradient(barData.colors, barData.colorStops, percent / 100);
+                          }, */
+                        ),
+                      );
+                    }).toList();
+                  },
+                  touchTooltipData: LineTouchTooltipData(
+                    tooltipBgColor: Colors.pink,
+                    tooltipRoundedRadius: 8,
+                    getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
+                      return lineBarsSpot.map((lineBarSpot) {
+                        return LineTooltipItem(
+                          lineBarSpot.y.toString(),
+                          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        );
+                      }).toList();
+                    },
+                  ),
+                ),
+                lineBarsData: lineBarsData,
+                minX: 0,
+                minY: 0,
+                titlesData: FlTitlesData(
+                  leftTitles: SideTitles(
+                    showTitles: false,
+                  ),
+                  bottomTitles: SideTitles(
+                   // reservedSize: 100,
+                    
+                      showTitles: false,
+                      interval:0.9,
+                      getTitles: (val) {
+                        switch (val.toInt()) {
+                    
+                        
+                          case 0:
+                            return 'ENERO';
+                          case 1:
+                            return 'FEBRERO';
+                          case 2:
+                            return 'MARZO';
+                          case 3:
+                            return 'ABRIL';
+                          case 4:
+                            return 'MAYO';
+                              case 5:
+                            return 'JUNIO';
+                               case 6:
+                            return 'JULIO';
+                     
+                        }
+                        return '';
+                      },  
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueGrey,
+                        fontFamily: 'Digital',
+                        fontSize: 10,
+                      )),
+                ),
+             /*    axisTitleData: FlAxisTitleData(
+                  rightTitle: AxisTitle(showTitle: true, titleText: 'count'),
+                  leftTitle: AxisTitle(showTitle: true, titleText: 'count'),
+                  topTitle:
+                      AxisTitle(showTitle: true, titleText: 'Wall clock', textAlign: TextAlign.left),
+                ), */
+                gridData: FlGridData(show: false),
+                borderData: FlBorderData(
+                  show: false,
+                ),
+              ),
+            ),
+       ),
+           Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Container(
+        alignment: Alignment.centerLeft,
+        child: Text('Acumulado Febrero', style: TextStyle(fontSize: 20),),),
+    ),
+
+            DataTable(
+dataRowHeight: 30,
+columnSpacing: 40,
+horizontalMargin: 45,
+              //  sortColumnIndex: 2,
+                sortAscending: false,
+                columns: [
+
+                  DataColumn(
+                     
+                    label: Text("Año", style: TextStyle(fontSize: 16, color: Colors.black),)),
+                  DataColumn(label: Text("Monto\nMensual",  style: TextStyle(fontSize: 16,  color: Colors.black))),
+                  DataColumn(label: Text("Incremento",  style: TextStyle(fontSize: 16,  color: Colors.black))),
+                ],
+                rows: [
+                  DataRow(
+                   // selected: true,
+                    cells: [
+                 //   DataCell(Text("Andres"), showEditIcon: true),
+                    DataCell(Text("2019", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                      DataCell(Row(
+                      children: <Widget>[
+                        Icon(Icons.arrow_upward, color: Colors.green,),
+                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
+                      ],
+                    ))
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text("2018", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                      DataCell(Row(
+                      children: <Widget>[
+                        Icon(Icons.arrow_downward, color: Colors.red,),
+                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
+                      ],
+                    ))
+                  ]),
+                     DataRow(cells: [
+                    DataCell(Text("2017", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                    DataCell(Row(
+                      children: <Widget>[
+                        Icon(Icons.arrow_upward, color: Colors.green,),
+                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
+                      ],
+                    ))
+                  ]),
+               
+
+                ],
+              )
+       
+       ]
+       ); 
+       
+       }
+
+
+       }
 
 
 

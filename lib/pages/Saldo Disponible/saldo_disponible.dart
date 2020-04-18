@@ -1,7 +1,6 @@
 import 'package:ingresos/pages/Saldo%20Disponible/comparacion_periodos.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/impuestos_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/otros_movimientos.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/simple_bar_chart.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -80,8 +79,22 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
             Container(
               child: Text(''),
             ),
-            bannerImpuestos(),
-            Container(
+                Container(
+              child: Text(''),
+            ),
+                Container(
+              child: Text(''),
+            ),
+                Container(
+              child: Text(''),
+            ),
+                Container(
+              child: Text(''),
+            ),
+                Container(
+              child: Text(''),
+            ),
+                Container(
               child: Text(''),
             ),
             buttonFacturacion(),
@@ -144,11 +157,11 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
     return Center(
       child: Container(
         // alignment: AlignmentDirectional.bottomCenter,
-        width: 240.0,
-        height: 220.0,
+        width: 260.0,
+        height: 260.0,
         // padding: EdgeInsets.only(top),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(200),
+          borderRadius: BorderRadius.circular(300),
           color: Color.fromRGBO(255, 255, 255, 1),
         ),
 

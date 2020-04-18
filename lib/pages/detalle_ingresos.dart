@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/comisiones_page.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
 
 class DetalleIngresos extends StatefulWidget {
   DetalleIngresos({Key key}) : super(key: key);
@@ -31,8 +33,12 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
           _crearFondo(context),
           listaOpciones(),
           listaOpciones2(),
+          buttonJ(),
+          buttonK(),
+          buttonL(),
         ],
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){}),
     );
   }
 
@@ -121,20 +127,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
             ],
           ),
         ),
-        Container(
-          padding: EdgeInsets.only(top: 125, left: 330),
-          child: Column(
-            children: <Widget>[
-              SizedBox(),
-              IconButton(
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {})
-            ],
-          ),
-        ),
+
       ],
     );
   }
@@ -159,19 +152,12 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
                 size: 50,
                 color: Colors.blueGrey,
               ),
-              title: Text('Ultimo deposito'),
+              title: Text('Ultimo periodo facturado'),
               subtitle: Text(
                 '\u002443,983.87',
                 style: TextStyle(fontSize: 25),
               ),
-              trailing: Container(
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 30,
-                        color: Colors.orange,
-                      ),
-                      onPressed: () {})),
+             
             ),
           ],
         ),
@@ -216,14 +202,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
                 'Periodos anteriores',
                 style: TextStyle(color: Colors.blueGrey, fontSize: 18),
               ),
-              trailing: Container(
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 30,
-                        color: Colors.orange,
-                      ),
-                      onPressed: () {})),
+        
             ),
           ],
         ),
@@ -242,5 +221,78 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
         ),
       ),
     ]));
+  }
+
+  Widget buttonJ(){
+    return                Container(
+          padding: EdgeInsets.only(top: 119, left: 330),
+          child: Column(
+            
+            children: <Widget>[
+              Container(
+                 padding: EdgeInsets.all(8),
+               // color: Colors.red,
+                child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible() ));
+                    }),
+              )
+            ],
+          ),
+        );
+  }
+
+    Widget buttonK(){
+    return                Container(
+          padding: EdgeInsets.only(top: 230, left: 330),
+          child: Column(
+            
+            children: <Widget>[
+        Container(
+            padding: EdgeInsets.all(8),
+               // color: Colors.red,
+                  child: IconButton(
+                     alignment: Alignment.center,
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 30,
+
+                        color: Colors.orange,
+                      ),
+                      onPressed: () {
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => ComisionesPage() ));
+                      })),
+            ],
+          ),
+        );
+  }
+
+    Widget buttonL(){
+    return              Container(
+          padding: EdgeInsets.only(top: 335, left: 330),
+          child: Column(
+            
+            children: <Widget>[
+        Container(
+            padding: EdgeInsets.all(8),
+               // color: Colors.red,
+                  child: IconButton(
+                     alignment: Alignment.center,
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 30,
+
+                        color: Colors.orange,
+                      ),
+                      onPressed: () {
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => ComisionesPage() ));
+                      })),
+            ],
+          ),
+        );
   }
 }

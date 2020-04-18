@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/vida_individual.dart';
 import 'package:intl/intl.dart';
 
 class BonosPage extends StatefulWidget {
@@ -56,6 +57,7 @@ class _BonosPageState extends State<BonosPage> {
             segurosPersonales(),
             segurosPatrimoniales(),
             segurosPatrimonialesPYME(),
+            grandesEmpresas(),
           ],
         ),
       ),
@@ -99,7 +101,7 @@ class _BonosPageState extends State<BonosPage> {
   }
 
   Widget segurosPersonales() {
-    final size = MediaQuery.of(context).size;
+    //final size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         children: <Widget>[
@@ -133,7 +135,9 @@ class _BonosPageState extends State<BonosPage> {
                       size: 25,
                       color: Colors.orange,
                     ),
-                    onPressed: () {})),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>  VidaIndividual()));
+                    })),
           ),
           Divider(),
           ListTile(
@@ -164,7 +168,7 @@ class _BonosPageState extends State<BonosPage> {
   }
 
   Widget segurosPatrimoniales() {
-    final size = MediaQuery.of(context).size;
+    //final size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         children: <Widget>[
@@ -228,7 +232,7 @@ class _BonosPageState extends State<BonosPage> {
   }
 
   Widget segurosPatrimonialesPYME() {
-    final size = MediaQuery.of(context).size;
+    //final size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         children: <Widget>[
@@ -236,7 +240,7 @@ class _BonosPageState extends State<BonosPage> {
           Container(
               alignment: Alignment.bottomLeft,
               child: Text(
-                '  Seguros Patrimoniales',
+                '   PyMEs',
                 style: TextStyle(
                     color: Colors.blueAccent[400],
                     fontWeight: FontWeight.bold,
@@ -247,9 +251,9 @@ class _BonosPageState extends State<BonosPage> {
             contentPadding: EdgeInsets.fromLTRB(4, 0, 4, 0),
             title: Row(
               children: <Widget>[
-                Text('  PyMEs'),
+                Text('  Vida'),
                 Text(
-                  '                                     ' "\u0024" +
+                  '                                          ' "\u0024" +
                       pattern.format(vidaIndividual),
                   style: TextStyle(color: Colors.blueGrey, fontSize: 17),
                 ),
@@ -269,9 +273,9 @@ class _BonosPageState extends State<BonosPage> {
             contentPadding: EdgeInsets.fromLTRB(4, 0, 4, 0),
             title: Row(
               children: <Widget>[
-                Text('  Grandes empresas'),
+                Text('  Autos'),
                 Text(
-                  '                  ' "\u0024" +
+                  '                                        ' "\u0024" +
                       pattern.format(vidaIndividual),
                   style: TextStyle(color: Colors.blueGrey, fontSize: 17),
                 ),
@@ -287,6 +291,92 @@ class _BonosPageState extends State<BonosPage> {
                     onPressed: () {})),
           ),
           Divider(),
+        ],
+      ),
+    );
+  }
+
+    Widget grandesEmpresas() {
+    //final size = MediaQuery.of(context).size;
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Text(''),
+          Container(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                '   Grandes Empresas',
+                style: TextStyle(
+                    color: Colors.blueAccent[400],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15),
+              )),
+          Divider(),
+          ListTile(
+            contentPadding: EdgeInsets.fromLTRB(4, 0, 4, 0),
+            title: Row(
+              children: <Widget>[
+                Text('  Vida'),
+                Text(
+                  '                                          ' "\u0024" +
+                      pattern.format(vidaIndividual),
+                  style: TextStyle(color: Colors.blueGrey, fontSize: 17),
+                ),
+              ],
+            ),
+            trailing: Container(
+                child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 25,
+                      color: Colors.orange,
+                    ),
+                    onPressed: () {})),
+          ),
+          Divider(),
+          ListTile(
+            contentPadding: EdgeInsets.fromLTRB(4, 0, 4, 0),
+            title: Row(
+              children: <Widget>[
+                Text('  Autos'),
+                Text(
+                  '                                        ' "\u0024" +
+                      pattern.format(vidaIndividual),
+                  style: TextStyle(color: Colors.blueGrey, fontSize: 17),
+                ),
+              ],
+            ),
+            trailing: Container(
+                child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 25,
+                      color: Colors.orange,
+                    ),
+                    onPressed: () {})),
+          ),
+          Divider(),
+               ListTile(
+            contentPadding: EdgeInsets.fromLTRB(4, 0, 4, 0),
+            title: Row(
+              children: <Widget>[
+                Text('  Daños'),
+                Text(
+                  '                                        ' "\u0024" +
+                      pattern.format(vidaIndividual),
+                  style: TextStyle(color: Colors.blueGrey, fontSize: 17),
+                ),
+              ],
+            ),
+            trailing: Container(
+                child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 25,
+                      color: Colors.orange,
+                    ),
+                    onPressed: () {})),
+          ),
         ],
       ),
     );
