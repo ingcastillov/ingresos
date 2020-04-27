@@ -1,23 +1,24 @@
 
-import 'package:ingresos/pages/Facturacion/facturacion_page.dart';
 import 'package:ingresos/pages/Periodos%20Anteriores/comparacion_periodos.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/bonos_page.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/comisiones_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/impuestos_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/otros_movimientos.dart';
+import 'package:ingresos/pages/Ultimo%20Deposito/comprobante.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
-import 'bonos_page.dart';
-import 'comisiones_page.dart';
 
-class SaldoDisponible extends StatefulWidget {
+
+class UltimoDeposito extends StatefulWidget {
   
   @override
-  _SaldoDisponibleState createState() => _SaldoDisponibleState();
+  _UltimoDepositoState createState() => _UltimoDepositoState();
 }
 
-class _SaldoDisponibleState extends State<SaldoDisponible> {
+class _UltimoDepositoState extends State<UltimoDeposito> {
   final GlobalKey<AnimatedCircularChartState> _chartKey =
       new GlobalKey<AnimatedCircularChartState>();
 
@@ -47,7 +48,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
             }),
         centerTitle: true,
         title: Text(
-          'Saldo Disponible',
+          'Último Periodo Facturado',
           style: TextStyle(color: Colors.blueGrey),
         ),
       ),
@@ -176,7 +177,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Saldo Disponible',
+                      '           Último\n Periodo Facturado',
                       style: TextStyle(color: Colors.blue[900], fontSize: 18),
                     ),
                     Text(
@@ -190,7 +191,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
                       child: Text(''),
                     ),
                     Text(
-                      'Del 14/10/19 al\n     16/10/19',
+                      '14/10/2019',
                       style: TextStyle(color: Colors.grey, fontSize: 16),
                     ),
                   ],
@@ -481,11 +482,11 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
       width: size.width * 0.95,
       child: RaisedButton(
         onPressed: () {
-           Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FacturacionPage())); 
+            Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ComprobantePage())); 
         },
         child: Text(
-          'VER DATOS DE FACTURACIÓN',
+          'VER COMPROBANTE',
           style: TextStyle(color: Colors.orange),
         ),
         color: Colors.white,

@@ -55,7 +55,9 @@ class _VidaIndividualState extends State<VidaIndividual> {
             ),
             bonoProductividad(),
             bonoRenovacion(),
-          
+             bonoRenovacion(),
+              bonoRenovacion(),
+               bonoRenovacion(),
           ],
         ),
       ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/comisiones_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
+import 'package:ingresos/pages/Ultimo%20Deposito/ultimo_periodo_facturado.dart';
+
+import 'Periodos Anteriores/periodos_anteriores.dart';
 
 class DetalleIngresos extends StatefulWidget {
   DetalleIngresos({Key key}) : super(key: key);
@@ -38,7 +41,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
           buttonL(),
         ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){}),
+    
     );
   }
 
@@ -152,7 +155,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
                 size: 50,
                 color: Colors.blueGrey,
               ),
-              title: Text('Ultimo periodo facturado'),
+              title: Text('Último periodo facturado'),
               subtitle: Text(
                 '\u002443,983.87',
                 style: TextStyle(fontSize: 25),
@@ -225,7 +228,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
 
   Widget buttonJ(){
     return                Container(
-          padding: EdgeInsets.only(top: 119, left: 330),
+          padding: EdgeInsets.only(top: 119, left: 340),
           child: Column(
             
             children: <Widget>[
@@ -264,7 +267,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
                         color: Colors.orange,
                       ),
                       onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => ComisionesPage() ));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => UltimoDeposito() ));
                       })),
             ],
           ),
@@ -289,7 +292,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
                         color: Colors.orange,
                       ),
                       onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => ComisionesPage() ));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => PeriodosAnteriores() ));
                       })),
             ],
           ),

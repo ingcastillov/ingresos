@@ -1,11 +1,10 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:ingresos/pages/Periodos%20Anteriores/filtro_periodos.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/filter_comisiones.dart';
 import 'package:intl/intl.dart';
 
-
-
-import 'filter_comisiones.dart';
 import 'dart:math';
 
 class ComparacionPeriodos extends StatefulWidget {
@@ -72,7 +71,7 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
               ),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FilterList()));
+                    MaterialPageRoute(builder: (context) => FilterPeriodos()));
               })
         ],
       ),
@@ -537,7 +536,7 @@ return Column(
          child: LineChart(
 
               LineChartData(
-
+              
             /*     showingTooltipIndicators: showIndexes.map((index) {
                 /*  return ShowingTooltipIndicators(index, [
                     LineBarSpot(
@@ -551,6 +550,7 @@ return Column(
                       return TouchedSpotIndicatorData(
                         FlLine(
                           color: Colors.pink,
+
                         ),
                         FlDotData(
                           show: true,
@@ -576,6 +576,7 @@ return Column(
                       }).toList();
                     },
                   ),
+
                 ),
                 lineBarsData: lineBarsData,
                 minY: 0,
@@ -583,6 +584,7 @@ return Column(
                   leftTitles: SideTitles(
                     showTitles: false,
                   ),
+
                   bottomTitles: SideTitles(
                    // reservedSize: 80,
 
@@ -619,6 +621,7 @@ return Column(
                         }
                         return '';
                       },  
+                      
                       textStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.blueGrey,
@@ -632,7 +635,20 @@ return Column(
                   topTitle:
                       AxisTitle(showTitle: true, titleText: 'Wall clock', textAlign: TextAlign.left),
                 ), */
-                gridData: FlGridData(show: false),
+                        gridData: FlGridData(show: true,
+                  drawHorizontalLine: true,
+                        checkToShowHorizontalLine: (value) => value % 2 == 1,
+                        getDrawingHorizontalLine: (value) {
+                          if (value == 0) {
+                            return const FlLine(color: Colors.red, strokeWidth: 2);
+                          }
+                          return const FlLine(
+                            color: Colors.grey,
+                            strokeWidth: 1,
+                          
+                          );
+                        },
+                ),
                 borderData: FlBorderData(
                   show: false,
                 ),
@@ -647,7 +663,58 @@ return Column(
         child: Text('Febrero', style: TextStyle(fontSize: 20),),),
     ),
 
+            DataTable(
+dataRowHeight: 30,
+columnSpacing: 40,
+horizontalMargin: 45,
+              //  sortColumnIndex: 2,
+                sortAscending: false,
+                columns: [
 
+                  DataColumn(
+                     
+                    label: Text("Año", style: TextStyle(fontSize: 16, color: Colors.black),)),
+                  DataColumn(label: Text("Monto\nMensual",  style: TextStyle(fontSize: 16,  color: Colors.black))),
+                  DataColumn(label: Text("Incremento",  style: TextStyle(fontSize: 16,  color: Colors.black))),
+                ],
+                rows: [
+                  DataRow(
+                   // selected: true,
+                    cells: [
+                 //   DataCell(Text("Andres"), showEditIcon: true),
+                    DataCell(Text("2019", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                      DataCell(Row(
+                      children: <Widget>[
+                        Icon(Icons.arrow_upward, color: Colors.green,),
+                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
+                      ],
+                    ))
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text("2018", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                      DataCell(Row(
+                      children: <Widget>[
+                        Icon(Icons.arrow_downward, color: Colors.red,),
+                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
+                      ],
+                    ))
+                  ]),
+                     DataRow(cells: [
+                    DataCell(Text("2017", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
+                    DataCell(Row(
+                      children: <Widget>[
+                        Icon(Icons.arrow_upward, color: Colors.green,),
+                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
+                      ],
+                    ))
+                  ]),
+               
+
+                ],
+              )
 
 
        
@@ -791,7 +858,7 @@ return Column(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         alignment: Alignment.centerLeft,
-        child: Text('Selecciona el Mes a Comparar'),),
+        child: Text('Total acumulado de enero al mes seleccionado'),),
     ),
        Container(
        //height: 100,
@@ -846,9 +913,10 @@ return Column(
                   leftTitles: SideTitles(
                     showTitles: false,
                   ),
+                 // show: true,
                   bottomTitles: SideTitles(
                    // reservedSize: 100,
-                    
+                     
                       showTitles: false,
                       interval:0.9,
                       getTitles: (val) {
@@ -886,7 +954,20 @@ return Column(
                   topTitle:
                       AxisTitle(showTitle: true, titleText: 'Wall clock', textAlign: TextAlign.left),
                 ), */
-                gridData: FlGridData(show: false),
+                gridData: FlGridData(show: true,
+                  drawHorizontalLine: true,
+                        checkToShowHorizontalLine: (value) => value % 2 == 0,
+                        getDrawingHorizontalLine: (value) {
+                          if (value == 0) {
+                            return const FlLine(color: Colors.red, strokeWidth: 2);
+                          }
+                          return const FlLine(
+                            color: Colors.grey,
+                            strokeWidth: 1,
+                          
+                          );
+                        },
+                ),
                 borderData: FlBorderData(
                   show: false,
                 ),
