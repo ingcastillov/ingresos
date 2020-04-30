@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/comisiones_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
 import 'package:ingresos/pages/Ultimo%20Deposito/ultimo_periodo_facturado.dart';
+import 'package:intl/intl.dart';
 
 import 'Periodos Anteriores/periodos_anteriores.dart';
 
@@ -13,6 +13,9 @@ class DetalleIngresos extends StatefulWidget {
 }
 
 class _DetalleIngresosState extends State<DetalleIngresos> {
+
+  double saldoDisponible= 84692.76;
+  final pattern = new NumberFormat("###,###,###.##");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,14 +34,20 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
           style: TextStyle(color: Colors.blueGrey),
         ),
       ),
-      body: Stack(
+      body: Column(
         children: <Widget>[
-          _crearFondo(context),
-          listaOpciones(),
-          listaOpciones2(),
-          buttonJ(),
-          buttonK(),
-          buttonL(),
+              
+              Stack(
+                children: <Widget>[
+                  _crearFondo(context),
+                  listaOpciones(),
+                ],
+              ),
+              
+              listaOpciones2(),
+              
+             
+           
         ],
       ),
     
@@ -67,7 +76,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
         color: Color.fromRGBO(255, 255, 255, 0.05),
       ),
     );
-
+   
     return Stack(
       children: <Widget>[
         colorFondo,
@@ -89,7 +98,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
               SizedBox(),
               Text(
                 'Saldo Disponible',
-                style: TextStyle(color: Colors.white, fontSize: 15),
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ],
           ),
@@ -100,12 +109,13 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
             children: <Widget>[
               SizedBox(),
               Text(
-                '\u002484,692.87',
+                "\u0024" + pattern.format(saldoDisponible),
                 style: TextStyle(color: Colors.white, fontSize: 40),
               ),
             ],
           ),
         ),
+        
         Container(
           padding: EdgeInsets.only(top: 140, left: 20),
           child: Column(
@@ -113,20 +123,43 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
               SizedBox(),
               Text(
                 'Del 14/10/19 al 16/10/19',
-                style: TextStyle(color: Colors.white, fontSize: 15),
+                style: TextStyle(color: Colors.white, fontSize: 14),
               ),
             ],
           ),
         ),
         Container(
-          padding: EdgeInsets.only(top: 140, left: 270),
+        padding: EdgeInsets.only(top: 140, left: 240),
+       // alignment: Alignment.centerRight,
           child: Column(
             children: <Widget>[
               SizedBox(),
               Text(
                 'Ver detalle',
-                style: TextStyle(color: Colors.white, fontSize: 15),
+                style: TextStyle(color: Colors.white, fontSize: 18),
               ),
+            ],
+          ),
+        ),
+
+         Container(
+          padding: EdgeInsets.only(top: 119, left: 310),
+          child: Column(
+            
+            children: <Widget>[
+              Container(
+                 padding: EdgeInsets.all(8),
+               // color: Colors.red,
+                child: IconButton(
+                  iconSize: 25,
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible() ));
+                    }),
+              )
             ],
           ),
         ),
@@ -138,164 +171,123 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
   Widget listaOpciones() {
     final size = MediaQuery.of(context).size;
 
-    return SingleChildScrollView(
-        child: Column(children: <Widget>[
-      SafeArea(
-          child: Container(
-        height: 130,
-      )),
-      Container(
-        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-        margin: EdgeInsets.symmetric(vertical: 50),
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(
-                Icons.account_balance_wallet,
-                size: 50,
-                color: Colors.blueGrey,
+  return Column(children: <Widget>[
+     
+      Padding(
+        padding: const EdgeInsets.fromLTRB(20,180,10,16),
+        child: Container(
+          
+          padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+         // margin: EdgeInsets.symmetric(vertical: 50),
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(
+                  Icons.attach_money,
+                  size: 40,
+                  color: Colors.blueGrey,
+                ),
+                title: Text(
+                  'Último Periodo Facturado',
+                  style: TextStyle(color: Colors.blueGrey, fontSize: 14),
+                ),
+                subtitle: Text("\u0024" + pattern.format(saldoDisponible), style: TextStyle(color: Color.fromRGBO(4, 32, 82, 1.0), fontSize: 21) ,),
+             trailing:   Container(
+              padding: EdgeInsets.all(8),
+                 // color: Colors.red,
+                    child: IconButton(
+                       alignment: Alignment.topLeft,
+                        icon: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 30,
+
+                          color: Colors.orange,
+                        ),
+                        onPressed: () {
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => UltimoDeposito() ));
+                        })),
               ),
-              title: Text('Último periodo facturado'),
-              subtitle: Text(
-                '\u002443,983.87',
-                style: TextStyle(fontSize: 25),
+            ],
+          ),
+          width: size.width * 0.90,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(4, 3),
+                blurRadius: 3.0,
+                spreadRadius: 3.0,
               ),
-             
-            ),
-          ],
-        ),
-        width: size.width * 0.90,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(4, 3),
-              blurRadius: 3.0,
-              spreadRadius: 3.0,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ]));
+    ]);
   }
 
   Widget listaOpciones2() {
     final size = MediaQuery.of(context).size;
 
-    return SingleChildScrollView(
-        child: Column(children: <Widget>[
-      SafeArea(
-          child: Container(
-        height: 235,
-      )),
-      Container(
-        padding: EdgeInsets.fromLTRB(0, 18, 0, 20),
-        margin: EdgeInsets.symmetric(vertical: 50),
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(
-                Icons.calendar_today,
-                size: 50,
-                color: Colors.blueGrey,
+  return Column(children: <Widget>[
+     
+      Padding(
+        padding: const EdgeInsets.fromLTRB(15,10,15,10),
+        child: Container(
+          
+           padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+         // margin: EdgeInsets.symmetric(vertical: 50),
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(
+                  Icons.calendar_today,
+                  size: 40,
+                  color: Colors.blueGrey,
+                ),
+                title: Text(
+                  'Periodos anteriores',
+                  style: TextStyle(color: Colors.blueGrey, fontSize: 18),
+                ),
+             trailing:   Container(
+              padding: EdgeInsets.all(8),
+                 // color: Colors.red,
+                    child: IconButton(
+                       alignment: Alignment.center,
+                        icon: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 30,
+
+                          color: Colors.orange,
+                        ),
+                        onPressed: () {
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => PeriodosAnteriores() ));
+                        })),
               ),
-              title: Text(
-                'Periodos anteriores',
-                style: TextStyle(color: Colors.blueGrey, fontSize: 18),
+            ],
+          ),
+          width: size.width * 0.90,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(4, 3),
+                blurRadius: 3.0,
+                spreadRadius: 3.0,
               ),
-        
-            ),
-          ],
-        ),
-        width: size.width * 0.90,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(4, 3),
-              blurRadius: 3.0,
-              spreadRadius: 3.0,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ]));
+    ]);
   }
 
-  Widget buttonJ(){
-    return                Container(
-          padding: EdgeInsets.only(top: 119, left: 340),
-          child: Column(
-            
-            children: <Widget>[
-              Container(
-                 padding: EdgeInsets.all(8),
-               // color: Colors.red,
-                child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible() ));
-                    }),
-              )
-            ],
-          ),
-        );
-  }
 
-    Widget buttonK(){
-    return                Container(
-          padding: EdgeInsets.only(top: 230, left: 330),
-          child: Column(
-            
-            children: <Widget>[
-        Container(
-            padding: EdgeInsets.all(8),
-               // color: Colors.red,
-                  child: IconButton(
-                     alignment: Alignment.center,
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 30,
 
-                        color: Colors.orange,
-                      ),
-                      onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => UltimoDeposito() ));
-                      })),
-            ],
-          ),
-        );
-  }
+   
 
-    Widget buttonL(){
-    return              Container(
-          padding: EdgeInsets.only(top: 335, left: 330),
-          child: Column(
-            
-            children: <Widget>[
-        Container(
-            padding: EdgeInsets.all(8),
-               // color: Colors.red,
-                  child: IconButton(
-                     alignment: Alignment.center,
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 30,
 
-                        color: Colors.orange,
-                      ),
-                      onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => PeriodosAnteriores() ));
-                      })),
-            ],
-          ),
-        );
-  }
 }

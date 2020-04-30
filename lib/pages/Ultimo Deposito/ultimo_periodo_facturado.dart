@@ -1,8 +1,9 @@
-
-import 'package:ingresos/pages/Periodos%20Anteriores/comparacion_periodos.dart';
+import 'package:ingresos/Commons/BotonNaranja.dart';
+import 'package:ingresos/Commons/EtiquetaSaldos.dart';
+import 'package:ingresos/Commons/FondoAzul.dart';
+import 'package:ingresos/Commons/GraficaCircular.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/bonos_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/comisiones_page.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/impuestos_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/otros_movimientos.dart';
 import 'package:ingresos/pages/Ultimo%20Deposito/comprobante.dart';
 import 'package:intl/intl.dart';
@@ -24,7 +25,7 @@ class _UltimoDepositoState extends State<UltimoDeposito> {
 
   double comisiones = 320000;
 
-  double bonos = 800000;
+  double bonos = 300000;
 
   double otrosmovimientos = 222000;
 
@@ -56,50 +57,21 @@ class _UltimoDepositoState extends State<UltimoDeposito> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Stack(
+           Stack(
               children: <Widget>[
                 _crearFondo(context),
                 Container(
-                    padding: EdgeInsets.only(top: 30),
+                    padding: EdgeInsets.only(top: 20),
                     child: _graficaCircular(context)),
               ],
             ),
-            Container(
-              child: Text(''),
-            ),
-            Container(
-              child: Text(''),
-            ),
+           SizedBox(height: 10,),
             bannerComisiones(),
-            Container(
-              child: Text(''),
-            ),
-            bannerBonos(),
-            Container(
-              child: Text(''),
-            ),
+           SizedBox(height: 10,),
+            bannerBonos(), 
+           SizedBox(height: 10,),
             bannerOtrosMovimientos(),
-            Container(
-              child: Text(''),
-            ),
-                Container(
-              child: Text(''),
-            ),
-                Container(
-              child: Text(''),
-            ),
-                Container(
-              child: Text(''),
-            ),
-                Container(
-              child: Text(''),
-            ),
-                Container(
-              child: Text(''),
-            ),
-                Container(
-              child: Text(''),
-            ),
+          SizedBox(height: 25,),
             buttonFacturacion(),
           ],
         ),
@@ -108,390 +80,61 @@ class _UltimoDepositoState extends State<UltimoDeposito> {
   }
 
   Widget _crearFondo(context) {
-    final size = MediaQuery.of(context).size;
-    final colorFondo = Container(
-      height: size.height * 0.20,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: <Color>[
-        Color.fromRGBO(19, 64, 155, 1.0),
-        Color.fromRGBO(19, 64, 155, 1.0),
-        Color.fromRGBO(19, 64, 155, 1.0),
-      ])),
-    );
-
-    return Stack(
-      children: <Widget>[
-        colorFondo,
-        Container(
-          //  padding: EdgeInsets.only(top:50 , left: 20),
-          child: Column(
-            children: <Widget>[
-              SizedBox(),
-            ],
-          ),
-        ),
-        Container(
-          // padding: EdgeInsets.only(top:10 , left: 20),
-          child: Column(
-            children: <Widget>[
-              SizedBox(),
-            ],
-          ),
-        ),
-      ],
-    );
+    return FondoAzul();
   }
 
   Widget _graficaCircular(context) {
-    List<CircularStackEntry> data = <CircularStackEntry>[
-      new CircularStackEntry(
-        <CircularSegmentEntry>[
-          new CircularSegmentEntry(comisiones, Colors.red, rankKey: 'Q1'),
-          new CircularSegmentEntry(bonos, Colors.blue, rankKey: 'Q2'),
-          new CircularSegmentEntry(otrosmovimientos, Colors.orange,
-              rankKey: 'Q3'),
-          // new CircularSegmentEntry(impuestos, Colors.white, rankKey: 'Q4'),
-        ],
-        rankKey: 'Quarterly Profits',
-      ),
-    ];
-
-    return Center(
-      child: Container(
-        // alignment: AlignmentDirectional.bottomCenter,
-        width: 260.0,
-        height: 260.0,
-        // padding: EdgeInsets.only(top),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(300),
-          color: Color.fromRGBO(255, 255, 255, 1),
-        ),
-
-        child: Stack(
-          children: <Widget>[
-            Container(
-                alignment: Alignment.center,
-                child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      '           Último\n Periodo Facturado',
-                      style: TextStyle(color: Colors.blue[900], fontSize: 18),
-                    ),
-                    Text(
-                      "\u0024" + pattern.format(saldoDisponible),
-                      style: TextStyle(
-                          color: Colors.blue[900],
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Container(
-                      child: Text(''),
-                    ),
-                    Text(
-                      '14/10/2019',
-                      style: TextStyle(color: Colors.grey, fontSize: 16),
-                    ),
-                  ],
-                )),
-            Container(
-              child: AnimatedCircularChart(
-                key: _chartKey,
-                size: Size(290.0, 290.0),
-                initialChartData: data,
-                chartType: CircularChartType.Radial,
-              ),
-            ),
-          ],
-        ),
-      ),
+    return GraficaCircular(
+      tituloGrafica: 'Saldo facturado',
+      saldoDisponible: saldoDisponible,
+      comisionesG: comisiones,
+      bonosG: bonos,
+      otrosmovimientosG: otrosmovimientos,
+      fecha: '15/04/2020',
+     
     );
   }
 
   Widget bannerComisiones() {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.085,
-      width: size.width * 0.95,
-
-      // padding: EdgeInsets.symmetric(vertical: ),
-    padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-      child: ListTile(
-        contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        leading: Container(
-         //  padding: EdgeInsets.only(right:110),
-          width: 10,
-          height: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            color: Colors.blue,
-          ),
-        ),
-        title: Text(
-          'Comisiones' + '\t\t\t\t\t\t\t\t\t\t\t\t' "\u0024" + pattern.format(comisiones),
-          style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-        ),
-        trailing: Container(
-            child: IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 25,
-                  color: Colors.orange,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ComisionesPage()));
-                })),
-      ),
-
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(4, 3),
-            blurRadius: 3.0,
-            spreadRadius: 3.0,
-          ),
-        ],
-      ),
-    ); 
-
-
-  }
-
-    Widget bannerComisionesF() {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.085,
-      width: size.width * 0.95,
-
-      // padding: EdgeInsets.symmetric(vertical: ),
-      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-      child: ListTile(
-        contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        leading: Container(
-          // padding: EdgeInsets.only(right:110),
-          width: 10,
-          height: size.height * 0.085,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            color: Colors.blue,
-          ),
-        ),
-        title: Text(
-          'Comisiones' + '             ' "\u0024" + pattern.format(comisiones),
-          style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-        ),
-        trailing: Container(
-            child: IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 25,
-                  color: Colors.orange,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ComisionesPage()));
-                })),
-      ),
-
-      decoration: BoxDecoration(
-        color: Colors.red,
-        borderRadius: BorderRadius.circular(12.0),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(4, 3),
-            blurRadius: 3.0,
-            spreadRadius: 3.0,
-          ),
-        ],
-      ),
-    ); 
-
-
+    return EtiquetaSaldo(
+        tituloEtiqueta: 'Comisiones',
+        saldoEtiqueta: comisiones,
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ComisionesPage()));
+        },
+        colorEtiqueta: Color.fromRGBO(8, 63, 164, 1));
   }
 
   Widget bannerBonos() {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.085,
-      width: size.width * 0.95,
-
-      // padding: EdgeInsets.symmetric(vertical: ),
-      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-      child: ListTile(
-        contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        leading: Container(
-          // padding: EdgeInsets.only(right:110),
-          width: 10,
-          height: size.height * 0.085,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            color: Colors.orange,
-          ),
-        ),
-        title: Text(
-          'Bonos' + '                      ' "\u0024" + pattern.format(bonos),
-          style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-        ),
-        trailing: Container(
-            child: IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 25,
-                  color: Colors.orange,
-                ),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => BonosPage()));
-                })),
-      ),
-
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(4, 3),
-            blurRadius: 3.0,
-            spreadRadius: 3.0,
-          ),
-        ],
-      ),
-    );
+    return EtiquetaSaldo(
+        tituloEtiqueta: 'Bonos',
+        saldoEtiqueta: bonos,
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => BonosPage()));
+        },
+        colorEtiqueta: Colors.orange);
   }
 
   Widget bannerOtrosMovimientos() {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.085,
-      width: size.width * 0.95,
-
-      // padding: EdgeInsets.symmetric(vertical: ),
-      padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
-      child: ListTile(
-        contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        leading: Container(
-          // padding: EdgeInsets.only(right:110),
-          width: 10,
-          height: size.height * 0.085,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            color: Colors.red,
-          ),
-        ),
-        title: Text(
-          'Otros Movimientos' +
-              '  ' "\u0024" +
-              pattern.format(otrosmovimientos),
-          style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-        ),
-        trailing: Container(
-            child: IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 25,
-                  color: Colors.orange,
-                ),
-                onPressed: () {
-                       Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => OtrosMovimientos()));
-                })),
-      ),
-
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(4, 3),
-            blurRadius: 3.0,
-            spreadRadius: 3.0,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget bannerImpuestos() {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.085,
-      width: size.width * 0.95,
-
-      // padding: EdgeInsets.symmetric(vertical: ),
-      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-      child: ListTile(
-        contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        leading: Container(
-          // padding: EdgeInsets.only(right:110),
-          width: 10,
-          height: size.height * 0.085,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            color: Colors.white,
-          ),
-        ),
-        title: Text(
-          'Impuestos' + '               ' "\u0024" + pattern.format(bonos),
-          style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-        ),
-        trailing: Container(
-            child: IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 25,
-                  color: Colors.orange,
-                ),
-                onPressed: () {
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ImpuestosPage()));
-                })),
-      ),
-
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(4, 3),
-            blurRadius: 3.0,
-            spreadRadius: 3.0,
-          ),
-        ],
-      ),
-    );
+    return EtiquetaSaldo(
+        tituloEtiqueta: 'OtrosMovimientos',
+        saldoEtiqueta: otrosmovimientos,
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => OtrosMovimientos()));
+        },
+        colorEtiqueta: Colors.red);
   }
 
   Widget buttonFacturacion() {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.085,
-      width: size.width * 0.95,
-      child: RaisedButton(
-        onPressed: () {
-            Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ComprobantePage())); 
-        },
-        child: Text(
-          'VER COMPROBANTE',
-          style: TextStyle(color: Colors.orange),
-        ),
-        color: Colors.white,
-        shape: RoundedRectangleBorder(side: BorderSide(color: Colors.orange)),
-      ),
+    return BotonNaranja(
+      tituloBoton: 'VER COMPROBANTE',
+      onPressed: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ComprobantePage()));
+      },
     );
   }
 }

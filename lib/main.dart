@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
 import 'package:ingresos/pages/detalle_ingresos.dart';
 import 'package:ingresos/utils/asegurado_cls.dart';
 

@@ -2,25 +2,43 @@ import 'package:ingresos/Commons/BotonNaranja.dart';
 import 'package:ingresos/Commons/EtiquetaSaldos.dart';
 import 'package:ingresos/Commons/FondoAzul.dart';
 import 'package:ingresos/Commons/GraficaCircular.dart';
-import 'package:ingresos/pages/Facturacion/facturacion_page.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/bonos_page.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/comisiones_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/otros_movimientos.dart';
-import 'package:flutter/material.dart';
-import 'bonos_page.dart';
-import 'comisiones_page.dart';
+import 'package:ingresos/pages/Ultimo%20Deposito/comprobante.dart';
+import 'package:intl/intl.dart';
 
-class SaldoDisponible extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+
+
+
+class SaldoFacturado extends StatefulWidget {
+
+final String tituloFecha;
+
+ SaldoFacturado(this.tituloFecha);
+  
   @override
-  _SaldoDisponibleState createState() => _SaldoDisponibleState();
+  _SaldoFacturadoState createState() => _SaldoFacturadoState(tituloFecha);
+  
 }
 
-class _SaldoDisponibleState extends State<SaldoDisponible> {
+class _SaldoFacturadoState extends State<SaldoFacturado> {
+  final String tituloFecha;
+    _SaldoFacturadoState(this.tituloFecha);
+  final GlobalKey<AnimatedCircularChartState> _chartKey =
+      new GlobalKey<AnimatedCircularChartState>();
+
   double comisiones = 320000;
 
-  double bonos = 800000;
+  double bonos = 300000;
 
   double otrosmovimientos = 222000;
 
   double impuestos = 1000000;
+
+  final pattern = new NumberFormat("###,###,###.##");
 
   double saldoDisponible = 84692.87;
 
@@ -38,7 +56,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
             }),
         centerTitle: true,
         title: Text(
-          'Saldo Disponible',
+          tituloFecha, //NECESITO ESTE DATO
           style: TextStyle(color: Colors.blueGrey),
         ),
       ),
@@ -46,7 +64,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Stack(
+           Stack(
               children: <Widget>[
                 _crearFondo(context),
                 Container(
@@ -74,13 +92,12 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
 
   Widget _graficaCircular(context) {
     return GraficaCircular(
-      tituloGrafica: 'Saldo Disponible',
+      tituloGrafica: 'Saldo Facturado',
       saldoDisponible: saldoDisponible,
       comisionesG: comisiones,
       bonosG: bonos,
       otrosmovimientosG: otrosmovimientos,
       fecha: '15/04/2020',
-      fechaFinal: '15/05/2020',
     );
   }
 
@@ -119,10 +136,10 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
 
   Widget buttonFacturacion() {
     return BotonNaranja(
-      tituloBoton: 'VER DATOS DE FACTURACIÓN',
+      tituloBoton: 'VER COMPROBANTE',
       onPressed: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => FacturacionPage()));
+            MaterialPageRoute(builder: (context) => ComprobantePage()));
       },
     );
   }
