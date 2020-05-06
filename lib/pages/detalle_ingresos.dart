@@ -129,7 +129,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
           ),
         ),
         Container(
-        padding: EdgeInsets.only(top: 140, left: 240),
+        padding: EdgeInsets.only(top: 140, left: 265),
        // alignment: Alignment.centerRight,
           child: Column(
             children: <Widget>[
@@ -143,7 +143,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
         ),
 
          Container(
-          padding: EdgeInsets.only(top: 119, left: 310),
+          padding: EdgeInsets.only(top: 119, left: 335),
           child: Column(
             
             children: <Widget>[

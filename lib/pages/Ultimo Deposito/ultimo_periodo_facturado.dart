@@ -7,9 +7,8 @@ import 'package:ingresos/pages/Saldo%20Disponible/comisiones_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/otros_movimientos.dart';
 import 'package:ingresos/pages/Ultimo%20Deposito/comprobante.dart';
 import 'package:intl/intl.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+
 
 
 
@@ -20,8 +19,7 @@ class UltimoDeposito extends StatefulWidget {
 }
 
 class _UltimoDepositoState extends State<UltimoDeposito> {
-  final GlobalKey<AnimatedCircularChartState> _chartKey =
-      new GlobalKey<AnimatedCircularChartState>();
+
 
   double comisiones = 320000;
 

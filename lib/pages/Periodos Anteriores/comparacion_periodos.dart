@@ -1,9 +1,11 @@
-
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:ingresos/Commons/GraficaBarras.dart';
+import 'package:ingresos/Commons/GraficaLinealTriple.dart';
+import 'package:ingresos/Commons/TablaAcumulado.dart';
+import 'package:ingresos/Commons/TablaMensualPorcentajes.dart';
+import 'package:ingresos/Commons/TituloEtiquetas.dart';
 import 'package:ingresos/pages/Periodos%20Anteriores/filtro_periodos.dart';
 import 'package:intl/intl.dart';
-
 import 'dart:math';
 
 class ComparacionPeriodos extends StatefulWidget {
@@ -17,7 +19,10 @@ class ComparacionPeriodos extends StatefulWidget {
 }
 
 class _ComparacionPeriodos extends State<ComparacionPeriodos> {
+
+  String mesTabla;
    
+  String fechaPrueba = '08/03/2019';
   double comisiones = 320000;
 
   double bonos = 800000;
@@ -36,6 +41,11 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
   final Color light = const Color(0xff73e8c9);
 
   static const double barWidth = 22;
+
+  bool selected= true;
+  bool selected1=false ;
+  bool selected2= false;
+
 
   @override
   void initState() {
@@ -75,14 +85,53 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
         ],
       ),
       body: DefaultTabController(
-       
+        initialIndex: 0,
         length: 3,
         child: Column(
+
           children: <Widget>[
             Container(
               constraints: BoxConstraints.expand(height: 50),
               child: TabBar(
-               
+
+               onTap: (value){
+                if(value==0){
+                  setState(() {
+                    
+                  });
+                  selected=true;
+                }
+                else{
+                    setState(() {
+                    
+                  });
+                   selected=false;
+                }
+                  if(value==1){
+                      setState(() {
+                    
+                  });
+                  selected1=true;
+                }
+                else{
+                    setState(() {
+                    
+                  });
+                   selected1=false;
+                }
+                  if(value==2){
+                      setState(() {
+                    
+                  });
+                  selected2=true;
+                }
+                else{
+                    setState(() {
+                    
+                  });
+                   selected2=false;
+                }
+               },
                 
                 isScrollable: true, 
                 tabs: [
@@ -138,9 +187,10 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
                 child: TabBarView(
                   
                   children: [
-               _anualPage(),
-                _anualPage2(),
-                _anualPage3(),
+                 _anualPage(),
+                _periodoMes(),
+                _acumuladoPage(),
+               
                 ]),
               ),
             )
@@ -152,7 +202,7 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
 
 
   Widget _anualPage() {
-   final size = MediaQuery.of(context).size;
+   
 return  Padding(
   padding: const EdgeInsets.all(16.0),
   child:   Column(
@@ -166,212 +216,24 @@ return  Padding(
             child: Text('Detalle Anual de Ingresos', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
           ),
         ),
-          Container(
-           // height: size.width*0.70,
-            width: size.width*0.95,
-        child:   BarChart(
-  
-                    BarChartData(
-                     // backgroundColor: Colors.red,
-                      alignment: BarChartAlignment.center,
-                      maxY: 10,
-                      groupsSpace: 50,
-                      barTouchData: const BarTouchData(
-                        enabled: false,
-                      ),
-                      titlesData: FlTitlesData(
-  
-                        show: true,
-                        bottomTitles: SideTitles(
-                          showTitles: true,
-                          textStyle: const TextStyle(color: Colors.black, fontSize: 17),
-                          margin: 10,
-                          rotateAngle: 0,
-                          getTitles: (double value) {
-                            switch (value.toInt()) {
-                              case 0:
-                                return '2017';
-                              case 1:
-                                return '2018';
-                              case 2:
-                                return '2019';
-                   
-                              default:
-                                return '';
-                            }
-                          },
-                        ),
-                        leftTitles: SideTitles(
-                             
-                          showTitles: true,
-                          textStyle: const TextStyle(color: Colors.transparent, fontSize: 10),
-                          rotateAngle: 45,
-                          getTitles: (double value) {
-                            if (value == 1) {
-                              return '';
-                            }
-                            return '${value.toInt()}0k';
-                          },
-                          interval: 5,
-                          margin: 1,
-                          reservedSize: 0,
-  
-                        ),
-                        rightTitles: SideTitles(
-                          showTitles: true,
-                          textStyle: const TextStyle(color: Colors.transparent, fontSize: 10),
-                          rotateAngle: 90,
-                          getTitles: (double value) {
-                            if (value == 1) {
-                              return '';
-                            }
-                            return '${value.toInt()}0k';
-                          },
-                          interval: 5,
-                          margin: 1,
-                          reservedSize: 0,
-                        ),
-                      ),
-                      gridData: FlGridData(
-                        show: true,
-                        drawHorizontalLine: true,
-                        checkToShowHorizontalLine: (value) => value % 2 == 1,
-                        getDrawingHorizontalLine: (value) {
-                          if (value == 0) {
-                            return const FlLine(color: Colors.red, strokeWidth: 2);
-                          }
-                          return const FlLine(
-                            color: Colors.grey,
-                            strokeWidth: 1,
-                          
-                          );
-                        },
-                      ),
-                      borderData: FlBorderData(
-                        show: false,
-                      ),
-                      barGroups: [
-                        BarChartGroupData(
-                          x: 0,
-                          barRods: [
-                            BarChartRodData(
-                              color: Colors.transparent,
-                              y: 10,
-                              width: 80,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(6), topRight: Radius.circular(6)),
-                              rodStackItem: const [
-                               BarChartRodStackItem(1, 6.5, Color.fromRGBO(115, 213, 250, 0.5)),
-                          
-                              ],
-                            ),
-                          ],
-                        ),
-                        BarChartGroupData(
-  
-                          x: 1,
-                          barRods: [
-                            BarChartRodData(
-                              color: Colors.transparent,
-                              y: 10,
-                              width: 80,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(6), topRight: Radius.circular(6)),
-                              rodStackItem: const [
-                                BarChartRodStackItem(1, 4.7, Color.fromRGBO(191, 115, 250, 0.5)),
-                           
-                              ],
-                            ),
-                          ],
-                        ),
-                        BarChartGroupData(
-                          x: 2,
-                          barRods: [
-                            BarChartRodData(
-                              color: Colors.transparent,
-                              y: 10,
-                              width: 80,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(6), topRight: Radius.circular(6)),
-                              rodStackItem: const [
-                           BarChartRodStackItem(1, 8.7, Color.fromRGBO(250, 170, 115, 0.5)),
-                       
-                              ],
-                            ),
-                          ],
-                        ),
-        
-                  
-        
-             
-                      ],
-                    ),
-                  ),
+    
+        GraficaBarras(gradle: 2, 
+        maxY: 10, 
+        ultimoY: 5, 
+        penultimoY: 3, 
+        antepenultimoY: 6),
 
-                  
-      ),
-
-      Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            
-            alignment: Alignment.topLeft,
-            child: Text('', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
-          ),
-        ),
-
-        DataTable(
-dataRowHeight: 30,
-columnSpacing: 40,
-horizontalMargin: 45,
-              //  sortColumnIndex: 2,
-                sortAscending: false,
-                columns: [
-
-                  DataColumn(
-                     
-                    label: Text("Año", style: TextStyle(fontSize: 16, color: Colors.black),)),
-                  DataColumn(label: Text("Monto\nAnual",  style: TextStyle(fontSize: 16,  color: Colors.black))),
-                  DataColumn(label: Text("Incremento",  style: TextStyle(fontSize: 16,  color: Colors.black))),
-                ],
-                rows: [
-                  DataRow(
-                   // selected: true,
-                    cells: [
-                 //   DataCell(Text("Andres"), showEditIcon: true),
-                    DataCell(Text("2017", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                      DataCell(Row(
-                      children: <Widget>[
-                        Icon(Icons.arrow_upward, color: Colors.green,),
-                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
-                      ],
-                    ))
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text("2018", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                      DataCell(Row(
-                      children: <Widget>[
-                        Icon(Icons.arrow_downward, color: Colors.red,),
-                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
-                      ],
-                    ))
-                  ]),
-                     DataRow(cells: [
-                    DataCell(Text("2019", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Row(
-                      children: <Widget>[
-                        Icon(Icons.arrow_upward, color: Colors.green,),
-                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
-                      ],
-                    ))
-                  ]),
-               
-
-                ],
-              )
+      TablaMensual(
+        montoAnual: true,
+        montoActual: 2000, 
+        montoPenultimo: 4444, 
+        montoAntepenultimo: 2222, 
+        porcentajeActual: 6, 
+        porcentajePenultimo: 15, 
+        porcentajeAntepenultimo: 54, 
+        incremento: true, 
+        incremento2: true, 
+        incremento3: false)
     ],
   ),
 );
@@ -382,663 +244,648 @@ horizontalMargin: 45,
 }
 
 
-  Widget _anualPage2() {
-
-  final List<int> showIndexes = const [2];
-  final List<FlSpot> allSpots = [
-    FlSpot(0, 1),
-    FlSpot(1, 2),
-    FlSpot(2, 1),
-    FlSpot(3, 2),
-    FlSpot(4, 2),
-    FlSpot(5, 1),
-    FlSpot(6, 1),
-    FlSpot(7, 9),
-    FlSpot(8, 2),
-    FlSpot(9, 2),
-    FlSpot(10, 2),
-    FlSpot(11, 2),
-  ];
-  final List<int> showIndexes2 = const [2];
-    final List<FlSpot> allSpots2 = [
-    FlSpot(0, 1),
-    FlSpot(1, 8),
-    FlSpot(2, 1),
-    FlSpot(3, 7),
-    FlSpot(4, 2),
-    FlSpot(5, 5),
-    FlSpot(6, 1),
-    FlSpot(7, 3),
-    FlSpot(8, 2),
-    FlSpot(9, 2),
-    FlSpot(10, 2),
-    FlSpot(11, 2),
-  ];
-
-    final List<int> showIndexes3 = const [2];
-    final List<FlSpot> allSpots3 = [
-    FlSpot(0, 1),
-    FlSpot(1, 3),
-    FlSpot(2, 1),
-    FlSpot(3, 7),
-    FlSpot(4, 5),
-    FlSpot(5, 2),
-    FlSpot(6, 9),
-    FlSpot(7, 3),
-    FlSpot(8, 2),
-    FlSpot(9, 2),
-    FlSpot(10, 2),
-    FlSpot(11, 2),
-  ];
 
 
 
-   final lineBarsData = [
-      LineChartBarData(
-        
+  Widget _periodoMes() {
 
-          showingIndicators: showIndexes,
-          spots: allSpots,
-          isCurved: true,
-          barWidth: 2,
-          belowBarData: BarAreaData(
-            show: true,
-            colors: [
-          Colors.blue.withOpacity(0.25),
-           Colors.blue.withOpacity(0.25),
-          Colors.blue.withOpacity(0.25),
-            ],
-          ),
-          dotData: FlDotData(show: false),
-          colors: [
-          Colors.blue.withOpacity(0.25),
-           Colors.blue.withOpacity(0.25),
-           Colors.blue.withOpacity(0.25),
-          ],
-          colorStops: [
-            0.1,
-            0.4,
-            0.9
-          ]),
+return GraficaLinealTriple(
 
+  acumulado: false,
+ //CANTIDADES MOSTRADA EN TABLA DE GRAFICA POR MES
+        eneTotal: 1200,
+        febTotal: 1200,
+        marTotal: 1200,
+        abrTotal: 1200,
+        mayTotal: 1200,
+        junTotal: 1200,
+        julTotal: 1200,
+        agoTotal: 1200,
+        sepTotal: 1200,
+        octTotal: 1200,
+        novTotal: 1200,
+        dicTotal: 1200,
 
-      LineChartBarData(
-          showingIndicators: showIndexes2,
-          spots: allSpots2,
-          isCurved: true,
-          barWidth: 2,
-          belowBarData: BarAreaData(
-            show: true,
-            colors: [
-        Colors.deepPurple.withOpacity(0.25),
-           Colors.deepPurple.withOpacity(0.25),
-           Colors.deepPurple.withOpacity(0.25),
-            ],
-          ),
-          dotData: FlDotData(show: false),
-          colors: [
-             Colors.deepPurple.withOpacity(0.25),
-           Colors.deepPurple.withOpacity(0.25),
-           Colors.deepPurple.withOpacity(0.25),
-          ],
-          colorStops: [
-            0.1,
-            0.4,
-            0.9
-          ]),
+        enePorcentaje: 120,
+        febPorcentaje: 120,
+        marPorcentaje: 120,
+        abrPorcentaje: 120,
+        mayPorcentaje: 120,
+        junPorcentaje: 120,
+        julPorcentaje: 120,
+        agoPorcentaje: 120,
+        sepPorcentaje: 120,
+        octPorcentaje: 120,
+        novPorcentaje: 120,
+        dicPorcentaje: 120,
 
-        LineChartBarData(
-          showingIndicators: showIndexes3,
-          spots: allSpots3,
-          isCurved: true,
-          barWidth: 2,
-          belowBarData: BarAreaData(
-            show: true,
-            colors: [
-         Colors.deepOrange.withOpacity(0.25),
-           Colors.deepOrange.withOpacity(0.25),
-          Colors.deepOrange.withOpacity(0.25),
-     
-            ],
-          ),
-          dotData: FlDotData(show: false),
-          colors: [
-        Colors.deepOrange.withOpacity(0.25),
-           Colors.deepOrange.withOpacity(0.25),
-          Colors.deepOrange.withOpacity(0.25),
-          ],
-          colorStops: [
-            0.1,
-            0.4,
-            0.9
-          ]),
+        enePorcentaje2: 120,
+        febPorcentaje2: 120,
+        marPorcentaje2: 120,
+        abrPorcentaje2: 120,
+        mayPorcentaje2: 120,
+        junPorcentaje2: 120,
+        julPorcentaje2: 120,
+        agoPorcentaje2: 120,
+        sepPorcentaje2: 120,
+        octPorcentaje2: 120,
+        novPorcentaje2: 120,
+        dicPorcentaje2: 120,
 
-          
+        enePorcentaje3: 120,
+        febPorcentaje3: 120,
+        marPorcentaje3: 120,
+        abrPorcentaje3: 120,
+        mayPorcentaje3: 120,
+        junPorcentaje3: 120,
+        julPorcentaje3: 120,
+        agoPorcentaje3: 120,
+        sepPorcentaje3: 120,
+        octPorcentaje3: 120,
+        novPorcentaje3: 120,
+        dicPorcentaje3: 120,
 
-    ];
+        //CONTENIDO DE LAS TABLAS POR MES
+        eneContenido: mesEnero(),
+        febContenido: mesFebrero(),
+        marContenido: mesMarzo(),
+        abrContenido: mesAbril(),
+        mayContenido: mesMayo(),
+        junContenido: mesJunio(),
+        julContenido: mesJulio(),
+        agoContenido: mesAgosto(),
+        sepContenido: mesSeptiembre(),
+        octContenido: mesOctubre(),
+        novContenido: mesNoviembre(),
+        dicContenido: mesDiciembre(),
 
-   // final LineChartBarData tooltipsOnBar = lineBarsData[0];
-  final size = MediaQuery.of(context).size;
+        //VALORES DE LA GRAFICA
+        gradle: 4,
+        maxY: 10,
+        eneY: 4,
+        febY: 4,
+        marY: 6,
+        abrY: 3,
+        mayY: 7,
+        junY: 2,
+        julY: 8,
+        agoY: 2,
+        sepY: 6,
+        octY: 3,
+        novY: 8,
+        dicY: 3,
 
+        eneY2: 2,
+        febY2: 3,
+        marY2: 2,
+        abrY2: 3,
+        mayY2: 2,
+        junY2: 3,
+        julY2: 5,
+        agoY2: 3,
+        sepY2: 2,
+        octY2: 3,
+        novY2: 2,
+        dicY2: 3,
 
-return Column(
-  children: <Widget>[
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        alignment: Alignment.centerLeft,
-        child: Text('Selecciona el Mes a Comparar'),),
-    ),
-       Container(
-       //height: 100,
-         width: size.width*1,
-         child: LineChart(
-
-              LineChartData(
-              
-            /*     showingTooltipIndicators: showIndexes.map((index) {
-                /*  return ShowingTooltipIndicators(index, [
-                    LineBarSpot(
-                        tooltipsOnBar, lineBarsData.indexOf(tooltipsOnBar), tooltipsOnBar.spots[index]),
-                  ]); */
-                }).toList(), */
-                lineTouchData: LineTouchData(
-                  enabled: false,
-                  getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
-                    return spotIndexes.map((index) {
-                      return TouchedSpotIndicatorData(
-                        FlLine(
-                          color: Colors.pink,
-
-                        ),
-                        FlDotData(
-                          show: true,
-                          dotSize: 8,
-                      //    strokeWidth: 2,
-                       //   getStrokeColor: (spot, percent, barData) => Colors.black,
-                        /*   getDotColor: (spot, percent, barData) {
-                            return lerpGradient(barData.colors, barData.colorStops, percent / 100);
-                          }, */
-                        ),
-                      );
-                    }).toList();
-                  },
-                  touchTooltipData: LineTouchTooltipData(
-                    tooltipBgColor: Colors.pink,
-                    tooltipRoundedRadius: 8,
-                    getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
-                      return lineBarsSpot.map((lineBarSpot) {
-                        return LineTooltipItem(
-                          lineBarSpot.y.toString(),
-                          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                        );
-                      }).toList();
-                    },
-                  ),
-
-                ),
-                lineBarsData: lineBarsData,
-                minY: 0,
-                titlesData: FlTitlesData(
-                  leftTitles: SideTitles(
-                    showTitles: false,
-                  ),
-
-                  bottomTitles: SideTitles(
-                   // reservedSize: 80,
-
-                      showTitles: true,
-                      interval: 1.8,
-                      getTitles: (val) {
-                        switch (val.toInt()) {
-                          case 0:
-                            return 'ENERO';
-                        
-                          case 1:
-                            return 'FEBRERO';
-                          case 2:
-                            return 'MARZO';
-                          case 3:
-                            return 'ABRIL';
-                          case 4:
-                            return 'MAYO';
-                          case 5:
-                            return 'JUNIO';
-                          case 6:
-                            return 'JULIO';
-                          case 7:
-                            return 'AGOSTO';
-                          case 8:
-                            return 'SEPTIEMBRE';
-                          case 9:
-                            return 'OCTUBRE';
-                          case 10:
-                            return 'NOVIEMBRE';
-                          case 11:
-                            return 'DICIEMBRE';
-                     
-                        }
-                        return '';
-                      },  
-                      
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueGrey,
-                        fontFamily: 'Digital',
-                        fontSize: 10,
-                      )),
-                ),
-             /*    axisTitleData: FlAxisTitleData(
-                  rightTitle: AxisTitle(showTitle: true, titleText: 'count'),
-                  leftTitle: AxisTitle(showTitle: true, titleText: 'count'),
-                  topTitle:
-                      AxisTitle(showTitle: true, titleText: 'Wall clock', textAlign: TextAlign.left),
-                ), */
-                        gridData: FlGridData(show: true,
-                  drawHorizontalLine: true,
-                        checkToShowHorizontalLine: (value) => value % 2 == 1,
-                        getDrawingHorizontalLine: (value) {
-                          if (value == 0) {
-                            return const FlLine(color: Colors.red, strokeWidth: 2);
-                          }
-                          return const FlLine(
-                            color: Colors.grey,
-                            strokeWidth: 1,
-                          
-                          );
-                        },
-                ),
-                borderData: FlBorderData(
-                  show: false,
-                ),
-              ),
-            ),
-       ),
-
-           Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        alignment: Alignment.centerLeft,
-        child: Text('Febrero', style: TextStyle(fontSize: 20),),),
-    ),
-
-            DataTable(
-dataRowHeight: 30,
-columnSpacing: 40,
-horizontalMargin: 45,
-              //  sortColumnIndex: 2,
-                sortAscending: false,
-                columns: [
-
-                  DataColumn(
-                     
-                    label: Text("Año", style: TextStyle(fontSize: 16, color: Colors.black),)),
-                  DataColumn(label: Text("Monto\nMensual",  style: TextStyle(fontSize: 16,  color: Colors.black))),
-                  DataColumn(label: Text("Incremento",  style: TextStyle(fontSize: 16,  color: Colors.black))),
-                ],
-                rows: [
-                  DataRow(
-                   // selected: true,
-                    cells: [
-                 //   DataCell(Text("Andres"), showEditIcon: true),
-                    DataCell(Text("2019", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                      DataCell(Row(
-                      children: <Widget>[
-                        Icon(Icons.arrow_upward, color: Colors.green,),
-                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
-                      ],
-                    ))
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text("2018", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                      DataCell(Row(
-                      children: <Widget>[
-                        Icon(Icons.arrow_downward, color: Colors.red,),
-                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
-                      ],
-                    ))
-                  ]),
-                     DataRow(cells: [
-                    DataCell(Text("2017", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Row(
-                      children: <Widget>[
-                        Icon(Icons.arrow_upward, color: Colors.green,),
-                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
-                      ],
-                    ))
-                  ]),
-               
-
-                ],
-              )
+        eneY3: 4,
+        febY3: 5,
+        marY3: 4,
+        abrY3: 5,
+        mayY3: 4,
+        junY3: 5,
+        julY3: 4,
+        agoY3: 5,
+        sepY3: 4,
+        octY3: 2,
+        novY3: 4,
+        dicY3: 2
 
 
-       
-       ]
-       ); 
+
+);
        
        }
 
 
-  Widget _anualPage3() {
 
-  final List<int> showIndexes = const [2];
-  final List<FlSpot> allSpots = [
-    FlSpot(0, 2),
-    FlSpot(1, 2),
-    FlSpot(2, 1),
-    FlSpot(3, 0),
-    FlSpot(4, 0),
-    FlSpot(5, 0),
-     FlSpot(6, 0),
+ Widget _acumuladoPage(){
+ return GraficaLinealTriple(
+ //CANTIDADES MOSTRADA EN TABLA DE GRAFICA POR MES
+  
+ acumulado: true,
+        eneTotal: 1200,
+        febTotal: 1200,
+        marTotal: 1200,
+        abrTotal: 1200,
+        mayTotal: 1200,
+        junTotal: 1200,
+        julTotal: 1200,
+        agoTotal: 1200,
+        sepTotal: 1200,
+        octTotal: 1200,
+        novTotal: 1200,
+        dicTotal: 1200,
 
-  ];
-  final List<int> showIndexes2 = const [2];
-    final List<FlSpot> allSpots2 = [
-  FlSpot(0, 2),
-    FlSpot(1, 8),
-    FlSpot(2, 1),
-    FlSpot(3, 0),
-    FlSpot(4, 0),
-    FlSpot(5, 0),
-     FlSpot(6, 0),
+        enePorcentaje: 120,
+        febPorcentaje: 120,
+        marPorcentaje: 120,
+        abrPorcentaje: 120,
+        mayPorcentaje: 120,
+        junPorcentaje: 120,
+        julPorcentaje: 120,
+        agoPorcentaje: 120,
+        sepPorcentaje: 120,
+        octPorcentaje: 120,
+        novPorcentaje: 120,
+        dicPorcentaje: 120,
 
-  ];
+        enePorcentaje2: 120,
+        febPorcentaje2: 120,
+        marPorcentaje2: 120,
+        abrPorcentaje2: 120,
+        mayPorcentaje2: 120,
+        junPorcentaje2: 120,
+        julPorcentaje2: 120,
+        agoPorcentaje2: 120,
+        sepPorcentaje2: 120,
+        octPorcentaje2: 120,
+        novPorcentaje2: 120,
+        dicPorcentaje2: 120,
 
-    final List<int> showIndexes3 = const [2];
-    final List<FlSpot> allSpots3 = [
-    FlSpot(0, 2),
-    FlSpot(1, 3),
-    FlSpot(2, 1),
-    FlSpot(3, 0),
-    FlSpot(4, 0),
-    FlSpot(5, 0),
-    FlSpot(5, 0),
-    FlSpot(6, 0),
+        enePorcentaje3: 120,
+        febPorcentaje3: 120,
+        marPorcentaje3: 120,
+        abrPorcentaje3: 120,
+        mayPorcentaje3: 120,
+        junPorcentaje3: 120,
+        julPorcentaje3: 120,
+        agoPorcentaje3: 120,
+        sepPorcentaje3: 120,
+        octPorcentaje3: 120,
+        novPorcentaje3: 120,
+        dicPorcentaje3: 120,
 
-  ];
+        //CONTENIDO DE LAS TABLAS POR MES
+        eneContenido: mesEnero(),
+        febContenido: mesFebrero(),
+        marContenido: mesMarzo(),
+        abrContenido: mesAbril(),
+        mayContenido: mesMayo(),
+        junContenido: mesJunio(),
+        julContenido: mesJulio(),
+        agoContenido: mesAgosto(),
+        sepContenido: mesSeptiembre(),
+        octContenido: mesOctubre(),
+        novContenido: mesNoviembre(),
+        dicContenido: mesDiciembre(),
+
+        //VALORES DE LA GRAFICA
+        gradle: 4,
+        maxY: 10,
+        eneY: 3,
+        febY: 7,
+        marY: 6,
+        abrY: 4,
+        mayY: 3,
+        junY: 8,
+        julY: 0,
+        agoY: 3,
+        sepY: 5,
+        octY: 3,
+        novY: 2,
+        dicY: 4,
+
+        eneY2: 7,
+        febY2: 5,
+        marY2: 2,
+        abrY2: 7,
+        mayY2: 3,
+        junY2: 5,
+        julY2: 9,
+        agoY2: 3,
+        sepY2: 2,
+        octY2: 6,
+        novY2: 7,
+        dicY2: 8,
+
+        eneY3: 4,
+        febY3: 5,
+        marY3: 4,
+        abrY3: 5,
+        mayY3: 4,
+        junY3: 5,
+        julY3: 4,
+        agoY3: 5,
+        sepY3: 4,
+        octY3: 2,
+        novY3: 4,
+        dicY3: 2
 
 
 
-   final lineBarsData = [
-      LineChartBarData(
-         
-
-          showingIndicators: showIndexes,
-          spots: allSpots,
-          isCurved: true,
-          barWidth: 2,
-          belowBarData: BarAreaData(
-            show: true,
-            colors: [
-          Colors.blue.withOpacity(0.25),
-           Colors.blue.withOpacity(0.25),
-          Colors.blue.withOpacity(0.25),
-            ],
-          ),
-          dotData: FlDotData(show: false),
-          colors: [
-          Colors.blue.withOpacity(0.25),
-           Colors.blue.withOpacity(0.25),
-           Colors.blue.withOpacity(0.25),
-          ],
-          colorStops: [
-            0.1,
-            0.4,
-            0.9
-          ]),
 
 
-      LineChartBarData(
-          showingIndicators: showIndexes2,
-          spots: allSpots2,
-          isCurved: true,
-          barWidth: 2,
-          belowBarData: BarAreaData(
-            show: true,
-            colors: [
-        Colors.deepPurple.withOpacity(0.25),
-           Colors.deepPurple.withOpacity(0.25),
-           Colors.deepPurple.withOpacity(0.25),
-            ],
-          ),
-          dotData: FlDotData(show: false),
-          colors: [
-             Colors.deepPurple.withOpacity(0.25),
-           Colors.deepPurple.withOpacity(0.25),
-           Colors.deepPurple.withOpacity(0.25),
-          ],
-          colorStops: [
-            0.1,
-            0.4,
-            0.9
-          ]),
-
-        LineChartBarData(
-          showingIndicators: showIndexes3,
-          spots: allSpots3,
-          isCurved: true,
-          barWidth: 2,
-          belowBarData: BarAreaData(
-            show: true,
-            colors: [
-         Colors.deepOrange.withOpacity(0.25),
-           Colors.deepOrange.withOpacity(0.25),
-          Colors.deepOrange.withOpacity(0.25),
+);
+ }
+  Widget mesEnero() {
+    return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Enero',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Enero',
+        fontsize: 25,
+        ),
      
-            ],
-          ),
-          dotData: FlDotData(show: false),
-          colors: [
-        Colors.deepOrange.withOpacity(0.25),
-           Colors.deepOrange.withOpacity(0.25),
-          Colors.deepOrange.withOpacity(0.25),
-          ],
-          colorStops: [
-            0.1,
-            0.4,
-            0.9
-          ]),
+   selected1 ?  TablaMensual(
+     montoAnual: false,
+     montoActual: 2000, 
 
-          
+     incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoPenultimo: 1000, 
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero',
+       periodo2: 'Enero',
+       periodo3: 'Enero',
+     ),
+      ],
+    );
+  }
 
-    ];
+  Widget mesFebrero() {
+     return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Febrero',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Febrero',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(
+     montoAnual: false,
+     montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoPenultimo: 1000, 
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Febrero',
+       periodo2: 'Enero - Febrero',
+       periodo3: 'Enero - Febrero',
+     ),
+      ],
+    );
+  }
 
-   // final LineChartBarData tooltipsOnBar = lineBarsData[0];
-  final size = MediaQuery.of(context).size;
+  Widget mesMarzo() {
+     return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Marzo',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Marzo',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoAnual: false,
+     montoPenultimo: 1000, 
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Marzo',
+       periodo2: 'Enero - Marzo',
+       periodo3: 'Enero - Marzo',
+     ),
+      ],
+    );
+  }
 
+  Widget mesAbril() {
+    return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Abril',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Abril',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoAnual: false,
+     montoPenultimo: 1000, 
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Abril',
+       periodo2: 'Enero - Abril',
+       periodo3: 'Enero - Abril',
+     ),
+      ],
+    );
+  }
 
-return Column(
-  children: <Widget>[
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        alignment: Alignment.centerLeft,
-        child: Text('Total acumulado de enero al mes seleccionado'),),
-    ),
-       Container(
-       //height: 100,
-         width: size.width*1,
-         child: LineChart(
+  Widget mesMayo() {
+     return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Mayo',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Mayo',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoAnual: false,
+     montoPenultimo: 1000, 
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Mayo',
+       periodo2: 'Enero - Mayo',
+       periodo3: 'Enero - Mayo',
+     ),
+      ],
+    );
+  }
 
-              LineChartData(
-                  
-            /*     showingTooltipIndicators: showIndexes.map((index) {
-                /*  return ShowingTooltipIndicators(index, [
-                    LineBarSpot(
-                        tooltipsOnBar, lineBarsData.indexOf(tooltipsOnBar), tooltipsOnBar.spots[index]),
-                  ]); */
-                }).toList(), */
-                lineTouchData: LineTouchData(
-                  enabled: false,
-                  getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
-                    return spotIndexes.map((index) {
-                      return TouchedSpotIndicatorData(
-                        FlLine(
-                          color: Colors.pink,
-                        ),
-                        FlDotData(
-                          show: true,
-                          dotSize: 8,
-                      //    strokeWidth: 2,
-                       //   getStrokeColor: (spot, percent, barData) => Colors.black,
-                        /*   getDotColor: (spot, percent, barData) {
-                            return lerpGradient(barData.colors, barData.colorStops, percent / 100);
-                          }, */
-                        ),
-                      );
-                    }).toList();
-                  },
-                  touchTooltipData: LineTouchTooltipData(
-                    tooltipBgColor: Colors.pink,
-                    tooltipRoundedRadius: 8,
-                    getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
-                      return lineBarsSpot.map((lineBarSpot) {
-                        return LineTooltipItem(
-                          lineBarSpot.y.toString(),
-                          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                        );
-                      }).toList();
-                    },
-                  ),
-                ),
-                lineBarsData: lineBarsData,
-                minX: 0,
-                minY: 0,
-                titlesData: FlTitlesData(
-                  leftTitles: SideTitles(
-                    showTitles: false,
-                  ),
-                 // show: true,
-                  bottomTitles: SideTitles(
-                   // reservedSize: 100,
-                     
-                      showTitles: false,
-                      interval:0.9,
-                      getTitles: (val) {
-                        switch (val.toInt()) {
-                    
-                        
-                          case 0:
-                            return 'ENERO';
-                          case 1:
-                            return 'FEBRERO';
-                          case 2:
-                            return 'MARZO';
-                          case 3:
-                            return 'ABRIL';
-                          case 4:
-                            return 'MAYO';
-                              case 5:
-                            return 'JUNIO';
-                               case 6:
-                            return 'JULIO';
-                     
-                        }
-                        return '';
-                      },  
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueGrey,
-                        fontFamily: 'Digital',
-                        fontSize: 10,
-                      )),
-                ),
-             /*    axisTitleData: FlAxisTitleData(
-                  rightTitle: AxisTitle(showTitle: true, titleText: 'count'),
-                  leftTitle: AxisTitle(showTitle: true, titleText: 'count'),
-                  topTitle:
-                      AxisTitle(showTitle: true, titleText: 'Wall clock', textAlign: TextAlign.left),
-                ), */
-                gridData: FlGridData(show: true,
-                  drawHorizontalLine: true,
-                        checkToShowHorizontalLine: (value) => value % 2 == 0,
-                        getDrawingHorizontalLine: (value) {
-                          if (value == 0) {
-                            return const FlLine(color: Colors.red, strokeWidth: 2);
-                          }
-                          return const FlLine(
-                            color: Colors.grey,
-                            strokeWidth: 1,
-                          
-                          );
-                        },
-                ),
-                borderData: FlBorderData(
-                  show: false,
-                ),
-              ),
-            ),
-       ),
-           Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        alignment: Alignment.centerLeft,
-        child: Text('Acumulado Febrero', style: TextStyle(fontSize: 20),),),
-    ),
+  Widget mesJunio() {
+      return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Junio',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Junio',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoPenultimo: 1000, 
+     montoAnual: false,
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Junio',
+       periodo2: 'Enero - Junio',
+       periodo3: 'Enero - Junio',
+     ),
+      ],
+    );
+  }
 
-            DataTable(
-dataRowHeight: 30,
-columnSpacing: 40,
-horizontalMargin: 45,
-              //  sortColumnIndex: 2,
-                sortAscending: false,
-                columns: [
+  Widget mesJulio() {
+    return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Julio',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Julio',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoPenultimo: 1000, 
+     montoAnual: false,
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Julio',
+       periodo2: 'Enero - Julio',
+       periodo3: 'Enero - Julio',
+     ),
+      ],
+    );
+  }
 
-                  DataColumn(
-                     
-                    label: Text("Año", style: TextStyle(fontSize: 16, color: Colors.black),)),
-                  DataColumn(label: Text("Monto\nMensual",  style: TextStyle(fontSize: 16,  color: Colors.black))),
-                  DataColumn(label: Text("Incremento",  style: TextStyle(fontSize: 16,  color: Colors.black))),
-                ],
-                rows: [
-                  DataRow(
-                   // selected: true,
-                    cells: [
-                 //   DataCell(Text("Andres"), showEditIcon: true),
-                    DataCell(Text("2019", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                      DataCell(Row(
-                      children: <Widget>[
-                        Icon(Icons.arrow_upward, color: Colors.green,),
-                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
-                      ],
-                    ))
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text("2018", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                      DataCell(Row(
-                      children: <Widget>[
-                        Icon(Icons.arrow_downward, color: Colors.red,),
-                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
-                      ],
-                    ))
-                  ]),
-                     DataRow(cells: [
-                    DataCell(Text("2017", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Row(
-                      children: <Widget>[
-                        Icon(Icons.arrow_upward, color: Colors.green,),
-                        Text(" % 4.0", style: TextStyle(fontSize: 16, color: Colors.grey)),
-                      ],
-                    ))
-                  ]),
-               
+  Widget mesAgosto() {
+    return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Agosto',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Agosto',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoPenultimo: 1000, 
+     montoAnual: false,
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Agosto',
+       periodo2: 'Enero - Agosto',
+       periodo3: 'Enero - Agosto',
+     ),
+      ],
+    );
+  }
 
-                ],
-              )
-       
-       ]
-       ); 
-       
-       }
+  Widget mesSeptiembre() {
+    return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Septiembre',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Septiembre',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoPenultimo: 1000,
+     montoAnual: false, 
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Septiembre',
+       periodo2: 'Enero - Septiembre',
+       periodo3: 'Enero - Septiembre',
+     ),
+      ],
+    );
+  }
 
+  Widget mesOctubre() {
+     return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Octubre',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Octubre',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoPenultimo: 1000, 
+     montoAnual: false,
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Octubre',
+       periodo2: 'Enero - Octubre',
+       periodo3: 'Enero - Octubre',
+     ),
+      ],
+    );
+  }
 
+  Widget mesNoviembre() {
+    return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Noviembre',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Noviembre',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+   incremento: true,
+     incremento2: false,
+     incremento3: true,
+     montoPenultimo: 1000, 
+     montoAnual: false,
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Noviembre',
+       periodo2: 'Enero - Noviembre',
+       periodo3: 'Enero - Noviembre',
+     ),
+      ],
+    );
+  }
+
+  Widget mesDiciembre() {
+     return ListView(
+      children: 
+      <Widget>[
+   
+    selected1 ? TituloEtiquetas(tituloEtiqueta: 'Diciembre',
+        fontsize: 25,
+        ) :  TituloEtiquetas(tituloEtiqueta: 'Acumulado Diciembre',
+        fontsize: 25,
+        ),
+     
+   selected1 ?  TablaMensual(montoActual: 2000, 
+     incremento: true,
+     incremento2: true,
+     incremento3: true,
+     montoAnual: false,
+     montoPenultimo: 1000, 
+     montoAntepenultimo: 3000, 
+     porcentajeActual: 4, 
+     porcentajePenultimo: 5, 
+     porcentajeAntepenultimo: 6) :
+     TablaAcumulado(
+       montoActual: 2000,
+       montoAntepenultimo: 2000,
+       montoPenultimo: 2000,
+       periodo: 'Enero - Diciembre',
+       periodo2: 'Enero - Diciembre',
+       periodo3: 'Enero - Diciembre',
+     ),
+      ],
+    );
+  }
        }
 
 

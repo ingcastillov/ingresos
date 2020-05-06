@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -26,7 +26,7 @@ dependencies:
   flutter_circular_chart: ^0.1.0
  
   intl: ">=0.14.0"
-  fl_chart: ^0.8.7
+  fl_chart: ^0.9.3
  
   syncfusion_flutter_charts: ^18.1.43
 

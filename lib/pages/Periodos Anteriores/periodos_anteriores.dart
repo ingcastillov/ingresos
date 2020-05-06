@@ -1,8 +1,8 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:ingresos/Commons/TituloEtiquetas.dart';
+import 'package:ingresos/Commons/etiquetaInformativa.dart';
+import 'package:ingresos/Commons/graficalineal.dart';
 import 'package:ingresos/pages/Periodos%20Anteriores/saldo_facturado.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/comisiones_page.dart';
-import 'package:ingresos/pages/Ultimo%20Deposito/ultimo_periodo_facturado.dart';
 import 'package:intl/intl.dart';
 import 'comparacion_periodos.dart';
 import 'dart:math';
@@ -15,6 +15,8 @@ class PeriodosAnteriores extends StatefulWidget {
 }
 
 class _PeriodosAnteriores extends State<PeriodosAnteriores> {
+
+  String anio;
   double comisiones = 320000;
 
   double bonos = 800000;
@@ -22,8 +24,12 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
   double otrosmovimientos = 222000;
 
   double impuestos = 1000000;
- 
-  final azulMarino =  Color.fromRGBO(4, 54, 129, 1);
+
+  int variable = 0;
+  String mesTabla;
+  String mesCantidad;
+
+  final azulMarino = Color.fromRGBO(4, 54, 129, 1);
 
   var estiloTitulo = TextStyle(
     fontWeight: FontWeight.bold,
@@ -38,7 +44,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
     fontSize: 16,
   );
   final pattern = new NumberFormat("###,###,###.##");
-  bool selected = false;
+  bool selected = true;
   bool selected1 = false;
   bool selected2 = false;
 
@@ -67,7 +73,6 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
     borderRadius: BorderRadius.circular(30),
     color: Colors.orange,
   );
-
   bool eneSeleccionado = false;
   bool febSeleccionado = false;
   bool marSeleccionado = false;
@@ -81,7 +86,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
   bool novSeleccionado = false;
   bool dicSeleccionado = false;
 
-  String fechaPrueba = '08/03/2019';
+  String fechaPrueba = '08/06/2019';
 
   final Color dark = const Color(0xff3b8c75);
   final Color normal = const Color(0xff64caad);
@@ -148,27 +153,33 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
                       setState(() {});
                       if (value == 0) {
                         selected = true;
+                        anio='2019';
                       } else {
                         selected = false;
+                           anio='';
                       }
 
                       if (value == 1) {
                         selected1 = true;
+                        anio='2018';
                       } else {
                         selected1 = false;
+                        anio='';
                       }
 
                       if (value == 2) {
                         selected2 = true;
+                        anio='2017';
                       } else {
                         selected2 = false;
+                        anio='';
                       }
                     },
                     indicatorColor: Colors.white,
                     labelColor: Colors.blue,
 
                     //  isScrollable: true,
-
+           
                     tabs: [
                       Container(
                         //color: Color.fromRGBO(4, 54, 129, 1),
@@ -242,9 +253,9 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
               Expanded(
                 child: Container(
                   child: TabBarView(children: [
-                    _anualPage(),
-                    _anualPage2(),
-                    _anualPage3(),
+                    ultimoAnio(),
+                  penultimoAnio(),
+                   antepenultimoAnio(),
                   ]),
                 ),
               )
@@ -255,1872 +266,775 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
     );
   }
 
-  Widget _anualPage() {
-    final size = MediaQuery.of(context).size;
-    final List<int> showIndexes = [
-      eneSeleccionado ? 1 : 0,
-      febSeleccionado ? 2 : 0,
-      marSeleccionado ? 3 : 0,
-      abrSeleccionado ? 4 : 0,
-      maySeleccionado ? 5 : 0,
-      junSeleccionado ? 6 : 0,
-      julSeleccionado ? 7 : 0,
-      agoSeleccionado ? 8 : 0,
-      sepSeleccionado ? 9 : 0,
-      octSeleccionado ? 10 : 0,
-      novSeleccionado ? 11 : 0,
-      dicSeleccionado ? 12 : 0,
-    ];
-    final List<FlSpot> allSpots = [
-      FlSpot(0, 0),
-      FlSpot(1, 2),
-      FlSpot(2, 3),
-      FlSpot(3, 2),
-      FlSpot(4, 5),
-      FlSpot(5, 1),
-      FlSpot(6, 1),
-      FlSpot(7, 1),
-      FlSpot(8, 1),
-      FlSpot(9, 1),
-      FlSpot(10, 1),
-      FlSpot(11, 1),
-      FlSpot(12, 9),
-      FlSpot(13, 0),
-    ];
+  Widget ultimoAnio() {
+    return GraficaLineal(
 
-    final lineBarsData = [
-      LineChartBarData(
-          showingIndicators: showIndexes,
-          spots: allSpots,
-          isCurved: true,
-          barWidth: 4,
-          //  show: true,
-          belowBarData: BarAreaData(
-            show: true,
-            colors: [
-              Color.fromRGBO(31, 71, 164, 0.3),
-            ],
-          ),
-          dotData: FlDotData(show: false),
-          colors: [
-            Color.fromRGBO(31, 71, 164, 0.3),
-          ],
-          colorStops: [
-            0.05,
-          ]),
-    ];
+        //CANTIDADES MOSTRADA EN TABLA DE GRAFICA POR MES
+        eneTotal: 1200,
+        febTotal: 1200,
+        marTotal: 1200,
+        abrTotal: 1200,
+        mayTotal: 1200,
+        junTotal: 1200,
+        julTotal: 1200,
+        agoTotal: 1200,
+        sepTotal: 1200,
+        octTotal: 1200,
+        novTotal: 1200,
+        dicTotal: 1200,
 
-    // final LineChartBarData tooltipsOnBar = lineBarsData[0];
+        //CONTENIDO DE LAS TABLAS POR MES
+        eneContenido: mesEnero(),
+        febContenido: mesFebrero(),
+        marContenido: mesMarzo(),
+        abrContenido: mesAbril(),
+        mayContenido: mesMayo(),
+        junContenido: mesJunio(),
+        julContenido: mesJulio(),
+        agoContenido: mesAgosto(),
+        sepContenido: mesSeptiembre(),
+        octContenido: mesOctubre(),
+        novContenido: mesNoviembre(),
+        dicContenido: mesDiciembre(),
 
-    return Column(children: <Widget>[
-      Container(
-        height: 150,
-        width: size.width * 1,
-        child: LineChart(
-          LineChartData(
-            lineTouchData: LineTouchData(
-              enabled: false,
-              getTouchedSpotIndicator:
-                  (LineChartBarData barData, List<int> spotIndexes) {
-                return spotIndexes.map((index) {
-                  return TouchedSpotIndicatorData(
-                    FlLine(
-                     // dashArray: [5,90],
-                        color: Color.fromRGBO(8, 63, 164, 0.1), strokeWidth: 1),
-                    FlDotData(
-
-                      show: true,
-                      dotSize: 8,
-                      dotColor: Color.fromRGBO(8, 63, 164, 1),
-                    ),
-                  );
-                }).toList();
-              },
-              touchTooltipData: LineTouchTooltipData(
-                tooltipBgColor: Colors.orange,
-                tooltipRoundedRadius: 8,
-                getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
-                  return lineBarsSpot.map((lineBarSpot) {
-                    return LineTooltipItem(
-                      lineBarSpot.y.toString(),
-                      const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    );
-                  }).toList();
-                },
-              ),
-            ),
-            lineBarsData: lineBarsData,
-            minY: 0,
-            titlesData: FlTitlesData(
-              // show: true,
-              leftTitles: SideTitles(
-                showTitles: false,
-              ),
-
-              bottomTitles: SideTitles(
-                  //  reservedSize: 80,
-                  // reservedSize: 80,
-                  //margin: 6,
-                  showTitles: false,
-                  // reservedSize: 100,
-                  // interval: 1.5,
-                  getTitles: (val) {
-                    switch (val.toInt()) {
-                      case 0:
-                        return '';
-                      case 1:
-                        return 'Ene';
-
-                      case 2:
-                        return 'Feb';
-                      case 3:
-                        return 'Mar';
-                      case 4:
-                        return 'Abr';
-                      case 5:
-                        return 'May';
-                      case 6:
-                        return 'Jun';
-                      case 7:
-                        return 'Jul';
-                      case 8:
-                        return 'Ago';
-                      case 9:
-                        return 'Sep';
-                      case 10:
-                        return 'Oct';
-                      case 11:
-                        return 'Nov';
-                      case 12:
-                        return 'Dic';
-                      case 13:
-                        return '';
-                    }
-                    return '';
-                  },
-                  reservedSize: 50,
-                  textStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                    fontFamily: 'Digital',
-                    fontSize: 16,
-                  )),
-            ),
-            gridData: FlGridData(
-              show: true,
-              drawHorizontalLine: true,
-              checkToShowHorizontalLine: (value) => value % 3 == 0,
-              getDrawingHorizontalLine: (value) {
-                if (value == 0) {
-                  return const FlLine(color: Colors.red, strokeWidth: 2);
-                }
-                return const FlLine(
-                  color: Colors.grey,
-                  strokeWidth: 1,
-                );
-              },
-            ),
-            borderData: FlBorderData(
-              show: false,
-            ),
-          ),
-        ),
-      ),
-      DefaultTabController(
-        initialIndex: 0,
-        length: 12,
-        child: Column(
-          children: <Widget>[
-            Container(
-              child: TabBar(
-                indicatorColor: Colors.transparent,
-                // labelColor: Colors.orange,
-                labelPadding: EdgeInsets.symmetric(horizontal: 8),
-                onTap: (value) {
-                  setState(() {
-                    if (value == 0) {
-                      eneSeleccionado = true;
-                    } else {
-                      eneSeleccionado = false;
-                    }
-                    if (value == 1) {
-                      febSeleccionado = true;
-                    } else {
-                      febSeleccionado = false;
-                    }
-                    if (value == 2) {
-                      marSeleccionado = true;
-                    } else {
-                      marSeleccionado = false;
-                    }
-                    if (value == 3) {
-                      abrSeleccionado = true;
-                    } else {
-                      abrSeleccionado = false;
-                    }
-                    if (value == 4) {
-                      maySeleccionado = true;
-                    } else {
-                      maySeleccionado = false;
-                    }
-                    if (value == 5) {
-                      junSeleccionado = true;
-                    } else {
-                      junSeleccionado = false;
-                    }
-                    if (value == 6) {
-                      julSeleccionado = true;
-                    } else {
-                      julSeleccionado = false;
-                    }
-                    if (value == 7) {
-                      agoSeleccionado = true;
-                    } else {
-                      agoSeleccionado = false;
-                    }
-                    if (value == 8) {
-                      sepSeleccionado = true;
-                    } else {
-                      sepSeleccionado = false;
-                    }
-                    if (value == 9) {
-                      octSeleccionado = true;
-                    } else {
-                      octSeleccionado = false;
-                    }
-                    if (value == 10) {
-                      novSeleccionado = true;
-                    } else {
-                      novSeleccionado = false;
-                    }
-                    if (value == 11) {
-                      dicSeleccionado = true;
-                    } else {
-                      dicSeleccionado = false;
-                    }
-                  });
-                },
-                isScrollable: true,
-                tabs: [
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          eneSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Ene',
-                            style: eneSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          febSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Feb',
-                            style: febSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          marSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Mar',
-                            style: marSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          abrSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Abr',
-                            style: abrSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          maySeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('May',
-                            style: maySeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          junSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Jun',
-                            style: junSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          julSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Jul',
-                            style: julSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          agoSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Ago',
-                            style: agoSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          sepSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Sep',
-                            style: sepSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          octSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Oct',
-                            style: octSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          novSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Nov',
-                            style: novSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                  Container(
-                      height: 30,
-                      width: 50,
-                      decoration:
-                          dicSeleccionado ? indicadorMesSeleccionado : null,
-                      child: Tab(
-                        child: Text('Dic',
-                            style: dicSeleccionado
-                                ? estiloLetraBlanca
-                                : estiloTitulo),
-                      )),
-                ],
-              ),
-            ),
-            Container(
-              height: 200,
-              child: TabBarView(
-                children: [
-                mesEnero(),
-                mesFebrero(),
-                mesMarzo(),
-                mesAbril(),
-                mesMayo(),
-                mesJunio(),
-                mesJulio(),
-                mesAgosto(),
-                mesSeptiembre(),
-                mesOctubre(),
-                mesNoviembre(),
-                mesDiciembre(),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-
-    ]);
+        //VALORES DE LA GRAFICA
+        gradle: 4,
+        maxY: 10,
+        eneY: 4,
+        febY: 4,
+        marY: 6,
+        abrY: 3,
+        mayY: 7,
+        junY: 2,
+        julY: 8,
+        agoY: 2,
+        sepY: 6,
+        octY: 3,
+        novY: 8,
+        dicY: 3
+        );
   }
 
-  Widget _anualPage2() {
-    final size = MediaQuery.of(context).size;
-    final List<int> showIndexes = const [2];
-    final List<FlSpot> allSpots = [
-      FlSpot(0, 1),
-      FlSpot(1, 2),
-      FlSpot(2, 1),
-      FlSpot(3, 2),
-      FlSpot(4, 2),
-      FlSpot(5, 1),
-      FlSpot(6, 1),
-      FlSpot(7, 9),
-      FlSpot(8, 2),
-      FlSpot(9, 2),
-      FlSpot(10, 2),
-      FlSpot(11, 2),
-    ];
 
-    final lineBarsData = [
-      LineChartBarData(
-          showingIndicators: showIndexes,
-          spots: allSpots,
-          isCurved: true,
-          barWidth: 2,
-          belowBarData: BarAreaData(
-            show: true,
-            colors: [
-              Colors.blue.withOpacity(0.25),
-              Colors.blue.withOpacity(0.25),
-              Colors.blue.withOpacity(0.25),
-            ],
-          ),
-          dotData: FlDotData(show: false),
-          colors: [
-            Colors.blue.withOpacity(0.25),
-            Colors.blue.withOpacity(0.25),
-            Colors.blue.withOpacity(0.25),
-          ],
-          colorStops: [
-            0.1,
-            0.4,
-            0.9
-          ]),
-    ];
+    Widget penultimoAnio() {
+    return GraficaLineal(
 
-    // final LineChartBarData tooltipsOnBar = lineBarsData[0];
+        //CANTIDADES MOSTRADA EN TABLA DE GRAFICA POR MES
+        eneTotal: 1200,
+        febTotal: 1200,
+        marTotal: 1200,
+        abrTotal: 1200,
+        mayTotal: 1200,
+        junTotal: 1200,
+        julTotal: 1200,
+        agoTotal: 1200,
+        sepTotal: 1200,
+        octTotal: 1200,
+        novTotal: 1200,
+        dicTotal: 1200,
 
-    return Column(children: <Widget>[
-      Container(
-        height: 200,
-        width: size.width * 1,
-        child: LineChart(
-          LineChartData(
-            /*     showingTooltipIndicators: showIndexes.map((index) {
-                /*  return ShowingTooltipIndicators(index, [
-                    LineBarSpot(
-                        tooltipsOnBar, lineBarsData.indexOf(tooltipsOnBar), tooltipsOnBar.spots[index]),
-                  ]); */
-                }).toList(), */
-            lineTouchData: LineTouchData(
-              enabled: false,
-              getTouchedSpotIndicator:
-                  (LineChartBarData barData, List<int> spotIndexes) {
-                return spotIndexes.map((index) {
-                  return TouchedSpotIndicatorData(
-                    FlLine(
-                      color: Colors.pink,
-                    ),
-                    FlDotData(
-                      show: true,
-                      dotSize: 8,
-                      //    strokeWidth: 2,
-                      //   getStrokeColor: (spot, percent, barData) => Colors.black,
-                      /*   getDotColor: (spot, percent, barData) {
-                            return lerpGradient(barData.colors, barData.colorStops, percent / 100);
-                          }, */
-                    ),
-                  );
-                }).toList();
-              },
-              touchTooltipData: LineTouchTooltipData(
-                tooltipBgColor: Colors.pink,
-                tooltipRoundedRadius: 8,
-                getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
-                  return lineBarsSpot.map((lineBarSpot) {
-                    return LineTooltipItem(
-                      lineBarSpot.y.toString(),
-                      const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    );
-                  }).toList();
-                },
-              ),
-            ),
-            lineBarsData: lineBarsData,
-            minY: 0,
-            titlesData: FlTitlesData(
-              leftTitles: SideTitles(
-                showTitles: false,
-              ),
-              bottomTitles: SideTitles(
-                  // reservedSize: 80,
+        //CONTENIDO DE LAS TABLAS POR MES
+        eneContenido: mesEnero(),
+        febContenido: mesFebrero(),
+        marContenido: mesMarzo(),
+        abrContenido: mesAbril(),
+        mayContenido: mesMayo(),
+        junContenido: mesJunio(),
+        julContenido: mesJulio(),
+        agoContenido: mesAgosto(),
+        sepContenido: mesSeptiembre(),
+        octContenido: mesOctubre(),
+        novContenido: mesNoviembre(),
+        dicContenido: mesDiciembre(),
 
-                  showTitles: true,
-                  interval: 1.8,
-                  getTitles: (val) {
-                    switch (val.toInt()) {
-                      case 0:
-                        return 'ENERO';
-
-                      case 1:
-                        return 'FEBRERO';
-                      case 2:
-                        return 'MARZO';
-                      case 3:
-                        return 'ABRIL';
-                      case 4:
-                        return 'MAYO';
-                      case 5:
-                        return 'JUNIO';
-                      case 6:
-                        return 'JULIO';
-                      case 7:
-                        return 'AGOSTO';
-                      case 8:
-                        return 'SEPTIEMBRE';
-                      case 9:
-                        return 'OCTUBRE';
-                      case 10:
-                        return 'NOVIEMBRE';
-                      case 11:
-                        return 'DICIEMBRE';
-                    }
-                    return '';
-                  },
-                  textStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueGrey,
-                    fontFamily: 'Digital',
-                    fontSize: 10,
-                  )),
-            ),
-            /*    axisTitleData: FlAxisTitleData(
-                  rightTitle: AxisTitle(showTitle: true, titleText: 'count'),
-                  leftTitle: AxisTitle(showTitle: true, titleText: 'count'),
-                  topTitle:
-                      AxisTitle(showTitle: true, titleText: 'Wall clock', textAlign: TextAlign.left),
-                ), */
-            gridData: FlGridData(
-              show: true,
-              drawHorizontalLine: true,
-              checkToShowHorizontalLine: (value) => value % 3 == 0,
-              getDrawingHorizontalLine: (value) {
-                if (value == 0) {
-                  return const FlLine(color: Colors.red, strokeWidth: 2);
-                }
-                return const FlLine(
-                  color: Colors.grey,
-                  strokeWidth: 1,
-                );
-              },
-            ),
-            borderData: FlBorderData(
-              show: false,
-            ),
-          ),
-        ),
-      ),
-      Container(
-        child: Text('\n'),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Container(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Detalles de Facturas en Febrero',
-            style: TextStyle(fontSize: 17),
-          ),
-        ),
-      ),
-      Container(
-        height: size.height * 0.075,
-        width: size.width * 0.85,
-
-        // padding: EdgeInsets.symmetric(vertical: ),
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child: ListTile(
-          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          title: Text(
-            '08/02/2019' +
-                '\t\t\t\t\t\t\t\t\t\t\t\t\t\ \t\t\t\t \t\t\t\t' "\u0024" +
-                pattern.format(comisiones),
-            style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-          ),
-          trailing: Container(
-              child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 25,
-                    color: Colors.orange,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ComisionesPage()));
-                  })),
-        ),
-
-        decoration: BoxDecoration(
-          color: Colors.white,
-          // borderRadius: BorderRadius.circular(12.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(1, 3),
-              blurRadius: 1.0,
-              spreadRadius: 1.0,
-            ),
-          ],
-        ),
-      ),
-      Container(
-        height: size.height * 0.075,
-        width: size.width * 0.85,
-
-        // padding: EdgeInsets.symmetric(vertical: ),
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child: ListTile(
-          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          title: Text(
-            '15/02/2019' +
-                '\t\t\t\t\t\t\t\t\t\t\t\t\t\ \t\t\t\t \t\t\t\t' "\u0024" +
-                pattern.format(comisiones),
-            style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-          ),
-          trailing: Container(
-              child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 25,
-                    color: Colors.orange,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ComisionesPage()));
-                  })),
-        ),
-
-        decoration: BoxDecoration(
-          color: Colors.white,
-          //   borderRadius: BorderRadius.circular(12.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(1, 3),
-              blurRadius: 1.0,
-              spreadRadius: 1.0,
-            ),
-          ],
-        ),
-      ),
-      Container(
-        height: size.height * 0.075,
-        width: size.width * 0.85,
-
-        // padding: EdgeInsets.symmetric(vertical: ),
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child: ListTile(
-          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          title: Text(
-            '21/02/2019' +
-                '\t\t\t\t\t\t\t\t\t\t\t\t\t\ \t\t\t\t \t\t\t\t' "\u0024" +
-                pattern.format(comisiones),
-            style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-          ),
-          trailing: Container(
-              child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 25,
-                    color: Colors.orange,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ComisionesPage()));
-                  })),
-        ),
-
-        decoration: BoxDecoration(
-          color: Colors.white,
-          //    borderRadius: BorderRadius.circular(12.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(1, 3),
-              blurRadius: 1.0,
-              spreadRadius: 1.0,
-            ),
-          ],
-        ),
-      ),
-    ]);
+        //VALORES DE LA GRAFICA
+        gradle: 4,
+        maxY: 10,
+        eneY: 4,
+        febY: 4,
+        marY: 6,
+        abrY: 3,
+        mayY: 7,
+        junY: 2,
+        julY: 8,
+        agoY: 2,
+        sepY: 6,
+        octY: 3,
+        novY: 8,
+        dicY: 3
+        );
   }
 
-  Widget _anualPage3() {
-    final size = MediaQuery.of(context).size;
-    final List<int> showIndexes = const [2];
-    final List<FlSpot> allSpots = [
-      FlSpot(0, 1),
-      FlSpot(1, 2),
-      FlSpot(2, 1),
-      FlSpot(3, 2),
-      FlSpot(4, 2),
-      FlSpot(5, 1),
-      FlSpot(6, 1),
-      FlSpot(7, 9),
-      FlSpot(8, 2),
-      FlSpot(9, 2),
-      FlSpot(10, 2),
-      FlSpot(11, 2),
-    ];
 
-    final lineBarsData = [
-      LineChartBarData(
-          showingIndicators: showIndexes,
-          spots: allSpots,
-          isCurved: true,
-          barWidth: 2,
-          belowBarData: BarAreaData(
-            show: true,
-            colors: [
-              Colors.blue.withOpacity(0.25),
-              Colors.blue.withOpacity(0.25),
-              Colors.blue.withOpacity(0.25),
-            ],
-          ),
-          dotData: FlDotData(show: false),
-          colors: [
-            Colors.blue.withOpacity(0.25),
-            Colors.blue.withOpacity(0.25),
-            Colors.blue.withOpacity(0.25),
-          ],
-          colorStops: [
-            0.1,
-            0.4,
-            0.9
-          ]),
-    ];
+    Widget antepenultimoAnio() {
+    return GraficaLineal(
 
-    // final LineChartBarData tooltipsOnBar = lineBarsData[0];
+        //CANTIDADES MOSTRADA EN TABLA DE GRAFICA POR MES
+        eneTotal: 1200,
+        febTotal: 1200,
+        marTotal: 1200,
+        abrTotal: 1200,
+        mayTotal: 1200,
+        junTotal: 1200,
+        julTotal: 1200,
+        agoTotal: 1200,
+        sepTotal: 1200,
+        octTotal: 1200,
+        novTotal: 1200,
+        dicTotal: 1200,
 
-    return Column(children: <Widget>[
-      Container(
-        height: 200,
-        width: size.width * 1,
-        child: LineChart(
-          LineChartData(
-            /*     showingTooltipIndicators: showIndexes.map((index) {
-                /*  return ShowingTooltipIndicators(index, [
-                    LineBarSpot(
-                        tooltipsOnBar, lineBarsData.indexOf(tooltipsOnBar), tooltipsOnBar.spots[index]),
-                  ]); */
-                }).toList(), */
-            lineTouchData: LineTouchData(
-              enabled: false,
-              getTouchedSpotIndicator:
-                  (LineChartBarData barData, List<int> spotIndexes) {
-                return spotIndexes.map((index) {
-                  return TouchedSpotIndicatorData(
-                    FlLine(
-                      color: Colors.pink,
-                    ),
-                    FlDotData(
-                      show: true,
-                      dotSize: 8,
-                      //    strokeWidth: 2,
-                      //   getStrokeColor: (spot, percent, barData) => Colors.black,
-                      /*   getDotColor: (spot, percent, barData) {
-                            return lerpGradient(barData.colors, barData.colorStops, percent / 100);
-                          }, */
-                    ),
-                  );
-                }).toList();
-              },
-              touchTooltipData: LineTouchTooltipData(
-                tooltipBgColor: Colors.pink,
-                tooltipRoundedRadius: 8,
-                getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
-                  return lineBarsSpot.map((lineBarSpot) {
-                    return LineTooltipItem(
-                      lineBarSpot.y.toString(),
-                      const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    );
-                  }).toList();
-                },
-              ),
-            ),
-            lineBarsData: lineBarsData,
-            minY: 0,
-            titlesData: FlTitlesData(
-              leftTitles: SideTitles(
-                showTitles: false,
-              ),
-              bottomTitles: SideTitles(
-                  // reservedSize: 80,
+        //CONTENIDO DE LAS TABLAS POR MES
+        eneContenido: mesEnero(),
+        febContenido: mesFebrero(),
+        marContenido: mesMarzo(),
+        abrContenido: mesAbril(),
+        mayContenido: mesMayo(),
+        junContenido: mesJunio(),
+        julContenido: mesJulio(),
+        agoContenido: mesAgosto(),
+        sepContenido: mesSeptiembre(),
+        octContenido: mesOctubre(),
+        novContenido: mesNoviembre(),
+        dicContenido: mesDiciembre(),
 
-                  showTitles: true,
-                  interval: 1.8,
-                  getTitles: (val) {
-                    switch (val.toInt()) {
-                      case 0:
-                        return 'ENERO';
-
-                      case 1:
-                        return 'FEBRERO';
-                      case 2:
-                        return 'MARZO';
-                      case 3:
-                        return 'ABRIL';
-                      case 4:
-                        return 'MAYO';
-                      case 5:
-                        return 'JUNIO';
-                      case 6:
-                        return 'JULIO';
-                      case 7:
-                        return 'AGOSTO';
-                      case 8:
-                        return 'SEPTIEMBRE';
-                      case 9:
-                        return 'OCTUBRE';
-                      case 10:
-                        return 'NOVIEMBRE';
-                      case 11:
-                        return 'DICIEMBRE';
-                    }
-                    return '';
-                  },
-                  textStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueGrey,
-                    fontFamily: 'Digital',
-                    fontSize: 10,
-                  )),
-            ),
-            /*    axisTitleData: FlAxisTitleData(
-                  rightTitle: AxisTitle(showTitle: true, titleText: 'count'),
-                  leftTitle: AxisTitle(showTitle: true, titleText: 'count'),
-                  topTitle:
-                      AxisTitle(showTitle: true, titleText: 'Wall clock', textAlign: TextAlign.left),
-                ), */
-            gridData: FlGridData(
-              show: true,
-              drawHorizontalLine: true,
-              checkToShowHorizontalLine: (value) => value % 3 == 0,
-              getDrawingHorizontalLine: (value) {
-                if (value == 0) {
-                  return const FlLine(color: Colors.red, strokeWidth: 2);
-                }
-                return const FlLine(
-                  color: Colors.grey,
-                  strokeWidth: 1,
-                );
-              },
-            ),
-            borderData: FlBorderData(
-              show: false,
-            ),
-          ),
-        ),
-      ),
-      Container(
-        child: Text('\n'),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Container(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Detalles de Facturas en Febrero',
-            style: TextStyle(fontSize: 17),
-          ),
-        ),
-      ),
-      Container(
-        height: size.height * 0.075,
-        width: size.width * 0.85,
-
-        // padding: EdgeInsets.symmetric(vertical: ),
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child: ListTile(
-          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          title: Text(
-            '08/02/2019' +
-                '\t\t\t\t\t\t\t\t\t\t\t\t\t\ \t\t\t\t \t\t\t\t' "\u0024" +
-                pattern.format(comisiones),
-            style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-          ),
-          trailing: Container(
-              child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 25,
-                    color: Colors.orange,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ComisionesPage()));
-                  })),
-        ),
-
-        decoration: BoxDecoration(
-          color: Colors.white,
-          // borderRadius: BorderRadius.circular(12.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(1, 3),
-              blurRadius: 1.0,
-              spreadRadius: 1.0,
-            ),
-          ],
-        ),
-      ),
-      Container(
-        height: size.height * 0.075,
-        width: size.width * 0.85,
-
-        // padding: EdgeInsets.symmetric(vertical: ),
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child: ListTile(
-          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          title: Text(
-            '15/02/2019' +
-                '\t\t\t\t\t\t\t\t\t\t\t\t\t\ \t\t\t\t \t\t\t\t' "\u0024" +
-                pattern.format(comisiones),
-            style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-          ),
-          trailing: Container(
-              child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 25,
-                    color: Colors.orange,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ComisionesPage()));
-                  })),
-        ),
-
-        decoration: BoxDecoration(
-          color: Colors.white,
-          //   borderRadius: BorderRadius.circular(12.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(1, 3),
-              blurRadius: 1.0,
-              spreadRadius: 1.0,
-            ),
-          ],
-        ),
-      ),
-      Container(
-        height: size.height * 0.075,
-        width: size.width * 0.85,
-
-        // padding: EdgeInsets.symmetric(vertical: ),
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child: ListTile(
-          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          title: Text(
-            '21/02/2019' +
-                '\t\t\t\t\t\t\t\t\t\t\t\t\t\ \t\t\t\t \t\t\t\t' "\u0024" +
-                pattern.format(comisiones),
-            style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-          ),
-          trailing: Container(
-              child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 25,
-                    color: Colors.orange,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ComisionesPage()));
-                  })),
-        ),
-
-        decoration: BoxDecoration(
-          color: Colors.white,
-          //    borderRadius: BorderRadius.circular(12.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(1, 3),
-              blurRadius: 1.0,
-              spreadRadius: 1.0,
-            ),
-          ],
-        ),
-      ),
-    ]);
+        //VALORES DE LA GRAFICA
+        gradle: 4,
+        maxY: 10,
+        eneY: 4,
+        febY: 4,
+        marY: 6,
+        abrY: 3,
+        mayY: 7,
+        junY: 2,
+        julY: 8,
+        agoY: 2,
+        sepY: 6,
+        octY: 3,
+        novY: 8,
+        dicY: 3
+        );
   }
 
-Widget mesEnero(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Enero',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SaldoFacturado(fechaPrueba)));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
 
-Widget mesFebrero(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Febrero',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
 
-Widget mesMarzo(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Marzo',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
 
-Widget mesAbril(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Abril',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
 
-Widget mesMayo(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Mayo',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                 fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
+  Widget mesEnero() {
 
-Widget mesJunio(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Junio',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  '',
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
+    
+    return  ListView(
+      
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Enero'),
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '02/01/2019',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
 
-Widget mesJulio(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Julio',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '02/01/2019',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+      
+    
 
-Widget mesAgosto(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Agosto',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
 
-Widget mesSeptiembre(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Septiembre',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                 fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
+  
 
-Widget mesOctubre(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Octubre',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
+  }
 
-Widget mesNoviembre(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Noviembre',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
+  Widget mesFebrero() {
+    return  ListView(
+      
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Febrero'),
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/02/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
 
-Widget mesDiciembre(){
- final size = MediaQuery.of(context).size;
-  return  ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Detalles de Facturas en Diciembre',
-                            style: TextStyle(fontSize: 17, color: azulMarino),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          // alignment: Alignment.topRight,
-                          height: size.height * 0.088,
-                          width: size.width * 0.90,
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 3),
-                                blurRadius: 1.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                              leading: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  fechaPrueba,
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 18),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              subtitle: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(65, 16, 5, 16),
-                                child: Text(
-                                  "\u0024" + pattern.format(comisiones),
-                                  style: TextStyle(
-                                      color: Colors.blueGrey, fontSize: 18),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.orange,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                UltimoDeposito()));
-                                  })),
-                        ),
-                      ),
-                      
-                    ],
-                  );
-}
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/02/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesMarzo() {
+    return  ListView(
+      
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Marzo'),
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/03/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/03/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesAbril() {
+    return  ListView(
+      
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Abril'),
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/04/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/04/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesMayo() {
+    return  ListView(
+      
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Mayo'),
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/05/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/05/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesJunio() {
+      return  ListView(
+      
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Junio'),
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/06/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/06/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesJulio() {
+    return  ListView(
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Julio'),
+               //ULTIMO AÑO
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+             //PENULTIMO AÑO
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/07/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+             //ANTEPENULTIMO AÑO
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/07/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesAgosto() {
+    return  ListView(
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Agosto'),
+               //ULTIMO AÑO
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+             //PENULTIMO AÑO
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/08/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+             //ANTEPENULTIMO AÑO
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/08/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesSeptiembre() {
+    return  ListView(
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Septiembre'),
+               //ULTIMO AÑO
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+       
+             //PENULTIMO AÑO
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/09/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+             //ANTEPENULTIMO AÑO
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/09/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesOctubre() {
+    return  ListView(
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Octubre'),
+               //ULTIMO AÑO
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+       
+             //PENULTIMO AÑO
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/10/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+             //ANTEPENULTIMO AÑO
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/10/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesNoviembre() {
+      return  ListView(
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Noviembre'),
+               //ULTIMO AÑO
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+       
+             //PENULTIMO AÑO
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/11/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+             //ANTEPENULTIMO AÑO
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/11/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
+  Widget mesDiciembre() {
+    return  ListView(
+ children:
+     <Widget>[
+        TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Diciembre'),
+               //ULTIMO AÑO
+      selected ?  EtiquetaInformativa(
+            tituloEtiqueta: fechaPrueba,
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+       
+             //PENULTIMO AÑO
+         selected1 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/12/2018',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+             //ANTEPENULTIMO AÑO
+           selected2 ?  EtiquetaInformativa(
+            tituloEtiqueta: '21/12/2017',
+            montoEtiqueta: 5000,
+            height: 0.088,
+            width: 12.0,
+            fontTitleSize: 20,
+            buttonRequired: true,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaldoFacturado(fechaPrueba)));
+            }) :  Container(),
+      ],  
+    );
+  }
+
 }
