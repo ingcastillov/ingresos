@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class FilterPeriodos extends StatefulWidget {
@@ -8,9 +10,21 @@ class FilterPeriodos extends StatefulWidget {
 }
 
 class _FilterPeriodosState extends State<FilterPeriodos> {
+
+  bool comisionesSeleccionado=false;
+  bool otrosMovimientosSeleccionado=false;
+  bool bonosSeleccionado=false;
+
+  bool vidaSeleccionado=false;
+  bool autosSeleccionado=false;
+  bool gmmSeleccionado=false;
+  bool danosSeleccionado=false;
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
+      
       floatingActionButton:        Container(
          padding: EdgeInsets.only(left: 35),
                alignment: Alignment.bottomCenter,
@@ -20,29 +34,50 @@ class _FilterPeriodosState extends State<FilterPeriodos> {
           children: <Widget>[
 
            
-            RaisedButton(
+            Container(
+               height: size.height*0.07,
+              width: size.width*0.42,
+              child: RaisedButton(
 
-               padding: EdgeInsets.fromLTRB(44, 15, 44, 15),
-              child: Text('Borrar Filtros'),
-              color: Colors.white,
-            
-              onPressed: (){},
+                // padding: EdgeInsets.fromLTRB(44, 15, 44, 15),
+                child: Text('Borrar Filtros'),
+                color: Colors.white,
+              
+                onPressed: (){
+                setState(() {
+                   vidaSeleccionado=false;
+       gmmSeleccionado=false;
+       autosSeleccionado=false;
+       danosSeleccionado=false;
+       comisionesSeleccionado=false;
+       otrosMovimientosSeleccionado=false;
+       bonosSeleccionado=false;
+       
+                });
+                },
 
+              ),
             ),
             Text('    '),
-              RaisedButton(
-               padding: EdgeInsets.fromLTRB(64, 15, 64, 15),
-                  color: Colors.orange,
-                   child: Text('Filtrar', style: TextStyle(color: Colors.white),),
-              onPressed: (){},
-              
+              Container(
+                height: size.height*0.07,
+                 width: size.width*0.42,
+                child: RaisedButton(
+                  
+                // padding: EdgeInsets.fromLTRB(64, 15, 64, 15),
+                    color: Colors.orange,
+                     child: Text('Filtrar', style: TextStyle(color: Colors.white),),
+                onPressed: (){},
+                
             ),
+              ),
           ],
         ),
               ),
 
        body: SingleChildScrollView(
          child: SafeArea(
+           
            child: Column(
              children: <Widget>[
                ListTile(
@@ -61,12 +96,19 @@ class _FilterPeriodosState extends State<FilterPeriodos> {
                  Container(
                    padding: EdgeInsets.all(8),
                    child: RaisedButton(
-                     color: Colors.orange,
-  child: Text("Comisiones", style: TextStyle(color: Colors.white)),
+                     color: comisionesSeleccionado ? Colors.orange : Colors.white,
+  child: Text("Comisiones", style: comisionesSeleccionado ? TextStyle(color: Colors.white) : TextStyle(color:Colors.black)),
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(30)
   ),
-  onPressed: (){},
+  onPressed: (){
+    setState(() {
+comisionesSeleccionado=true;
+       otrosMovimientosSeleccionado=false;
+       bonosSeleccionado=false;
+    });
+    
+  },
 ),
                  ),
            
@@ -74,12 +116,20 @@ class _FilterPeriodosState extends State<FilterPeriodos> {
 Container(
   padding: EdgeInsets.all(8),
   child:   RaisedButton(
-color: Colors.white,
-    child: Text("Otros Movimientos", style: TextStyle(color: Colors.black)),
+   color: otrosMovimientosSeleccionado ? Colors.orange : Colors.white,
+    child: Text("Otros Movimientos", style: otrosMovimientosSeleccionado ? TextStyle(color: Colors.white) : TextStyle(color:Colors.black)),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30)
     ),
-    onPressed: (){},
+    onPressed: (){
+      setState(() {
+          comisionesSeleccionado=false;
+      otrosMovimientosSeleccionado=true;
+      bonosSeleccionado=false;
+      });
+    
+
+    },
   ),
 ),
 
@@ -89,12 +139,18 @@ Container(
     padding: EdgeInsets.all(8),
   alignment: Alignment.centerLeft,
   child:   RaisedButton(
-    color: Colors.white,
-    child: Text("Bonos", style: TextStyle(color: Colors.black),),
+   color: bonosSeleccionado ? Colors.orange : Colors.white,
+    child: Text("Bonos", style: bonosSeleccionado ? TextStyle(color: Colors.white) : TextStyle(color:Colors.black),),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30)
     ),
-    onPressed: (){},
+    onPressed: (){
+          setState(() {
+          comisionesSeleccionado=false;
+      otrosMovimientosSeleccionado=false;
+      bonosSeleccionado=true;
+      });
+    },
   ),
 ),
 
@@ -105,52 +161,95 @@ Container(
 
              Row(
                children: <Widget>[
-                 Container(
-                   padding: EdgeInsets.all(6),
-                   child: RaisedButton(
-                     color: Colors.white,
-  child: Text("Vida", style: TextStyle(color: Colors.black)),
+                 Padding(
+                   padding: const EdgeInsets.all(6.0),
+                   child: Container(
+                
+                     width: size.width*0.2,
+                     child: RaisedButton(
+                       color: vidaSeleccionado ? Colors.orange : Colors.white,
+  child: Text("Vida", style: TextStyle(color: vidaSeleccionado ? Colors.white : Colors.black)),
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(30)
   ),
-  onPressed: (){},
+  onPressed: (){
+    setState(() {
+       vidaSeleccionado=true;
+       gmmSeleccionado=false;
+       autosSeleccionado=false;
+       danosSeleccionado=false;
+    });
+   
+  },
 ),
+                   ),
                  ),
            
 
-Container(
-  padding: EdgeInsets.all(6),
-  child:   RaisedButton(
-color: Colors.white,
-    child: Text("Autos", style: TextStyle(color: Colors.black)),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(30)
+Padding(
+  padding: const EdgeInsets.all(6.0),
+  child:   Container(
+   
+   width: size.width*0.2,
+    child:   RaisedButton(
+  color: autosSeleccionado ? Colors.orange : Colors.white,
+      child: Text("Autos", style: TextStyle(color: autosSeleccionado ? Colors.white : Colors.black)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30)
+      ),
+      onPressed: (){
+            setState(() {
+       vidaSeleccionado=false;
+       gmmSeleccionado=false;
+       autosSeleccionado=true;
+       danosSeleccionado=false;
+    });
+      },
     ),
-    onPressed: (){},
   ),
 ),
 
-Container(
-  padding: EdgeInsets.all(6),
-  child:   RaisedButton(
-color: Colors.white,
-    child: Text("GMM", style: TextStyle(color: Colors.black)),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(30)
+Padding(
+  padding: const EdgeInsets.all(6.0),
+  child:   Container(
+   width: size.width*0.2,
+    child:   RaisedButton(
+  color: gmmSeleccionado ? Colors.orange : Colors.white,
+      child: Text("GMM", style: TextStyle(color: gmmSeleccionado ? Colors.white : Colors.black)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30)
+      ),
+      onPressed: (){
+            setState(() {
+       vidaSeleccionado=false;
+       gmmSeleccionado=true;
+       autosSeleccionado=false;
+       danosSeleccionado=false;
+    });
+      },
     ),
-    onPressed: (){},
   ),
 ),
 
-Container(
-  padding: EdgeInsets.all(6),
-  child:   RaisedButton(
-color: Colors.white,
-    child: Text("Daños", style: TextStyle(color: Colors.black)),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(30)
+Padding(
+  padding: const EdgeInsets.all(6.0),
+  child:   Container(
+   width: size.width*0.2,
+    child:   RaisedButton(
+  color: danosSeleccionado ? Colors.orange : Colors.white,
+      child: Text("Daños", style: TextStyle(color: danosSeleccionado ? Colors.white : Colors.black)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30)
+      ),
+      onPressed: (){
+            setState(() {
+       vidaSeleccionado=false;
+       gmmSeleccionado=false;
+       autosSeleccionado=false;
+       danosSeleccionado=true;
+    });
+      },
     ),
-    onPressed: (){},
   ),
 ),
 

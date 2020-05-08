@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ingresos/Commons/TituloEtiquetas.dart';
 import 'package:ingresos/Commons/etiquetaInformativa.dart';
 import 'package:ingresos/Commons/graficalineal.dart';
+import 'package:ingresos/pages/Periodos%20Anteriores/chartprueba.dart';
 import 'package:ingresos/pages/Periodos%20Anteriores/saldo_facturado.dart';
 import 'package:intl/intl.dart';
 import 'comparacion_periodos.dart';
@@ -484,7 +485,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
      <Widget>[
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Febrero'),
       selected ?  EtiquetaInformativa(
-            tituloEtiqueta: fechaPrueba,
+            tituloEtiqueta: 'gordo',
             montoEtiqueta: 5000,
             height: 0.088,
             width: 12.0,
@@ -494,7 +495,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => SaldoFacturado(fechaPrueba)));
+                      builder: (context) => PutAttention()));
             }) :  Container(),
          selected1 ?  EtiquetaInformativa(
             tituloEtiqueta: '21/02/2018',

@@ -56,7 +56,7 @@ class GraficaBarrasState extends State<GraficaBarras> {
 @override
   Widget build(BuildContext context) {
        final size = MediaQuery.of(context).size;
-    
+     List<int> showTooltips = const [];
 
   
 return       Container(
@@ -66,6 +66,10 @@ return       Container(
         child:   BarChart(
   
                     BarChartData(
+             
+                 rangeAnnotations: RangeAnnotations(
+                  
+                 ),
                      // backgroundColor: Colors.red,
                       alignment: BarChartAlignment.center,
                       minY: 0,
@@ -74,7 +78,13 @@ return       Container(
                       barTouchData:  BarTouchData(
                         enabled: false,
                       ),
+                     
+
+                     
+                     
+                     
                       titlesData: FlTitlesData(
+   
     leftTitles: SideTitles(
       showTitles: false
     ),
@@ -98,6 +108,7 @@ return       Container(
                                 return '';
                             }
                           },
+
                         ),
               
                 
@@ -121,6 +132,7 @@ return       Container(
                         show: false,
                       ),
                       barGroups: [
+                        
                         BarChartGroupData(
                           x: 0,
                           barRods: [
@@ -155,6 +167,7 @@ return       Container(
                           ],
                         ),
                         BarChartGroupData(
+                          
                           x: 2,
                           barRods: [
                             BarChartRodData(
@@ -169,6 +182,7 @@ return       Container(
                               ],
                             ),
                           ],
+                          showingTooltipIndicators: showTooltips,
                         ),
         
                   
@@ -176,6 +190,7 @@ return       Container(
              
                       ],
                     ),
+                   
                   ),
 
                   

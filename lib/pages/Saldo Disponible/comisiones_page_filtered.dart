@@ -2,64 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:ingresos/Commons/TituloColorComisiones.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
 
+import 'comisiones_page.dart';
 import 'filter_comisiones.dart';
 
- class Avengers{
-String tipo;
-String poliza;
-String asegurado;
-double comision;
-double prima;
 
+class ComisionesPageFiltered extends StatefulWidget {
+ final List<Avengers> searchResult;
 
-Avengers({this.tipo, this.poliza, this.asegurado, this.comision, this.prima});
-
-static List<Avengers> getAvengers(){
-  return <Avengers>[
-   Avengers(tipo: 'vida', poliza: '234324', asegurado: 'Thor', comision: 3000, prima: 1234),
-   Avengers(tipo: 'salud', poliza: '1234', asegurado: 'Hulk', comision: 4000, prima: 12345),
-   Avengers(tipo: 'autos', poliza: '44344', asegurado: 'Black Widow', comision: 8000, prima: 123456),
-   Avengers(tipo: 'danos', poliza: '235212776', asegurado: 'Captain America', comision: 10000, prima: 1234567),
-   Avengers(tipo: 'vida', poliza: '124', asegurado: 'Thor nillo', comision: 10000, prima: 3222),
-   Avengers(tipo: 'autos', poliza: '333333', asegurado: 'Spiderman', comision: 12332, prima: 12345),
-   Avengers(tipo: 'danos', poliza: '22222', asegurado: 'Batman', comision: 111111, prima: 333333),
-   Avengers(tipo: 'autos', poliza: '11111', asegurado: 'Captain America', comision: 10000, prima: 1234567),
-   Avengers(tipo: 'vida', poliza: '555544', asegurado: 'Hawkeye', comision: 10000, prima: 1234567),
-    Avengers(tipo: 'salud', poliza: '34433', asegurado: 'Captain Marvel', comision: 4000, prima: 12345),
-    Avengers(tipo: 'salud', poliza: '1234', asegurado: 'Rocket Racoon', comision: 4000, prima: 12345),
-  ];
-}
-
-} 
-
-class ComisionesPage extends StatefulWidget {
-
-
+   ComisionesPageFiltered({@required this.searchResult,});
   @override
-  _ComisionesPageState createState() => _ComisionesPageState();
+  _ComisionesPageFilteredState createState() => _ComisionesPageFilteredState();
 }
+ 
+class _ComisionesPageFilteredState extends State<ComisionesPageFiltered> {
 
-class _ComisionesPageState extends State<ComisionesPage> {
 
 
-  List<Avengers> comisiones;
-   List<Avengers> comisionesVida;
-     List<Avengers> comisionesSalud;
-       List<Avengers> comisionesAutos;
-         List<Avengers> comisionesDanos;
   List<Avengers> selectedComisiones;
+  List<Avengers> searchResult;
+  List<Avengers> searchResultVida=[];
+  List<Avengers> searchResultSalud=[];
+  List<Avengers> searchResultAutos=[];
+  List<Avengers> searchResultDanos=[];
   bool sort;
   int indexColumn=1;
+
   @override
   void initState() {
     super.initState();
         sort = false;
+  
     selectedComisiones = [];
-    comisiones = Avengers.getAvengers();
- comisionesVida = Avengers.getAvengers().where((i) => i.tipo.contains('vida')).toList();
- comisionesSalud = Avengers.getAvengers().where((i) => i.tipo.contains('salud')).toList();
-  comisionesAutos = Avengers.getAvengers().where((i) => i.tipo.contains('autos')).toList();
-   comisionesDanos = Avengers.getAvengers().where((i) => i.tipo.contains('danos')).toList();
+    searchResult= widget.searchResult;
+     searchResultVida = widget.searchResult.where((i) => i.tipo.contains('vida')).toList();
+ searchResultSalud = widget.searchResult.where((i) => i.tipo.contains('salud')).toList();
+  searchResultAutos = widget.searchResult.where((i) => i.tipo.contains('autos')).toList();
+   searchResultDanos = widget.searchResult.where((i) => i.tipo.contains('danos')).toList();
+
+
   }
  
 
@@ -73,7 +53,7 @@ class _ComisionesPageState extends State<ComisionesPage> {
               color: Colors.orange,
             ),
             onPressed: () {
-             Navigator.push(context,
+              Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SaldoDisponible()));
             }),
         centerTitle: true,
@@ -82,7 +62,6 @@ class _ComisionesPageState extends State<ComisionesPage> {
           style: TextStyle(color: Colors.blueGrey),
         ),
         actions: <Widget>[
-
           IconButton(
               icon: Icon(
                 Icons.filter_list,
@@ -187,10 +166,11 @@ class _ComisionesPageState extends State<ComisionesPage> {
               child: Container(
                 child: TabBarView(children: [
                   pantallaGeneral(),
-                  pantallaVida(),
-                  pantallaSalud(),
-                  pantallaAutos(),
-                  pantallaDanos(),
+                   pantallaVida(),
+                      pantallaSalud(),
+                pantallaAutos(),
+                pantallaDanos()
+            
                 ]),
               ),
             )
@@ -297,7 +277,9 @@ class _ComisionesPageState extends State<ComisionesPage> {
                 pantallaVida(),
                 pantallaSalud(),
                 pantallaAutos(),
-                pantallaDanos(),
+                pantallaDanos()
+
+            
               ]),
             ),
           )
@@ -377,7 +359,7 @@ columns: [
     },
          ),
      ],   
-   rows:  comisiones.map(
+   rows:  searchResult.map(
       (Avengers avenger) => DataRow(
             selected: selectedComisiones.contains(avenger),
             cells: [
@@ -422,6 +404,8 @@ columns: [
       ],
     );
   }
+
+
 
   Widget pantallaVida() {
 
@@ -493,7 +477,7 @@ columns: [
     },
          ),
      ],   
-   rows:  comisionesVida.map(
+   rows:  searchResultVida.map(
       (Avengers avenger) => DataRow(
             selected: selectedComisiones.contains(avenger),
             cells: [
@@ -536,6 +520,7 @@ columns: [
 
 
   }
+
 
   Widget pantallaSalud() {
     return ListView(
@@ -606,7 +591,7 @@ columns: [
     },
          ),
      ],   
-   rows:  comisionesSalud.map(
+   rows:  searchResultSalud.map(
       (Avengers avenger) => DataRow(
             selected: selectedComisiones.contains(avenger),
             cells: [
@@ -704,7 +689,7 @@ columns: [
     },
          ),
      ],   
-   rows:  comisionesAutos.map(
+   rows:  searchResultAutos.map(
       (Avengers avenger) => DataRow(
             selected: selectedComisiones.contains(avenger),
             cells: [
@@ -802,7 +787,7 @@ columns: [
     },
          ),
      ],   
-   rows:  comisionesDanos.map(
+   rows:  searchResultDanos.map(
       (Avengers avenger) => DataRow(
             selected: selectedComisiones.contains(avenger),
             cells: [
@@ -832,23 +817,18 @@ columns: [
   }
 
 
+
   onSortColum(int columnIndex, bool ascending) {
     setState(() {
       
     });
   if (columnIndex == 1) {
     if (ascending) {
-    comisiones.sort((a, b) => a.poliza.compareTo(b.poliza));
-     comisionesVida.sort((a, b) => a.poliza.compareTo(b.poliza));
-     comisionesSalud.sort((a, b) => a.poliza.compareTo(b.poliza));
-     comisionesAutos.sort((a, b) => a.poliza.compareTo(b.poliza));
-     comisionesDanos.sort((a, b) => a.poliza.compareTo(b.poliza));
+    searchResult.sort((a, b) => a.poliza.compareTo(b.poliza));
+
     } else {
-      comisiones.sort((a, b) => b.poliza.compareTo(a.poliza));
-      comisionesVida.sort((a, b) => b.poliza.compareTo(a.poliza));
-      comisionesSalud.sort((a, b) => b.poliza.compareTo(a.poliza));
-      comisionesAutos.sort((a, b) => b.poliza.compareTo(a.poliza));
-      comisionesDanos.sort((a, b) => b.poliza.compareTo(a.poliza));
+      searchResult.sort((a, b) => b.poliza.compareTo(a.poliza));
+
     }
   }
 } 
@@ -859,17 +839,11 @@ columns: [
     });
   if (columnIndex == 2) {
     if (ascending) {
-      comisiones.sort((a, b) => a.asegurado.compareTo(b.asegurado));
-      comisionesVida.sort((a, b) => a.asegurado.compareTo(b.asegurado));
-      comisionesSalud.sort((a, b) => a.asegurado.compareTo(b.asegurado));
-      comisionesAutos.sort((a, b) => a.asegurado.compareTo(b.asegurado));
-      comisionesDanos.sort((a, b) => a.asegurado.compareTo(b.asegurado));
+      searchResult.sort((a, b) => a.asegurado.compareTo(b.asegurado));
+
     } else {
-      comisiones.sort((a, b) => b.asegurado.compareTo(a.asegurado));
-      comisionesVida.sort((a, b) => b.asegurado.compareTo(a.asegurado));
-      comisionesSalud.sort((a, b) => b.asegurado.compareTo(a.asegurado));
-      comisionesAutos.sort((a, b) => b.asegurado.compareTo(a.asegurado));
-      comisionesDanos.sort((a, b) => b.asegurado.compareTo(a.asegurado));
+      searchResult.sort((a, b) => b.asegurado.compareTo(a.asegurado));
+
     }
   }
 } 
@@ -880,17 +854,11 @@ columns: [
     });
   if (columnIndex == 3) {
     if (ascending) {
-    comisiones.sort((a, b) => a.comision.compareTo(b.comision));
-     comisionesVida.sort((a, b) => a.comision.compareTo(b.comision));
-     comisionesSalud.sort((a, b) => a.comision.compareTo(b.comision));
-     comisionesAutos.sort((a, b) => a.comision.compareTo(b.comision));
-     comisionesDanos.sort((a, b) => a.comision.compareTo(b.comision));
+    searchResult.sort((a, b) => a.comision.compareTo(b.comision));
+
     } else {
-      comisiones.sort((a, b) => b.comision.compareTo(a.comision));
-       comisionesVida.sort((a, b) => b.comision.compareTo(a.comision));
-       comisionesSalud.sort((a, b) => b.comision.compareTo(a.comision));
-       comisionesAutos.sort((a, b) => b.comision.compareTo(a.comision));
-       comisionesDanos.sort((a, b) => b.comision.compareTo(a.comision));
+      searchResult.sort((a, b) => b.comision.compareTo(a.comision));
+
     }
   }
 } 
@@ -901,17 +869,11 @@ columns: [
     });
   if (columnIndex == 4) {
     if (ascending) {
-    comisiones.sort((a, b) => a.prima.compareTo(b.prima));
-     comisionesVida.sort((a, b) => a.prima.compareTo(b.prima));
-     comisionesSalud.sort((a, b) => a.prima.compareTo(b.prima));
-     comisionesAutos.sort((a, b) => a.prima.compareTo(b.prima));
-     comisionesDanos.sort((a, b) => a.prima.compareTo(b.prima));
+    searchResult.sort((a, b) => a.prima.compareTo(b.prima));
+
     } else {
-      comisiones.sort((a, b) => b.prima.compareTo(a.prima));
-      comisionesVida.sort((a, b) => b.prima.compareTo(a.prima));
-      comisionesSalud.sort((a, b) => b.prima.compareTo(a.prima));
-       comisionesAutos.sort((a, b) => b.prima.compareTo(a.prima));
-        comisionesDanos.sort((a, b) => b.prima.compareTo(a.prima));
+      searchResult.sort((a, b) => b.prima.compareTo(a.prima));
+
     }
   }
 } 

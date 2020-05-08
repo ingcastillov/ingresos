@@ -9,11 +9,13 @@ import 'bonos_page.dart';
 import 'comisiones_page.dart';
 
 class SaldoDisponible extends StatefulWidget {
+
   @override
   _SaldoDisponibleState createState() => _SaldoDisponibleState();
 }
 
 class _SaldoDisponibleState extends State<SaldoDisponible> {
+
   double comisiones = 320000;
 
   double bonos = 800000;
