@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ingresos/main.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
 import 'package:ingresos/pages/Ultimo%20Deposito/ultimo_periodo_facturado.dart';
 import 'package:intl/intl.dart';
 
 import 'Periodos Anteriores/periodos_anteriores.dart';
+import 'Saldo Disponible/filter_comisiones.dart';
 
 class DetalleIngresos extends StatefulWidget {
   DetalleIngresos({Key key}) : super(key: key);
@@ -26,7 +28,8 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
               color: Colors.orange,
             ),
             onPressed: () {
-              Navigator.pop(context);
+             Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyApp()));
             }),
         centerTitle: true,
         title: Text(
@@ -129,7 +132,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
           ),
         ),
         Container(
-        padding: EdgeInsets.only(top: 140, left: 265),
+        padding: EdgeInsets.only(top: 140, left: 240),
        // alignment: Alignment.centerRight,
           child: Column(
             children: <Widget>[
@@ -143,7 +146,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
         ),
 
          Container(
-          padding: EdgeInsets.only(top: 119, left: 335),
+          padding: EdgeInsets.only(top: 119, left: 310),
           child: Column(
             
             children: <Widget>[

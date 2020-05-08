@@ -5,6 +5,7 @@ import 'package:ingresos/Commons/GraficaCircular.dart';
 import 'package:ingresos/pages/Facturacion/facturacion_page.dart';
 import 'package:ingresos/pages/Saldo%20Disponible/otros_movimientos.dart';
 import 'package:flutter/material.dart';
+import 'package:ingresos/pages/detalle_ingresos.dart';
 import 'bonos_page.dart';
 import 'comisiones_page.dart';
 
@@ -36,7 +37,8 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
               color: Colors.orange,
             ),
             onPressed: () {
-              Navigator.pop(context);
+             Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DetalleIngresos()));
             }),
         centerTitle: true,
         title: Text(
