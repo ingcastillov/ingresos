@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
+import 'package:intl/intl.dart';
+
+import 'filtro_otrosmovimientos.dart';
 
 class OtrosMovimientos extends StatefulWidget {
   OtrosMovimientos({Key key}) : super(key: key);
@@ -8,8 +12,19 @@ class OtrosMovimientos extends StatefulWidget {
 }
 
 class _OtrosMovimientosState extends State<OtrosMovimientos> {
+ List<Otros> others;
+ List<Otros> selectedOtros;
+ final pattern = new NumberFormat("\u0024###,###,###.##");
+  final pattern2 = new NumberFormat("\u0024###,###,###.##");
 
-  
+    void initState() {
+    super.initState();
+       
+    selectedOtros = [];
+    others = Otros.getOtros();
+
+  }
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,13 +35,24 @@ class _OtrosMovimientosState extends State<OtrosMovimientos> {
               color: Colors.orange,
             ),
             onPressed: () {
-              Navigator.pop(context);
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible()));
             }),
         centerTitle: true,
         title: Text(
           'Otros Movimientos',
           style: TextStyle(color: Colors.blueGrey),
         ),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                Icons.filter_list,
+                color: Colors.orange,
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FilterOtrosMovimientos())); 
+              })
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -110,7 +136,7 @@ class _OtrosMovimientosState extends State<OtrosMovimientos> {
         child: Column(children: <Widget>[
       SafeArea(
           child: Container(
-        height: 130,
+        height: 110,
       )),
       Container(
         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -128,32 +154,32 @@ columnSpacing: 20,
                   DataColumn(label: Text("Observación",  style: TextStyle(fontSize: 16,  color: Colors.black))),
                   DataColumn(label: Text("Monto",  style: TextStyle(fontSize: 16,  color: Colors.black))),
                 ],
-                rows: [
-                  DataRow(
-                   // selected: true,
-                    cells: [
-                 //   DataCell(Text("Andres"), showEditIcon: true),
-                    DataCell(Text("Buzón E", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("Toronto 2019", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey)))
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text("Fianzas", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("Toronto 2019", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("-\u00245500", style: TextStyle(fontSize: 16, color: Colors.red)))
-                  ]),
-                     DataRow(cells: [
-                    DataCell(Text("Pensión Alimenticia", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00240", style: TextStyle(fontSize: 16, color: Colors.grey)))
-                  ]),
-                     DataRow(cells: [
-                    DataCell(Text("Congresos", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("Toronto 2019", style: TextStyle(fontSize: 16, color: Colors.grey))),
-                    DataCell(Text("\u00245500", style: TextStyle(fontSize: 16, color: Colors.grey)))
-                  ])
+                rows: others.map(
+      (Otros otro) => DataRow(
+            selected: selectedOtros.contains(otro),
+            cells: [
 
-                ],
+              DataCell(
+                Text(otro.concepto, style: TextStyle(color: Colors.black54, fontSize: 16)),
+                
+              ),
+           DataCell(
+                Text(otro.observacion, style: TextStyle(color: Colors.black54, fontSize: 16)),
+             
+              ),
+               DataCell(
+           otro.monto.isNegative ?   Text(pattern2.format(otro.monto),  
+                style: TextStyle(color: Colors.red, fontSize: 16) ,) : Text(pattern.format(otro.monto),  
+                style: TextStyle(color: Colors.black54, fontSize: 16) ,),
+             
+              ),
+            
+             
+          
+            ]
+            ),
+    )
+    .toList() ?? [],  
               )
       
           ],
@@ -176,3 +202,30 @@ columnSpacing: 20,
   }
 
 }
+
+
+ class Otros{
+String concepto;
+String observacion;
+double monto;
+
+
+
+Otros({this.concepto, this.observacion, this.monto,});
+
+static List<Otros> getOtros(){
+  return <Otros>[
+   Otros(concepto: 'Buzón E', observacion: '', monto: 3000),
+   Otros(concepto: 'Fianzas', observacion: 'Torono 2019', monto: -5000),
+    Otros(concepto: 'Pensión Alimenticia', observacion: 'Nikki Minaj', monto: 0),
+     Otros(concepto: 'Congresos', observacion: 'Citizen', monto: 5500),
+        Otros(concepto: 'Buzón E', observacion: '', monto: 3000),
+   Otros(concepto: 'Fianzas', observacion: 'Torono 2019', monto: -5000),
+    Otros(concepto: 'Pensión Alimenticia', observacion: 'Nikki Minaj', monto: 0),
+     Otros(concepto: 'Congresos', observacion: 'Citizen', monto: 5500),
+     
+
+  ];
+}
+
+} 

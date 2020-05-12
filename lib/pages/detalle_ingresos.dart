@@ -5,7 +5,6 @@ import 'package:ingresos/pages/Ultimo%20Deposito/ultimo_periodo_facturado.dart';
 import 'package:intl/intl.dart';
 
 import 'Periodos Anteriores/periodos_anteriores.dart';
-import 'Saldo Disponible/filter_comisiones.dart';
 
 class DetalleIngresos extends StatefulWidget {
   DetalleIngresos({Key key}) : super(key: key);
@@ -132,7 +131,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
           ),
         ),
         Container(
-        padding: EdgeInsets.only(top: 140, left: 240),
+        padding: EdgeInsets.only(top: 140, left: 260),
        // alignment: Alignment.centerRight,
           child: Column(
             children: <Widget>[
@@ -146,7 +145,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
         ),
 
          Container(
-          padding: EdgeInsets.only(top: 119, left: 310),
+          padding: EdgeInsets.only(top: 119, left: 340),
           child: Column(
             
             children: <Widget>[

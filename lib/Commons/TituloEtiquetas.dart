@@ -30,8 +30,9 @@ final azulMarino =  Color.fromRGBO(4, 54, 129, 1);
   Widget build(BuildContext context) {
  
     return    Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Container(
+                          
                           alignment: Alignment.centerLeft,
                           child: Text(
                             widget.tituloEtiqueta,

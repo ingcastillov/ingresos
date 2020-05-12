@@ -429,6 +429,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
      <Widget>[
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Enero'),
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -442,6 +443,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
                       builder: (context) => SaldoFacturado(fechaPrueba)));
             }) :  Container(),
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '02/01/2019',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -456,6 +458,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
 
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '02/01/2019',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -485,7 +488,8 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
      <Widget>[
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Febrero'),
       selected ?  EtiquetaInformativa(
-            tituloEtiqueta: 'gordo',
+        color: Colors.black54,
+            tituloEtiqueta: '19/09/2018',
             montoEtiqueta: 5000,
             height: 0.088,
             width: 12.0,
@@ -498,6 +502,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
                       builder: (context) => PutAttention()));
             }) :  Container(),
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/02/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -512,6 +517,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
 
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/02/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -535,6 +541,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
      <Widget>[
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Marzo'),
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -548,6 +555,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
                       builder: (context) => SaldoFacturado(fechaPrueba)));
             }) :  Container(),
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/03/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -562,6 +570,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
 
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/03/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -585,6 +594,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
      <Widget>[
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Abril'),
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -598,6 +608,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
                       builder: (context) => SaldoFacturado(fechaPrueba)));
             }) :  Container(),
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/04/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -612,6 +623,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
 
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/04/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -635,6 +647,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
      <Widget>[
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Mayo'),
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -648,6 +661,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
                       builder: (context) => SaldoFacturado(fechaPrueba)));
             }) :  Container(),
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/05/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -662,6 +676,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
 
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/05/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -685,6 +700,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
      <Widget>[
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Junio'),
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -698,6 +714,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
                       builder: (context) => SaldoFacturado(fechaPrueba)));
             }) :  Container(),
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/06/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -712,6 +729,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
 
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/06/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -735,6 +753,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Julio'),
                //ULTIMO AÑO
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -749,6 +768,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
              //PENULTIMO AÑO
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/07/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -763,6 +783,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
              //ANTEPENULTIMO AÑO
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/07/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -786,6 +807,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Agosto'),
                //ULTIMO AÑO
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -800,6 +822,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
              //PENULTIMO AÑO
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/08/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -814,6 +837,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
              //ANTEPENULTIMO AÑO
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/08/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -837,6 +861,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Septiembre'),
                //ULTIMO AÑO
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -852,6 +877,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
        
              //PENULTIMO AÑO
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/09/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -866,6 +892,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
              //ANTEPENULTIMO AÑO
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/09/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -889,6 +916,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Octubre'),
                //ULTIMO AÑO
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -904,6 +932,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
        
              //PENULTIMO AÑO
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/10/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -918,6 +947,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
              //ANTEPENULTIMO AÑO
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/10/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -941,6 +971,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Noviembre'),
                //ULTIMO AÑO
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -956,6 +987,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
        
              //PENULTIMO AÑO
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/11/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -970,6 +1002,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
              //ANTEPENULTIMO AÑO
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/11/2017',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -993,6 +1026,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
         TituloEtiquetas(tituloEtiqueta: 'Detalles de Facturas en Diciembre'),
                //ULTIMO AÑO
       selected ?  EtiquetaInformativa(
+        color: Colors.black54,
             tituloEtiqueta: fechaPrueba,
             montoEtiqueta: 5000,
             height: 0.088,
@@ -1008,6 +1042,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
        
              //PENULTIMO AÑO
          selected1 ?  EtiquetaInformativa(
+           color: Colors.black54,
             tituloEtiqueta: '21/12/2018',
             montoEtiqueta: 5000,
             height: 0.088,
@@ -1022,6 +1057,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
             }) :  Container(),
              //ANTEPENULTIMO AÑO
            selected2 ?  EtiquetaInformativa(
+             color: Colors.black54,
             tituloEtiqueta: '21/12/2017',
             montoEtiqueta: 5000,
             height: 0.088,

@@ -11,6 +11,7 @@ class EtiquetaInformativa extends StatefulWidget {
   final double fontTitleSize;
   final onPressed;
  final bool buttonRequired;
+ final color;
 
    EtiquetaInformativa(
       {Key key,
@@ -21,6 +22,7 @@ class EtiquetaInformativa extends StatefulWidget {
       @required this.width,
       @required this.fontTitleSize,
       @required this.buttonRequired,
+     @required this.color,
   this.onPressed,
    
   }): super(key: key);
@@ -46,14 +48,14 @@ final azulMarino =  Color.fromRGBO(4, 54, 129, 1);
                             decoration: BoxDecoration(
                               color: Colors
                                   .white, // borderRadius: BorderRadius.circular(12.0),
-                              boxShadow: <BoxShadow>[
+                       /*        boxShadow: <BoxShadow>[
                                 BoxShadow(
                                   color: Colors.black26,
-                                  offset: Offset(1, 3),
-                                  blurRadius: 1.0,
-                                  spreadRadius: 1.0,
+                                  offset: Offset(0, 1),
+                                  blurRadius: 0.1,
+                                  spreadRadius: 0.1,
                                 ),
-                              ],
+                              ], */
                             ),
                             child: Container(
        height: size.height * 0.070,
@@ -67,10 +69,10 @@ final azulMarino =  Color.fromRGBO(4, 54, 129, 1);
                crossAxisAlignment: CrossAxisAlignment.start,
               //  mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Text(widget.tituloEtiqueta, style: TextStyle(fontSize: 20, color: Colors.black54),),
+                  Text(widget.tituloEtiqueta, style: TextStyle(fontSize: widget.fontTitleSize, color: widget.color),),
                   Text(widget.subtituloEtiqueta, style: TextStyle(fontSize: 14, color: Colors.black54),),
                 ],
-              ) : Text(widget.tituloEtiqueta, style: TextStyle(fontSize: 20, color: Colors.black54),),
+              ) : Text(widget.tituloEtiqueta, style: TextStyle(fontSize: widget.fontTitleSize, color: widget.color),),
            //  leading: Text('Vida', style: TextStyle(fontSize: 20, color: Colors.black54),),
               
               title: Container(

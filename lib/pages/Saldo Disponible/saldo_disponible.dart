@@ -3,11 +3,11 @@ import 'package:ingresos/Commons/EtiquetaSaldos.dart';
 import 'package:ingresos/Commons/FondoAzul.dart';
 import 'package:ingresos/Commons/GraficaCircular.dart';
 import 'package:ingresos/pages/Facturacion/facturacion_page.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/otros_movimientos.dart';
 import 'package:flutter/material.dart';
 import 'package:ingresos/pages/detalle_ingresos.dart';
-import 'bonos_page.dart';
-import 'comisiones_page.dart';
+import 'Bonos/bonos_page.dart';
+import 'Comisiones/comisiones_page.dart';
+import 'OtrosMovimientos/otros_movimientos.dart';
 
 class SaldoDisponible extends StatefulWidget {
 
@@ -112,7 +112,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
 
   Widget bannerOtrosMovimientos() {
     return EtiquetaSaldo(
-        tituloEtiqueta: 'OtrosMovimientos',
+        tituloEtiqueta: 'Otros Movimientos',
         saldoEtiqueta: otrosmovimientos,
         onPressed: () {
           Navigator.push(context,
