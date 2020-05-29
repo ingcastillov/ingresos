@@ -2,12 +2,14 @@ import 'package:ingresos/Commons/BotonNaranja.dart';
 import 'package:ingresos/Commons/EtiquetaSaldos.dart';
 import 'package:ingresos/Commons/FondoAzul.dart';
 import 'package:ingresos/Commons/GraficaCircular.dart';
-import 'package:ingresos/pages/Facturacion/facturacion_page.dart';
 import 'package:flutter/material.dart';
-import 'package:ingresos/pages/detalle_ingresos.dart';
-import 'Bonos/bonos_page.dart';
-import 'Comisiones/comisiones_page.dart';
-import 'OtrosMovimientos/otros_movimientos.dart';
+
+import 'bonos_page.dart';
+import 'comisiones_page.dart';
+import 'detalle_ingresos.dart';
+import 'facturacion_page.dart';
+import 'model_ingresos.dart';
+import 'otros_movimientos.dart';
 
 class SaldoDisponible extends StatefulWidget {
 
@@ -16,6 +18,7 @@ class SaldoDisponible extends StatefulWidget {
 }
 
 class _SaldoDisponibleState extends State<SaldoDisponible> {
+  DetallesIngresosDto detalleData;
 
   double comisiones = 320000;
 
@@ -38,7 +41,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
             ),
             onPressed: () {
              Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DetalleIngresos()));
+                    MaterialPageRoute(builder: (context) => DetalleIngresos(detalleData)));
             }),
         centerTitle: true,
         title: Text(

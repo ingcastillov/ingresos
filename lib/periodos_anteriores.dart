@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ingresos/Commons/TituloEtiquetas.dart';
 import 'package:ingresos/Commons/etiquetaInformativa.dart';
 import 'package:ingresos/Commons/graficalineal.dart';
-import 'package:ingresos/pages/Periodos%20Anteriores/chartprueba.dart';
-import 'package:ingresos/pages/Periodos%20Anteriores/saldo_facturado.dart';
+import 'package:ingresos/saldo_facturado.dart';
 import 'package:intl/intl.dart';
+import 'chartprueba.dart';
 import 'comparacion_periodos.dart';
 import 'dart:math';
 
@@ -93,7 +93,7 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
   final Color normal = const Color(0xff64caad);
   final Color light = const Color(0xff73e8c9);
 
-  static const double barWidth = 22;
+ /*  static const double barWidth = 22; */
 
   @override
   void initState() {

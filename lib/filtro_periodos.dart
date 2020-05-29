@@ -40,7 +40,7 @@ class _FilterPeriodosState extends State<FilterPeriodos> {
               child: RaisedButton(
 
                 // padding: EdgeInsets.fromLTRB(44, 15, 44, 15),
-                child: Text('Borrar Filtros'),
+                child: Text('Limpiar Filtros'),
                 color: Colors.white,
               
                 onPressed: (){

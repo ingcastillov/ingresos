@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
+import 'package:ingresos/saldo_disponible.dart';
 import 'package:intl/intl.dart';
 
 import 'filtro_otrosmovimientos.dart';
-import 'otros_movimientos.dart';
 
-class OtrosMovimientosFiltered extends StatefulWidget {
-   final List<Otros> searchResult;
-
-  OtrosMovimientosFiltered({@required this.searchResult,});
+class OtrosMovimientos extends StatefulWidget {
+  OtrosMovimientos({Key key}) : super(key: key);
 
   @override
-  _OtrosMovimientosFilteredState createState() => _OtrosMovimientosFilteredState();
+  _OtrosMovimientosState createState() => _OtrosMovimientosState();
 }
 
-class _OtrosMovimientosFilteredState extends State<OtrosMovimientosFiltered> {
+class _OtrosMovimientosState extends State<OtrosMovimientos> {
  List<Otros> others;
  List<Otros> selectedOtros;
  final pattern = new NumberFormat("\u0024###,###,###.##");
   final pattern2 = new NumberFormat("\u0024###,###,###.##");
 
-List<Otros> searchResult;
     void initState() {
     super.initState();
        
     selectedOtros = [];
     others = Otros.getOtros();
- searchResult= widget.searchResult;
+
   }
  
   @override
@@ -39,7 +35,7 @@ List<Otros> searchResult;
               color: Colors.orange,
             ),
             onPressed: () {
-             Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible()));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible()));
             }),
         centerTitle: true,
         title: Text(
@@ -158,7 +154,7 @@ columnSpacing: 20,
                   DataColumn(label: Text("Observación",  style: TextStyle(fontSize: 16,  color: Colors.black))),
                   DataColumn(label: Text("Monto",  style: TextStyle(fontSize: 16,  color: Colors.black))),
                 ],
-                rows: searchResult.map(
+                rows: others.map(
       (Otros otro) => DataRow(
             selected: selectedOtros.contains(otro),
             cells: [
@@ -208,3 +204,25 @@ columnSpacing: 20,
 }
 
 
+ class Otros{
+String concepto;
+String observacion;
+double monto;
+
+
+
+Otros({this.concepto, this.observacion, this.monto,});
+
+static List<Otros> getOtros(){
+  return <Otros>[
+   Otros(concepto: 'Buzón E', observacion: '', monto: 3000),
+   Otros(concepto: 'Fianzas', observacion: 'Toronto 2019', monto: -5000),
+    Otros(concepto: 'Pensión Alimenticia', observacion: 'England', monto: 0),
+     Otros(concepto: 'Congresos', observacion: 'Citizen', monto: 5500),
+
+     
+
+  ];
+}
+
+} 

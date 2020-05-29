@@ -30,6 +30,8 @@ dependencies:
   http: ^0.12.1
  
   syncfusion_flutter_charts: ^18.1.43
+  wc_flutter_share: ^0.2.1
+  share: ^0.6.2+3
 
 dev_dependencies:
   flutter_test:

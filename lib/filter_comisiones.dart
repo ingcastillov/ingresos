@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'comisiones_page.dart';
 import 'comisiones_page_filtered.dart';
 
@@ -94,6 +95,9 @@ class _FilterListState extends State<FilterList> {
                               padding: EdgeInsets.all(15),
                 alignment: Alignment.centerLeft,
                 child: TextField(
+                  textCapitalization: TextCapitalization.characters,
+              
+
                   onChanged: onSearchTextChanged,
                   controller: controller,
                   decoration: InputDecoration(
@@ -183,14 +187,18 @@ class _FilterListState extends State<FilterList> {
 
 
     onSearchTextChanged(String text) async {
+      
     searchResult.clear();
     if (text.isEmpty) {
       setState(() {});
       return;
     }
 
+
         _userDetails.forEach((userDetail) {
+
       if (userDetail.asegurado.contains(text) || userDetail.poliza.contains(text))
+ 
         searchResult.add(userDetail);
     });
 
@@ -201,3 +209,4 @@ class _FilterListState extends State<FilterList> {
 
 
 }
+

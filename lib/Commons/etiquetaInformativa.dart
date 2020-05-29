@@ -12,6 +12,8 @@ class EtiquetaInformativa extends StatefulWidget {
   final onPressed;
  final bool buttonRequired;
  final color;
+ final fondocolor;
+ final bool spaceX;
 
    EtiquetaInformativa(
       {Key key,
@@ -23,7 +25,9 @@ class EtiquetaInformativa extends StatefulWidget {
       @required this.fontTitleSize,
       @required this.buttonRequired,
      @required this.color,
+     this.fondocolor,
   this.onPressed,
+  this.spaceX,
    
   }): super(key: key);
     EtiquetaInformativaState createState() => new EtiquetaInformativaState();
@@ -42,12 +46,14 @@ final azulMarino =  Color.fromRGBO(4, 54, 129, 1);
   return Padding(
     padding: EdgeInsets.fromLTRB(widget.width,0,widget.width,0),
     child: Container(
+      
                              alignment: Alignment.center,
                            height: size.height * widget.height ,
                            // width: ,
                             decoration: BoxDecoration(
-                              color: Colors
-                                  .white, // borderRadius: BorderRadius.circular(12.0),
+                           
+                              
+                              // borderRadius: BorderRadius.circular(12.0),
                        /*        boxShadow: <BoxShadow>[
                                 BoxShadow(
                                   color: Colors.black26,
@@ -58,9 +64,9 @@ final azulMarino =  Color.fromRGBO(4, 54, 129, 1);
                               ], */
                             ),
                             child: Container(
-       height: size.height * 0.070,
+       height: size.height * 0.085,
       width: size.width * 0.999,
-          color: Colors.white,
+             color: widget.fondocolor!=null ? widget.fondocolor : Colors.white, 
           child: Container(
             alignment: Alignment.centerLeft,
             child: ListTile(
@@ -82,7 +88,7 @@ final azulMarino =  Color.fromRGBO(4, 54, 129, 1);
                 :Text(pattern.format(widget.montoEtiqueta),  
                 style: TextStyle(color: azulMarino, fontSize: 18) ,),
                 ),
-               trailing: widget.buttonRequired ? IconButton(icon: Icon(Icons.arrow_forward_ios, color: Colors.orange,), onPressed: widget.onPressed) : null,
+               trailing: widget.buttonRequired ? IconButton(icon: Icon(Icons.arrow_forward_ios, color: widget.spaceX!=null || widget.spaceX==true ? Colors.transparent :Colors.orange,), onPressed: widget.onPressed) : null,
             //  contentPadding: EdgeInsets.all(16),
         
             ),

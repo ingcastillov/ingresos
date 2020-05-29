@@ -60,7 +60,7 @@ horizontalMargin: 45,
                   Text("Año", style: TextStyle(fontSize: 16, color: Colors.black),)),
   DataColumn(label: 
   
-     widget.montoAnual ? Text("Monto\nanual",  style: TextStyle(fontSize: 16,  color: Colors.black))  :   Text("Monto\nMensual",  style: TextStyle(fontSize: 16,  color: Colors.black))),
+     widget.montoAnual ? Text("Monto\nanual",  style: TextStyle(fontSize: 16,  color: Colors.black))  :   Text("Monto por\nmes",  style: TextStyle(fontSize: 16,  color: Colors.black))),
                   DataColumn(label: Text("Incremento",  style: TextStyle(fontSize: 16,  color: Colors.black))),
               
                 ],

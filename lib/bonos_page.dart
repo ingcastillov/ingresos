@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ingresos/Commons/TituloEtiquetas.dart';
 import 'package:ingresos/Commons/etiquetaInformativa.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/Bonos/vida_individual.dart';
 import 'package:intl/intl.dart';
+
+import 'bonos_desglose.dart';
 
 class BonosPage extends StatefulWidget {
   @override
@@ -117,6 +118,7 @@ class _BonosPageState extends State<BonosPage> {
       ),
        Divider(),
       EtiquetaInformativa(
+       
         color: Colors.black,
         tituloEtiqueta: 'Vida Individual ', 
         montoEtiqueta: 222000, 
@@ -125,13 +127,14 @@ class _BonosPageState extends State<BonosPage> {
         fontTitleSize: 16,
         onPressed: (){
               Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => VidaIndividual()));
+                    MaterialPageRoute(builder: (context) => VidaIndividual(titulo: 'Vida Individual',)));
         },
         
 
         buttonRequired: true),
          Divider(),
            EtiquetaInformativa(
+             
         color: Colors.black,
         tituloEtiqueta: 'Salud Individual', 
         montoEtiqueta: 222000, 
@@ -140,7 +143,7 @@ class _BonosPageState extends State<BonosPage> {
         fontTitleSize: 16,
     onPressed: (){
               Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => VidaIndividual()));
+                    MaterialPageRoute(builder: (context) => VidaIndividual(titulo: 'Salud Individual',)));
         },
         buttonRequired: true),
          Divider(),
@@ -166,7 +169,7 @@ class _BonosPageState extends State<BonosPage> {
         fontTitleSize: 16,
             onPressed: (){
               Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => VidaIndividual()));
+                    MaterialPageRoute(builder: (context) => VidaIndividual( titulo: 'Autos Personales',)));
         },
         
 
@@ -179,7 +182,10 @@ class _BonosPageState extends State<BonosPage> {
         height: 0.085, 
         width: 0.9,
         fontTitleSize: 16,
-
+   onPressed: (){
+                   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => VidaIndividual( titulo: 'Daños Patrimoniales',)));
+   },
         buttonRequired: true),
     ],
   );
@@ -201,7 +207,10 @@ class _BonosPageState extends State<BonosPage> {
         height: 0.085, 
         width: 0.9,
         fontTitleSize: 16,
-
+   onPressed: (){
+                   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => VidaIndividual( titulo: 'Vida',)));
+   },
         buttonRequired: true),
          Divider(),
            EtiquetaInformativa(
@@ -211,7 +220,10 @@ class _BonosPageState extends State<BonosPage> {
         height: 0.085, 
         width: 0.9,
         fontTitleSize: 16,
-
+  onPressed: (){
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => VidaIndividual( titulo: 'Autos',)));
+  },
         buttonRequired: true),
          Divider(),
     ],
@@ -233,17 +245,10 @@ class _BonosPageState extends State<BonosPage> {
         height: 0.085, 
         width: 0.9,
         fontTitleSize: 16,
-
-        buttonRequired: true),
-         Divider(),
-           EtiquetaInformativa(
-        color: Colors.black,
-        tituloEtiqueta: 'Autos', 
-        montoEtiqueta: 222000, 
-        height: 0.085, 
-        width: 0.9,
-        fontTitleSize: 16,
-
+   onPressed: (){
+                   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => VidaIndividual( titulo: 'Vida',)));
+   },
         buttonRequired: true),
          Divider(),
                EtiquetaInformativa(
@@ -253,7 +258,10 @@ class _BonosPageState extends State<BonosPage> {
         height: 0.085, 
         width: 0.9,
         fontTitleSize: 16,
-
+   onPressed: (){
+                   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => VidaIndividual( titulo: 'Daños',)));
+   },
         buttonRequired: true),
          Divider(),
     ],

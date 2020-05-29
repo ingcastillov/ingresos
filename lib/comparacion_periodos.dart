@@ -4,9 +4,10 @@ import 'package:ingresos/Commons/GraficaLinealTriple.dart';
 import 'package:ingresos/Commons/TablaAcumulado.dart';
 import 'package:ingresos/Commons/TablaMensualPorcentajes.dart';
 import 'package:ingresos/Commons/TituloEtiquetas.dart';
-import 'package:ingresos/pages/Periodos%20Anteriores/filtro_periodos.dart';
 import 'package:intl/intl.dart';
 import 'dart:math';
+
+import 'filtro_periodos.dart';
 
 class ComparacionPeriodos extends StatefulWidget {
   
@@ -40,7 +41,7 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
   final Color normal = const Color(0xff64caad);
   final Color light = const Color(0xff73e8c9);
 
-  static const double barWidth = 22;
+  //static const double barWidth = 22;
 
   bool selected= true;
   bool selected1=false ;

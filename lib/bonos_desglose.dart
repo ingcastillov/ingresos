@@ -5,11 +5,17 @@ import 'package:ingresos/Commons/ventanaEmergente.dart';
 import 'package:intl/intl.dart';
 
 class VidaIndividual extends StatefulWidget {
+
+  final String titulo;
+  VidaIndividual({@required this.titulo});
   @override
-  _VidaIndividualState createState() => _VidaIndividualState();
+  _VidaIndividualState createState() => _VidaIndividualState(titulo);
 }
 
 class _VidaIndividualState extends State<VidaIndividual> {
+  String titulo;
+
+  _VidaIndividualState(String titulo);
 
   List<BonosVidaIndividual> bonos;
   List<BonosVidaIndividual> bonosProductividad;
@@ -59,7 +65,7 @@ class _VidaIndividualState extends State<VidaIndividual> {
             }),
         centerTitle: true,
         title: Text(
-          'Vida Individual',
+          widget.titulo,
           style: TextStyle(color: Colors.blueGrey),
         ),
       ),
@@ -75,7 +81,7 @@ class _VidaIndividualState extends State<VidaIndividual> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        'Vida Individual',
+                        widget.titulo,
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                       Text(''),

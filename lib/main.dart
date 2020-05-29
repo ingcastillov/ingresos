@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ingresos/pages/detalle_ingresos.dart';
-import 'package:ingresos/utils/asegurado_cls.dart';
+import 'package:ingresos/login_page.dart';
+import 'package:ingresos/login_page_noe.dart';
+
+
+
 
 void main() => runApp(MyApp());
-  Asegurado asegurado;
-  Asegurado aseguradosVidaDto;
+/*   Asegurado asegurado;
+  Asegurado aseguradosVidaDto; */
 class MyApp extends StatelessWidget {
 
 
@@ -33,9 +36,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
 
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title, this.agente}) : super(key: key);
+  final String title;
+  final AgentePrueba agente;
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -45,16 +50,23 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-
+  //int _counter = 0;
+  List<AgentePrueba> searchResult;
+  String buzon;
+@override
+void initState() { 
+  super.initState();
+   searchResult = AgentePrueba.getAgentes();
+  
+ 
+ 
+}
 
   @override
   Widget build(BuildContext context) {
@@ -93,19 +105,64 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
+      
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DetalleIngresos() ));
+          setState(() {
+/*             Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => DetalleIngresos()),
+  ); */
+          });
+   mostrarVentana();
+       
         },
        
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),  
     );
   }
+
+           mostrarVentana(){
+  String buzon='k';
+
+  if(buzon=='S'){
+showDialog(context: context,
+builder: (context) => LoginDialog(),
+); 
+  }
+else{
+showDialog(context: context,
+builder: (context) => LoginDialogNoE(),
+); 
 }
+
+
+
+          }
+
+}
+
+
+
+   class AgentePrueba{
+String agente;
+String cua;
+String buzone;
+
+
+
+AgentePrueba({this.agente, this.cua, this.buzone });
+
+static List<AgentePrueba> getAgentes(){
+  return <AgentePrueba>[
+   AgentePrueba(agente: '12345', cua: '56453213212', buzone: 'N' ),
+ AgentePrueba(agente: '12345', cua: '5435435323', buzone: 'S' ),
+
+
+  ];
+}
+
+} 

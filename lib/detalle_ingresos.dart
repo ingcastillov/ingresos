@@ -1,22 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:ingresos/main.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/saldo_disponible.dart';
-import 'package:ingresos/pages/Ultimo%20Deposito/ultimo_periodo_facturado.dart';
+import 'package:ingresos/model.dart';
+import 'package:ingresos/model_ingresos.dart';
+import 'package:ingresos/periodos_anteriores.dart';
+import 'package:ingresos/saldo_disponible.dart';
+import 'package:ingresos/ultimo_periodo_facturado.dart';
+
 import 'package:intl/intl.dart';
 
-import 'Periodos Anteriores/periodos_anteriores.dart';
+import 'model_ingresos.dart';
+
+
+
+
+
+
 
 class DetalleIngresos extends StatefulWidget {
-  DetalleIngresos({Key key}) : super(key: key);
-
+  final DetallesIngresosDto detalleData;
+ DetalleIngresos(this.detalleData);
   @override
-  _DetalleIngresosState createState() => _DetalleIngresosState();
+  _DetalleIngresosState createState() => _DetalleIngresosState(detalleData);
 }
 
 class _DetalleIngresosState extends State<DetalleIngresos> {
+  DetallesIngresosDto detalleData;
+ _DetalleIngresosState(this.detalleData);
+  Future<DetallesIngresosDto> detale;
+
+  double montoIngresos;
 
   double saldoDisponible= 84692.76;
-  final pattern = new NumberFormat("###,###,###.##");
+  final pattern = new NumberFormat("\u0024###,###,###.##");
+
+  /* DetalleIngresos detalles =  new DetalleIngresos(); */
+  DetallesIngresosDto detalle;
+  double dato;
+  double elDetalle;
+   ProductoModel producto = new ProductoModel();
+    //DetallesProvider provider = new DetallesProvider();
+  @override
+  void initState() { 
+  
+ //  elDetalle = detalleData.imp;
+
+    super.initState();
+ // detalle.detalleGeneralDto.imp==null ? dato=0 : dato=  detalle.detalleGeneralDto.imp;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,59 +123,57 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
                             Positioned(top: -160, left: 0, child: circulo),
                             Positioned(top: -250, left: 0, child: circulo), */
 
-        Container(
-          padding: EdgeInsets.only(top: 50, left: 20),
-          child: Column(
-            children: <Widget>[
-              SizedBox(),
-              Text(
-                'Saldo Disponible',
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 80, left: 20),
-          child: Column(
-            children: <Widget>[
-              SizedBox(),
-              Text(
-                "\u0024" + pattern.format(saldoDisponible),
-                style: TextStyle(color: Colors.white, fontSize: 40),
-              ),
-            ],
-          ),
-        ),
-        
-        Container(
-          padding: EdgeInsets.only(top: 140, left: 20),
-          child: Column(
-            children: <Widget>[
-              SizedBox(),
-              Text(
-                'Del 14/10/19 al 16/10/19',
-                style: TextStyle(color: Colors.white, fontSize: 14),
-              ),
-            ],
-          ),
-        ),
-        Container(
-        padding: EdgeInsets.only(top: 140, left: 260),
-       // alignment: Alignment.centerRight,
-          child: Column(
-            children: <Widget>[
-              SizedBox(),
-              Text(
-                'Ver detalle',
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-            ],
-          ),
-        ),
+     Container(
 
-         Container(
-          padding: EdgeInsets.only(top: 119, left: 340),
+       padding: EdgeInsets.fromLTRB(20,30,0,30),
+   child: Column(
+
+     children: <Widget>[
+       Container(
+         alignment: Alignment.topLeft,
+
+         child: Text('Saldo Disponible', style: TextStyle(color: Colors.blueAccent, fontSize: 14),),
+      
+         ),
+         SizedBox(height:8),
+        Container(
+alignment: Alignment.centerLeft,
+         child: Text(pattern.format(2000000), style: TextStyle(color: Colors.white, fontSize: 32),),
+         ),
+  SizedBox(height:10),
+          Row(
+            children: <Widget>[
+              Container(
+         alignment: Alignment.centerLeft,
+
+         child: Text('Del 14/10/19 a 16/10/19', style: TextStyle(color: Colors.white, fontSize: 14),),
+      
+         ),
+          SizedBox(width:size.width*0.20 ),
+                Container(
+         alignment: Alignment.bottomRight,
+
+         child: Text('Ver Detalle', style: TextStyle(color: Colors.white, fontSize: 14),),
+      
+         ),
+                Container(
+         alignment: Alignment.bottomRight,
+        // padding: EdgeInsets.all(89),
+         child: IconButton( iconSize: 18,icon: Icon(Icons.arrow_forward_ios, color: Colors.white,), onPressed: (){
+             Navigator.push(context, MaterialPageRoute(builder: (context) => SaldoDisponible() ));
+         })),
+      
+     
+            ],
+          ),
+
+
+     ],
+   ),
+     ),
+
+   /*       Container(
+          padding: EdgeInsets.only(top: size.height*0.180, left: size.width*0.85),
           child: Column(
             
             children: <Widget>[
@@ -164,7 +192,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
               )
             ],
           ),
-        ),
+        ), */
 
       ],
     );
@@ -176,7 +204,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
   return Column(children: <Widget>[
      
       Padding(
-        padding: const EdgeInsets.fromLTRB(20,180,10,16),
+        padding: const EdgeInsets.fromLTRB(20,185,10,16),
         child: Container(
           
           padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
@@ -193,7 +221,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
                   'Último Periodo Facturado',
                   style: TextStyle(color: Colors.blueGrey, fontSize: 14),
                 ),
-                subtitle: Text("\u0024" + pattern.format(saldoDisponible), style: TextStyle(color: Color.fromRGBO(4, 32, 82, 1.0), fontSize: 21) ,),
+                subtitle: Text(pattern.format(saldoDisponible), style: TextStyle(color: Color.fromRGBO(4, 32, 82, 1.0), fontSize: 21) ,),
              trailing:   Container(
               padding: EdgeInsets.all(8),
                  // color: Colors.red,
@@ -206,7 +234,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
                           color: Colors.orange,
                         ),
                         onPressed: () {
-                           Navigator.push(context, MaterialPageRoute(builder: (context) => UltimoDeposito() ));
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => UltimoPeriodoFacturado() ));
                         })),
               ),
             ],
@@ -288,6 +316,27 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
   }
 
 
+/* Widget _cargarDetalles(){
+/* 
+  return FutureBuilder(
+    future: provider.loadUnits(),
+  
+    builder: (BuildContext context, AsyncSnapshot<List<DetallesIngresosDto>> snapshot) {
+    if(snapshot.hasData){
+
+      return ListView.builder(
+        itemCount: snapshot.data.length,
+        itemBuilder: (context, i){
+
+        }
+        );
+    }
+    else{
+     return Center(child: CircularProgressIndicator());
+    }
+    },
+  ); */
+} */
 
    
 

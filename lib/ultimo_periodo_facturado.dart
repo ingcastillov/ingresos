@@ -2,24 +2,25 @@ import 'package:ingresos/Commons/BotonNaranja.dart';
 import 'package:ingresos/Commons/EtiquetaSaldos.dart';
 import 'package:ingresos/Commons/FondoAzul.dart';
 import 'package:ingresos/Commons/GraficaCircular.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/Bonos/bonos_page.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/Comisiones/comisiones_page.dart';
-import 'package:ingresos/pages/Saldo%20Disponible/OtrosMovimientos/otros_movimientos.dart';
-import 'package:ingresos/pages/Ultimo%20Deposito/comprobante.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
+import 'bonos_page.dart';
+import 'comisiones_page.dart';
+import 'comprobante.dart';
+import 'otros_movimientos.dart';
 
 
 
-class UltimoDeposito extends StatefulWidget {
+
+class UltimoPeriodoFacturado extends StatefulWidget {
 
   
   @override
-  _UltimoDepositoState createState() => _UltimoDepositoState();
+  _UltimoPeriodoFacturadoState createState() => _UltimoPeriodoFacturadoState();
 }
 
-class _UltimoDepositoState extends State<UltimoDeposito> {
+class _UltimoPeriodoFacturadoState extends State<UltimoPeriodoFacturado> {
 
 
 
@@ -119,7 +120,7 @@ class _UltimoDepositoState extends State<UltimoDeposito> {
 
   Widget bannerOtrosMovimientos() {
     return EtiquetaSaldo(
-        tituloEtiqueta: 'OtrosMovimientos',
+        tituloEtiqueta: 'Otros Movimientos',
         saldoEtiqueta: otrosmovimientos,
         onPressed: () {
           Navigator.push(context,
