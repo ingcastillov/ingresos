@@ -1,8 +1,7 @@
  import 'dart:convert';
 import 'dart:io';
+import '../../../SegundaClave.dart';
 import 'package:http/http.dart' as http;
-
-import 'SegundaClave.dart';
 
 
 
@@ -37,4 +36,3 @@ Future<SegundaClave>  getClaves() async {
   } 
   
   
-

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:ingresos/detalle_ingresos.dart';
+import 'package:ingresos/SegundaClave.dart';
 
+import 'detalle_ingresos.dart';
 import 'main.dart';
-import 'model_ingresos.dart';
 
 class LoginDialog extends StatefulWidget {
-  LoginDialog({Key key}) : super(key: key);
+
+
+   
+  LoginDialog() : super();
 
   @override
   _LoginDialogState createState() => _LoginDialogState();
 }
 
 class _LoginDialogState extends State<LoginDialog> {
-    DetallesIngresosDto detalleData;
+
     String radio;
    
     bool clavecorrecta;
@@ -22,14 +25,25 @@ List<AgentePrueba> _userDetails;
   TextEditingController validacion = new TextEditingController();
    final azulMarino = Color.fromRGBO(4, 54, 129, 1);
 String errorText;
-void initState() { 
+SegundaClave segunda;
+
+bool errorClave;
+
+final s = new SegundaClave();
+
+ Future<SegundaClave> cl;
+Map user;
+void initState()  { 
+ 
   super.initState();
    searchResult = AgentePrueba.getAgentes();
     _userDetails = AgentePrueba.getAgentes();
-  //    searchResultVida = FacturasNotas.getFacturas().where((i) => i.clase.contains('vida')).where((i) => i.tipo.contains('factura')).toList();
-  
+
+ errorClave = s.error;
+ print(errorClave);
 }
 
+ List<SegundaClave> claves;
   @override
   Widget build(BuildContext context) {
   return  ListView(
@@ -118,11 +132,18 @@ void initState() {
        
       
           actions: <Widget>[
-FlatButton(onPressed: (){
+FlatButton(onPressed: ()  {
       setState(() {
         
       });
          if(validacion.text!='1234'){
+      errorText='La clave no es valida';
+       setState(() {
+         
+       });
+        
+       } 
+        if(clavecorrecta==false){
       errorText='La clave no es valida';
        setState(() {
          
@@ -145,7 +166,7 @@ FlatButton(onPressed: (){
         }
        
       }
-      
+    //  print(widget.segundaC.error);
       
  
 }, child: Text('ACEPTAR', style: TextStyle(color: Colors.orange),))
@@ -165,13 +186,15 @@ FlatButton(onPressed: (){
 
     void viajarP(){
       setState(() {
-            Navigator.push(
+  Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => DetalleIngresos(detalleData)),
+    MaterialPageRoute(builder: (context) => DetalleIngresos()),
   );
       });
 
-  }
+  } 
+
+ 
 
    void checkCua(String value) {
     setState(() {
@@ -181,3 +204,6 @@ FlatButton(onPressed: (){
     });
   }
 }
+
+
+

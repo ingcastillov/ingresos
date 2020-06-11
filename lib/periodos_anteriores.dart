@@ -8,6 +8,8 @@ import 'chartprueba.dart';
 import 'comparacion_periodos.dart';
 import 'dart:math';
 
+import 'detalle_ingresos.dart';
+
 class PeriodosAnteriores extends StatefulWidget {
   final random = Random();
 
@@ -111,7 +113,8 @@ class _PeriodosAnteriores extends State<PeriodosAnteriores> {
               color: Colors.orange,
             ),
             onPressed: () {
-              Navigator.pop(context);
+             Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DetalleIngresos()));
             }),
         centerTitle: true,
         title: Text(

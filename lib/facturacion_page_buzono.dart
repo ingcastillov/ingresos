@@ -4,6 +4,8 @@ import 'package:ingresos/Commons/DesgloseFactura.dart';
 import 'package:ingresos/saldo_disponible.dart';
 import 'package:share/share.dart';
 
+import 'detalle_ingresos.dart';
+
 class FacturacionPageBuzono extends StatefulWidget {
   @override
   _FacturacionPageBuzonoState createState() => _FacturacionPageBuzonoState();
@@ -190,6 +192,18 @@ setState(() {
 });
  //  Share.share ("Cosas increíbles para compartir"); 
  share(context, aleta); 
+ enviadoE=true;
+ new Future.delayed(Duration(seconds: 6),(){
+  
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => DetalleIngresos(status: false,)),
+  ); 
+  
+
+}
+); 
+
 
     
   } : null,

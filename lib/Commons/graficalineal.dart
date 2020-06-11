@@ -175,28 +175,48 @@ class GraficaLinealState extends State<GraficaLineal> {
 
     final lineBarsData = [
       LineChartBarData(
+   
+        shadow: Shadow(
+          blurRadius: 0.1,
+          color: Color.fromRGBO(31, 71, 164, 1),
+          offset: Offset(0, 0)
+        ),
+        //curveSmoothness: 2.0,
+
           showingIndicators: showIndexes  ,
           
           spots: allSpots,
           isCurved: true,
-          barWidth: 4,
+          barWidth: 3,
+    
+           
            show: true,
           belowBarData: BarAreaData(
+       
+ 
+   
             show: true,
             colors: [
-              Color.fromRGBO(31, 71, 164, 0.3),
-            
+          
+                  Color.fromRGBO(31, 71, 164, 0.3),
+                  Color.fromRGBO(255, 255, 255, 1),
+               
             ],
+            gradientColorStops:  [
+            50
+            ]
           ),
           dotData: FlDotData(show: false),
 
           colors: [
-            Color.fromRGBO(31, 71, 164, 0.3),
+              
+               Color.fromRGBO(31, 71, 164, 0.3),
+               
+       
          
           ],
-          colorStops: [
-            0.05,
-          ]),
+       
+          ),
     ];
      
      //ESTA VARIABLE ES NECESARIA PARA LOS CUADROS DE TEXTO

@@ -135,6 +135,7 @@ return       Container(
                         
                         BarChartGroupData(
                           x: 0,
+
                           barRods: [
                             BarChartRodData(
                               color: Colors.transparent,
@@ -143,7 +144,7 @@ return       Container(
                               borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(6), topRight: Radius.circular(6)),
                               rodStackItem:  [
-                               BarChartRodStackItem(1, 6.5, Color.fromRGBO(115, 213, 250, 0.5)),
+                               BarChartRodStackItem(1, widget.maxY, Color.fromRGBO(115, 213, 250, 0.5)),
                           
                               ],
                             ),
@@ -160,7 +161,7 @@ return       Container(
                               borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(6), topRight: Radius.circular(6)),
                               rodStackItem:  [
-                                BarChartRodStackItem(1, 4.7, Color.fromRGBO(191, 115, 250, 0.5)),
+                                BarChartRodStackItem(1, widget.maxY, Color.fromRGBO(191, 115, 250, 0.5)),
                            
                               ],
                             ),
@@ -177,7 +178,7 @@ return       Container(
                               borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(6), topRight: Radius.circular(6)),
                               rodStackItem:  [
-                           BarChartRodStackItem(1, 8.7, Color.fromRGBO(250, 170, 115, 0.5)),
+                           BarChartRodStackItem(1, widget.maxY, Color.fromRGBO(250, 170, 115, 0.5)),
                        
                               ],
                             ),

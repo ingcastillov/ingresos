@@ -1,6 +1,18 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:ingresos/filteredperiodos/bonos_autos_filter.dart';
+import 'package:ingresos/filteredperiodos/bonos_danos_filter.dart';
+import 'package:ingresos/filteredperiodos/bonos_gmm_filter.dart';
+import 'package:ingresos/filteredperiodos/bonos_vida_filter.dart';
+import 'package:ingresos/filteredperiodos/otros_gmm_filter.dart';
+import 'package:ingresos/filteredperiodos/otros_vida_filter.dart';
+import 'comparacion_periodos.dart';
+import 'filteredperiodos/comisiones_autos_filter.dart';
+import 'filteredperiodos/comisiones_danos_filter.dart';
+import 'filteredperiodos/comisiones_gmm_filter.dart';
+import 'filteredperiodos/comisiones_vida_filter.dart';
+import 'filteredperiodos/otros_autos_filter.dart';
+import 'filteredperiodos/otros_danos_filter.dart';
 
 class FilterPeriodos extends StatefulWidget {
   FilterPeriodos({Key key}) : super(key: key);
@@ -19,6 +31,9 @@ class _FilterPeriodosState extends State<FilterPeriodos> {
   bool autosSeleccionado=false;
   bool gmmSeleccionado=false;
   bool danosSeleccionado=false;
+
+  String resultadoFiltro='General';
+  String resultadoFiltroRamo='General';
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +67,13 @@ class _FilterPeriodosState extends State<FilterPeriodos> {
        comisionesSeleccionado=false;
        otrosMovimientosSeleccionado=false;
        bonosSeleccionado=false;
-       
+       resultadoFiltro='General';
+       resultadoFiltroRamo='General';
+         Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ComparacionPeriodos()));
                 });
+/*                                 Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ComparacionPeriodos())); */
                 },
 
               ),
@@ -67,7 +87,62 @@ class _FilterPeriodosState extends State<FilterPeriodos> {
                 // padding: EdgeInsets.fromLTRB(64, 15, 64, 15),
                     color: Colors.orange,
                      child: Text('Filtrar', style: TextStyle(color: Colors.white),),
-                onPressed: (){},
+                onPressed: (){
+ /*                  if(resultadoFiltro=='General' && resultadoFiltroRamo=='General'){
+                        Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ComparacionPeriodos()));
+                  }  */
+                  if(resultadoFiltro=='Comisiones' && resultadoFiltroRamo=='Vida'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ComisionesVidaFiltered()));
+                  }
+                  if(resultadoFiltro=='Comisiones' && resultadoFiltroRamo=='Autos'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ComisionesAutosFiltered()));
+                  }
+                    if(resultadoFiltro=='Comisiones' && resultadoFiltroRamo=='GMM'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ComisionesGMMFiltered()));
+                  }
+                                    if(resultadoFiltro=='Comisiones' && resultadoFiltroRamo=='Daños'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ComisionesDanosFiltered()));
+                  }
+                                      if(resultadoFiltro=='Otros' && resultadoFiltroRamo=='Vida'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OtrosVidaFiltered()));
+                  }
+                                    if(resultadoFiltro=='Otros' && resultadoFiltroRamo=='Autos'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OtrosAutosFiltered()));
+                  }
+                    if(resultadoFiltro=='Otros' && resultadoFiltroRamo=='GMM'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OtrosGMMFiltered()));
+                  }
+                                    if(resultadoFiltro=='Otros' && resultadoFiltroRamo=='Daños'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OtrosDanosFiltered()));
+                  }
+                                     if(resultadoFiltro=='Bonos' && resultadoFiltroRamo=='Vida'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BonosVidaFiltered()));
+                  }
+                                    if(resultadoFiltro=='Bonos' && resultadoFiltroRamo=='Autos'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BonosAutosFiltered()));
+                  }
+                    if(resultadoFiltro=='Bonos' && resultadoFiltroRamo=='GMM'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BonosGMMFiltered()));
+                  }
+                                    if(resultadoFiltro=='Bonos' && resultadoFiltroRamo=='Daños'){
+                      Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BonosDanosFiltered()));
+                  }
+  
+                   
+                },
                 
             ),
               ),
@@ -83,7 +158,8 @@ class _FilterPeriodosState extends State<FilterPeriodos> {
                ListTile(
                  leading: Text('Filtros', style: TextStyle(color:Colors.black, fontSize: 25, fontWeight: FontWeight.bold),),
                  trailing:            IconButton(icon: Icon(Icons.close,), onPressed: (){
-    Navigator.pop(context);
+                          Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ComparacionPeriodos()));
              }),
                ),
             Container(
@@ -106,6 +182,7 @@ class _FilterPeriodosState extends State<FilterPeriodos> {
 comisionesSeleccionado=true;
        otrosMovimientosSeleccionado=false;
        bonosSeleccionado=false;
+       accionBotonFiltered('Comisiones');
     });
     
   },
@@ -126,6 +203,7 @@ Container(
           comisionesSeleccionado=false;
       otrosMovimientosSeleccionado=true;
       bonosSeleccionado=false;
+      accionBotonFiltered('Otros');
       });
     
 
@@ -149,6 +227,7 @@ Container(
           comisionesSeleccionado=false;
       otrosMovimientosSeleccionado=false;
       bonosSeleccionado=true;
+      accionBotonFiltered('Bonos');
       });
     },
   ),
@@ -178,6 +257,7 @@ Container(
        gmmSeleccionado=false;
        autosSeleccionado=false;
        danosSeleccionado=false;
+       accionBotonFilteredRamo('Vida');
     });
    
   },
@@ -203,6 +283,7 @@ Padding(
        gmmSeleccionado=false;
        autosSeleccionado=true;
        danosSeleccionado=false;
+       accionBotonFilteredRamo('Autos');
     });
       },
     ),
@@ -225,6 +306,7 @@ Padding(
        gmmSeleccionado=true;
        autosSeleccionado=false;
        danosSeleccionado=false;
+       accionBotonFilteredRamo('GMM');
     });
       },
     ),
@@ -247,6 +329,8 @@ Padding(
        gmmSeleccionado=false;
        autosSeleccionado=false;
        danosSeleccionado=true;
+       accionBotonFilteredRamo('Daños');
+
     });
       },
     ),
@@ -261,5 +345,19 @@ Padding(
          ),
        ),
     );
+  }
+
+
+  accionBotonFiltered(String value){
+  
+  resultadoFiltro=value;
+ 
+
+  }
+
+    accionBotonFilteredRamo(String value){
+  
+  resultadoFiltroRamo=value;
+
   }
 }

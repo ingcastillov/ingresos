@@ -132,7 +132,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
       width: size.width * 0.999,  color: Colors.white,
           child: ListTile(
             leading: Icon(Icons.line_style, color: Color.fromRGBO(10, 48, 136, 1),),
-            title: Text(widget.tituloFactura, style: TextStyle(color: Color.fromRGBO(10, 48, 136, 1), fontSize: 18),),
+            title: Text(widget.tituloFactura, style: TextStyle(color: Color.fromRGBO(10, 48, 136, 1), fontSize: 16),),
           ),
         ),
 
@@ -143,7 +143,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         height: 0.080, 
         width: 0.999, 
         fontTitleSize: 18, 
-        fontMontoSize: 18,
+        fontMontoSize: 16,
         onPressed: (){
          setState(() {
                  if(vida==false){
@@ -259,8 +259,8 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         montoEtiqueta: widget.montoFacturasVida, 
         height: 0.080, 
         width: 0.999, 
-        fontTitleSize: 18, 
-        fontMontoSize: 18,
+        fontTitleSize: 16, 
+        fontMontoSize: 16,
         onPressed: (){
           setState(() {
             
@@ -296,7 +296,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
                                 height: 0.085, 
                                 width: 0.999, 
                                 fontTitleSize: 16, 
-                                fontMontoSize: 18,
+                                fontMontoSize: 16,
                                 onPressed: (){
                                   setState(() {
                                     
@@ -342,8 +342,8 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
                                   montoEtiqueta: widget.item[index].impuestoAplicar, 
                                   height: 0.085, 
                                   width: 0.999, 
-                                  fontTitleSize: 18, 
-                                  fontMontoSize: 18,
+                                  fontTitleSize: 16, 
+                                  fontMontoSize: 16,
 
                                   onPressed: (){
                                     setState(() {
@@ -451,8 +451,8 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         montoEtiqueta: widget.montoNotasVida, 
         height: 0.080, 
         width: 0.999, 
-        fontTitleSize: 18, 
-        fontMontoSize: 18,
+        fontTitleSize: 16, 
+        fontMontoSize: 16,
         onPressed: (){
           setState(() {
             
@@ -485,7 +485,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
                                 height: 0.085, 
                                 width: 0.999, 
                                 fontTitleSize: 16, 
-                                fontMontoSize: 18,
+                                fontMontoSize: 16,
                                 onPressed: (){
                                   setState(() {
                                     
@@ -525,7 +525,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
                                   height: 0.085, 
                                   width: 0.999, 
                                   fontTitleSize: 16, 
-                                  fontMontoSize: 18,
+                                  fontMontoSize: 16,
 
                                   onPressed: (){
                                     setState(() {
@@ -643,7 +643,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         height: 0.080, 
         width: 0.999, 
         fontTitleSize: 18, 
-        fontMontoSize: 18,
+        fontMontoSize: 16,
         onPressed: (){
          setState(() {
                  if(novida==false){
@@ -771,7 +771,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         height: 0.080, 
         width: 0.999, 
         fontTitleSize: 16, 
-        fontMontoSize: 18,
+        fontMontoSize: 16,
         onPressed: (){
           setState(() {
             
@@ -807,7 +807,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
                                 height: 0.085, 
                                 width: 0.999, 
                                 fontTitleSize: 16, 
-                                fontMontoSize: 18,
+                                fontMontoSize: 16,
                                 onPressed: (){
                                   setState(() {
                                     
@@ -851,7 +851,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
                                   height: 0.085, 
                                   width: 0.999, 
                                   fontTitleSize: 16, 
-                                  fontMontoSize: 18,
+                                  fontMontoSize: 16,
 
                                   onPressed: (){
                                     setState(() {
@@ -956,7 +956,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         height: 0.080, 
         width: 0.999, 
         fontTitleSize: 16, 
-        fontMontoSize: 18,
+        fontMontoSize: 16,
         onPressed: (){
           setState(() {
             
@@ -1011,7 +1011,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         montoEtiqueta: widget.itemNotesNV[i].importeAImpuesto, 
         height: 0.080, 
         width: 0.999, 
-        fontTitleSize: 18, 
+        fontTitleSize: 16, 
         spaceX: true,
         buttonRequired: true, 
         color: Colors.black
@@ -1053,7 +1053,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         montoEtiqueta: widget.itemNotesNV[i].ivaAcreditado, 
         height: 0.080, 
         width: 0.999, 
-        fontTitleSize: 18, 
+        fontTitleSize: 16, 
         
         spaceX: true,
         buttonRequired: true, 
@@ -1068,7 +1068,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         montoEtiqueta: widget.itemNotesNV[i].ivaRetenido, 
         height: 0.080, 
         width: 0.999, 
-        fontTitleSize: 18, 
+        fontTitleSize: 16, 
          spaceX: true,
         buttonRequired: true, 
         color: Colors.black
@@ -1082,7 +1082,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         montoEtiqueta: widget.itemNotesNV[i].isrMonto, 
         height: 0.080, 
         width: 0.999, 
-        fontTitleSize: 18, 
+        fontTitleSize: 16, 
          spaceX: true,
         buttonRequired: true, 
         color: Colors.black
@@ -1096,7 +1096,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         montoEtiqueta: widget.itemNotesNV[i].impuestoCedular, 
         height: 0.080, 
         width: 0.999, 
-        fontTitleSize: 18, 
+        fontTitleSize: 16, 
          spaceX: true,
         buttonRequired: true, 
         color: Colors.black
@@ -1109,7 +1109,7 @@ class DesgloseFacturaState extends State<DesgloseFactura> {
         montoEtiqueta: widget.itemNotesNV[i].importeDespuesDeImpuesto, 
         height: 0.080, 
         width: 0.999, 
-        fontTitleSize: 18, 
+        fontTitleSize: 16, 
          spaceX: true,
         buttonRequired: true, 
         color: Colors.black

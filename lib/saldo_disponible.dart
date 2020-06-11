@@ -41,7 +41,7 @@ class _SaldoDisponibleState extends State<SaldoDisponible> {
             ),
             onPressed: () {
              Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DetalleIngresos(detalleData)));
+                    MaterialPageRoute(builder: (context) => DetalleIngresos()));
             }),
         centerTitle: true,
         title: Text(

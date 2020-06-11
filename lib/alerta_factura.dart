@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ingresos/detalle_ingresos.dart';
 import 'package:ingresos/model_ingresos.dart';
 
+import 'detalle_ingresos.dart';
 import 'main.dart';
 
 class AlertaFactura extends StatefulWidget {
@@ -13,6 +14,7 @@ class AlertaFactura extends StatefulWidget {
 
 class _AlertaFacturaState extends State<AlertaFactura> {
   DetallesIngresosDto detalleData;
+  bool status;
 
     String radio;
    
@@ -47,7 +49,11 @@ void initState() {
 
               actions: <Widget>[
                FlatButton(onPressed: (){
-                    Navigator.pop(context);
+                status=false;
+                    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => DetalleIngresos(status: status,)),
+  );
                }, child: Text('ACEPTAR', style: TextStyle(color: Colors.orange),))
               ],
            
@@ -68,7 +74,7 @@ void initState() {
       setState(() {
             Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => DetalleIngresos(detalleData)),
+    MaterialPageRoute(builder: (context) => DetalleIngresos()),
   );
       });
 

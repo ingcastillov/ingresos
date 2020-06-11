@@ -301,7 +301,7 @@ setState(() {
 });
  String buzon='S';
 
-  if(buzon=='r'){
+  if(buzon=='S'){
 showDialog(context: context,
 builder: (context) => AlertaFactura(),
 ); 

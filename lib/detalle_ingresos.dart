@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+
 import 'package:ingresos/main.dart';
 import 'package:ingresos/model.dart';
 import 'package:ingresos/model_ingresos.dart';
@@ -8,6 +10,7 @@ import 'package:ingresos/ultimo_periodo_facturado.dart';
 
 import 'package:intl/intl.dart';
 
+import 'Commons/ventanaEmergente.dart';
 import 'model_ingresos.dart';
 
 
@@ -17,16 +20,19 @@ import 'model_ingresos.dart';
 
 
 class DetalleIngresos extends StatefulWidget {
-  final DetallesIngresosDto detalleData;
- DetalleIngresos(this.detalleData);
+final bool status;
+
+  const DetalleIngresos({Key key, this.status}) : super(key: key);
+
+
   @override
-  _DetalleIngresosState createState() => _DetalleIngresosState(detalleData);
+  _DetalleIngresosState createState() => _DetalleIngresosState();
 }
 
 class _DetalleIngresosState extends State<DetalleIngresos> {
-  DetallesIngresosDto detalleData;
- _DetalleIngresosState(this.detalleData);
-  Future<DetallesIngresosDto> detale;
+
+ bool visibilityAlerta=true;
+ bool visibilityAlerta2=true;
 
   double montoIngresos;
 
@@ -34,16 +40,22 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
   final pattern = new NumberFormat("\u0024###,###,###.##");
 
   /* DetalleIngresos detalles =  new DetalleIngresos(); */
+ 
   DetallesIngresosDto detalle;
   double dato;
   double elDetalle;
    ProductoModel producto = new ProductoModel();
     //DetallesProvider provider = new DetallesProvider();
+    bool lilpeep;
+      String buzon = 'S';
+
+
   @override
   void initState() { 
   
- //  elDetalle = detalleData.imp;
-
+ 
+   
+    
     super.initState();
  // detalle.detalleGeneralDto.imp==null ? dato=0 : dato=  detalle.detalleGeneralDto.imp;
   }
@@ -67,6 +79,8 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
         ),
       ),
       body: Column(
+      
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
               
               Stack(
@@ -77,6 +91,14 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
               ),
               
               listaOpciones2(),
+      widget.status==false ? alertaStatus() : Container(),
+      
+      
+      widget.status==true ? alertaStatusAproved() : Container(),
+    
+       
+         
+
               
              
            
@@ -88,6 +110,7 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
 
   Widget _crearFondo(context) {
     final size = MediaQuery.of(context).size;
+  
     final colorFondo = Container(
       height: size.height * 0.3,
       width: double.infinity,
@@ -108,13 +131,22 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
         color: Color.fromRGBO(255, 255, 255, 0.05),
       ),
     );
+        final circulo2 = Container(
+      width: 400.0,
+      height: 400.0,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(200),
+        color: Color.fromRGBO(255, 255, 255, 0.45),
+      ),
+    );
    
     return Stack(
       children: <Widget>[
         colorFondo,
         Positioned(top: -70, right: 0, child: circulo),
         Positioned(top: -40, right: -120, child: circulo),
-        Positioned(top: -40, right: -250, child: circulo),
+      buzon=='' ?  Positioned(top: -40, right: -250, child: circulo) :
+      Positioned(top: -40, right: -250, child: circulo2),
 
         /*   Positioned(top: 100, left: 0, child: circulo),
                           Positioned(top: 50, left: 0, child: circulo),
@@ -313,6 +345,49 @@ alignment: Alignment.centerLeft,
         ),
       ),
     ]);
+  }
+
+  Widget alertaStatus(){
+
+    return VentanaEmergente(tituloText: 'ESTATUS DE FACTURACIÓN', 
+    contenidoText: 'Hubo un problema con la petición de facturacion', 
+    contenidoVinculo: 'Llamar a Soporte',
+    onPressed: (){
+      print('on presee');
+    },
+    color: Color.fromRGBO(253, 243, 245, 1), 
+    icono: Icons.backspace, 
+    color2: Color.fromRGBO(205, 90, 89, 1), 
+    vinculo: true, 
+    visibilidad: visibilityAlerta,
+    onPressedClear: (){
+      setState(() {
+        
+      });
+      print('ooooo');
+    visibilityAlerta=false;
+    }
+    );
+  }
+
+    Widget alertaStatusAproved(){
+
+    return VentanaEmergente(tituloText: 'ESTATUS DE FACTURACIÓN', 
+    contenidoText: 'La solicitud de facturación fue aprobada', 
+    onPressed: (){},
+    color: Color.fromRGBO(236, 249, 242, 1), 
+    icono: Icons.check_circle_outline,
+    color2: Color.fromRGBO(91, 199, 144, 1), 
+    vinculo: false, 
+    visibilidad: visibilityAlerta2,
+    onPressedClear: (){
+      setState(() {
+        
+      });
+    visibilityAlerta2=false;
+
+    }
+    );
   }
 
 

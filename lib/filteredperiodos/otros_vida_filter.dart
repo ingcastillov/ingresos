@@ -7,20 +7,23 @@ import 'package:ingresos/Commons/TituloEtiquetas.dart';
 import 'package:intl/intl.dart';
 import 'dart:math';
 
-import 'filtro_periodos.dart';
-import 'periodos_anteriores.dart';
+import '../filtro_periodos.dart';
+import '../periodos_anteriores.dart';
 
-class ComparacionPeriodos extends StatefulWidget {
+
+class OtrosVidaFiltered extends StatefulWidget {
   
  final random = Random();
+
+
 
  
 
   @override
-  _ComparacionPeriodos createState() => _ComparacionPeriodos();
+  _OtrosVidaFiltered createState() => _OtrosVidaFiltered();
 }
 
-class _ComparacionPeriodos extends State<ComparacionPeriodos> {
+class _OtrosVidaFiltered extends State<OtrosVidaFiltered> {
 
   String mesTabla;
    
@@ -48,6 +51,9 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
   bool selected1=false ;
   bool selected2= false;
 
+String concepto;
+String ramo;
+
 
   @override
   void initState() {
@@ -67,8 +73,10 @@ class _ComparacionPeriodos extends State<ComparacionPeriodos> {
               color: Colors.orange,
             ),
             onPressed: () {
-             Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PeriodosAnteriores()));
+              Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => PeriodosAnteriores()),
+  );
             }),
         centerTitle: true,
         title: Text(
@@ -219,24 +227,30 @@ return  Padding(
             child: Text('Detalle Anual de Ingresos', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
           ),
         ),
-    
-        GraficaBarras(gradle: 2, 
+   
+//GRAFICA COMISIONES Y VIDA DE LO CONTRARIO TRAR GRAFICA CON DATOS GENERALES
+  GraficaBarras(
+        gradle: 2, 
         maxY: 10, 
-        ultimoY: 5, 
+        ultimoY:  6, 
         penultimoY: 3, 
-        antepenultimoY: 6),
-
-      TablaMensual(
+        antepenultimoY: 7
+        ),
+   
+ 
+//TABLA COMISIONES Y VIDA DE LO CONTRARIO TRAR GRAFICA CON DATOS GENERALES
+   TablaMensual(
         montoAnual: true,
         montoActual: 2000, 
         montoPenultimo: 4444, 
         montoAntepenultimo: 2222, 
-        porcentajeActual: 6, 
-        porcentajePenultimo: 15, 
-        porcentajeAntepenultimo: 54, 
+        porcentajeActual: 99, 
+        porcentajePenultimo: 99, 
+        porcentajeAntepenultimo: 99, 
         incremento: true, 
         incremento2: true, 
-        incremento3: false)
+        incremento3: false
+        )
     ],
   ),
 );
@@ -252,7 +266,8 @@ return  Padding(
 
   Widget _periodoMes() {
 
-return GraficaLinealTriple(
+
+return   GraficaLinealTriple(
 
   acumulado: false,
  //CANTIDADES MOSTRADA EN TABLA DE GRAFICA POR MES
@@ -367,7 +382,7 @@ return GraficaLinealTriple(
 
 
 );
-       
+   // return CircularProgressIndicator();   
        }
 
 

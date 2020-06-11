@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ingresos/login_page.dart';
 import 'package:ingresos/login_page_noe.dart';
-
-
+import 'Requests.dart';
 
 
 void main() => runApp(MyApp());
@@ -11,11 +11,22 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
 
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
+      localizationsDelegates: [
+        // ... app-specific localization delegate[s] here
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+          const Locale('en'), // English
+          const Locale('es'), // español
+        ],
+
       title: 'Flutter Demo',
       theme: ThemeData(
 
@@ -31,7 +42,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         
       ),
-      home: MyHomePage(title: 'sasas' ),
+      home: MyHomePage(title: '' ),
     );
   }
 }
@@ -41,6 +52,7 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title, this.agente}) : super(key: key);
   final String title;
   final AgentePrueba agente;
+ 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -59,12 +71,18 @@ class _MyHomePageState extends State<MyHomePage> {
   //int _counter = 0;
   List<AgentePrueba> searchResult;
   String buzon;
+ 
+  //SegundaClave clave;
+  bool claveDecoded;
+
+
+  _MyHomePageState();
 @override
 void initState() { 
   super.initState();
    searchResult = AgentePrueba.getAgentes();
   
- 
+
  
 }
 
@@ -103,7 +121,7 @@ void initState() {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              '',
             ),
       
           ],
@@ -125,9 +143,11 @@ void initState() {
     );
   }
 
-           mostrarVentana(){
-  String buzon='k';
+           mostrarVentana() async {
+var claveInfo = await getClaves();
 
+if(claveInfo!=null){
+  String buzon='S';
   if(buzon=='S'){
 showDialog(context: context,
 builder: (context) => LoginDialog(),
@@ -138,6 +158,14 @@ showDialog(context: context,
 builder: (context) => LoginDialogNoE(),
 ); 
 }
+
+print('si lo cumplio we');
+}
+else{
+print('por mis uhevos no pasas giripollas');
+}
+ 
+
 
 
 

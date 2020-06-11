@@ -84,9 +84,9 @@ final azulMarino =  Color.fromRGBO(4, 54, 129, 1);
               title: Container(
                 alignment: Alignment.centerRight,
                 child: widget.montoEtiqueta.isNegative ? Text(pattern2.format(widget.montoEtiqueta),  
-                style: TextStyle(color: Colors.red) ,) 
+                style: TextStyle(color: Colors.red, fontSize: 16) ,) 
                 :Text(pattern.format(widget.montoEtiqueta),  
-                style: TextStyle(color: azulMarino, fontSize: 18) ,),
+                style: TextStyle(color: azulMarino, fontSize: 16) ,),
                 ),
                trailing: widget.buttonRequired ? IconButton(icon: Icon(Icons.arrow_forward_ios, color: widget.spaceX!=null || widget.spaceX==true ? Colors.transparent :Colors.orange,), onPressed: widget.onPressed) : null,
             //  contentPadding: EdgeInsets.all(16),
