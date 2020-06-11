@@ -8,7 +8,6 @@ import 'bonos_page.dart';
 import 'comisiones_page.dart';
 import 'detalle_ingresos.dart';
 import 'facturacion_page.dart';
-import 'model_ingresos.dart';
 import 'otros_movimientos.dart';
 
 class SaldoDisponible extends StatefulWidget {
@@ -18,7 +17,6 @@ class SaldoDisponible extends StatefulWidget {
 }
 
 class _SaldoDisponibleState extends State<SaldoDisponible> {
-  DetallesIngresosDto detalleData;
 
   double comisiones = 320000;
 

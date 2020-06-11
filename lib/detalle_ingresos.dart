@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:ingresos/main.dart';
-import 'package:ingresos/model.dart';
-import 'package:ingresos/model_ingresos.dart';
 import 'package:ingresos/periodos_anteriores.dart';
 import 'package:ingresos/saldo_disponible.dart';
 import 'package:ingresos/ultimo_periodo_facturado.dart';
@@ -11,7 +9,7 @@ import 'package:ingresos/ultimo_periodo_facturado.dart';
 import 'package:intl/intl.dart';
 
 import 'Commons/ventanaEmergente.dart';
-import 'model_ingresos.dart';
+
 
 
 
@@ -41,10 +39,9 @@ class _DetalleIngresosState extends State<DetalleIngresos> {
 
   /* DetalleIngresos detalles =  new DetalleIngresos(); */
  
-  DetallesIngresosDto detalle;
   double dato;
   double elDetalle;
-   ProductoModel producto = new ProductoModel();
+ 
     //DetallesProvider provider = new DetallesProvider();
     bool lilpeep;
       String buzon = 'S';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ingresos/detalle_ingresos.dart';
-import 'package:ingresos/model_ingresos.dart';
 
 import 'main.dart';
 
@@ -12,7 +11,6 @@ class LoginDialogNoE extends StatefulWidget {
 }
 
 class _LoginDialogState extends State<LoginDialogNoE> {
-   DetallesIngresosDto detalleData;
     String radio;
    
     bool clavecorrecta;

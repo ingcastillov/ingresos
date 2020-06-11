@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ingresos/detalle_ingresos.dart';
-import 'package:ingresos/model_ingresos.dart';
 
 import 'detalle_ingresos.dart';
 import 'main.dart';
@@ -13,7 +12,6 @@ class AlertaFactura extends StatefulWidget {
 }
 
 class _AlertaFacturaState extends State<AlertaFactura> {
-  DetallesIngresosDto detalleData;
   bool status;
 
     String radio;
